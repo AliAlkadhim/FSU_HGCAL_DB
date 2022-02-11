@@ -41,8 +41,19 @@ def generate_sql_code(fields, rows, Tablename, DB_sql_file):
             sql_file.write(' ' + field + ' varchar(32),')
         sql_file.write(' ' + fields[-1] + ' varchar(32)')
         sql_file.write(' );\n')
-
-
+        # the syntax for inserting rows is: insert into test values (1, 'here', ' nahmean');
+        for row in rows:
+            sql_file.write('insert into ' + Tablename +' values (')
+            for element in row[:-1]:
+                if not element:#check if the string is empty, if it is, it should be null in sql
+                    sql_file.write('null' +', ')
+                else:
+                    sql_file.write("'" + element + "', ")
+            if not row[-1]:
+                sql_file.write('null' +' ')
+            else:
+                sql_file.write("'" + row[-1] + "' ")
+            sql_file.write(');\n')
 
 
 print('field names are: ', fields)
