@@ -1,7 +1,7 @@
 This repo is uses mysql to build a database for the HGCAL data at FSU from existing csv tables. The instructions make the use of mysql workbench, of course using it without the workbench (by just mysql) is also possible.
 
 
-# ------------------------------------------MYSQL INSTALLATION----------------------
+# MYSQL INSTALLATION
 ## linux: 
 * got to https://dev.mysql.com/downloads/repo/apt/ and click download, cd to the download path in a terminal
 
@@ -15,7 +15,7 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 * 
 * Double check to make sure you have the server installed by doing "ps ax | grep mysql" or by doing "sudo service mysql status" (if it shows active (Running) you're good)* 
 * install mysql-workbench by doing "sudo apt-get install mysql-workbench-community" and launch it. 
-# ------------------------------------------MYSQL CONFIGURATION----------------------
+# MYSQL CONFIGURATION
 * the root user (local instance 3306) is created automatically and it is highly discouraged to use it, so create another user with the appropriate privileges.
 * 
 * Click on the root user (local instance 3306) to connect to it, then click on "Users and Privileges" on the left under "Management"
@@ -34,7 +34,7 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 * Leave everything else as they are, and press OK
 * click back on admin, you should see a new admin connection for our admin user
 * click it and type its password (you can check "save password in keychain" if you're not concerned about your computer's secturity), and click OK. 
-# ------------------------------------------CHECK THAT YOU CAN ACCESS A DATABASE WITH WORKBENCH----------------------
+# CHECK THAT YOU CAN ACCESS A DATABASE WITH WORKBENCH
 
 * go to https://www.mysqltutorial.org/mysql-sample-database.aspx and click "Download MySQL Sample Database" 
 * in a terminal, cd to where you downloaded it, and do "unzip mysqlsampledatabase.zip"
@@ -45,7 +45,7 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 * Click on the Import Progress tab and click "Start Import" on the lower right corner. (by the way it shows the command that you can execute independetly of the workbench)
 * Click on the "Query 1" tab (you can close the Data Import/Restore tab)
 * on the query tab, type "show databases;" and press ctrl+enter, you should see the newly imported database, called "classicmodels" show up on the Database grid at the bottom. 
-# ------------------------------------------Reproducing FSU_HGCAL template DB----------------------
+# Reproducing FSU_HGCAL template DB
 * git clone https://github.com/AliAlkadhim/FSU_HGCAL_DB.git
 * cd FSU_HGCAL_DB
 * python generate_sql.py
