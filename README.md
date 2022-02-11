@@ -17,7 +17,7 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 * install mysql-workbench by doing "sudo apt-get install mysql-workbench-community" and launch it. 
 # MYSQL CONFIGURATION
 * the root user (local instance 3306) is created automatically and it is highly discouraged to use it, so create another user with the appropriate privileges.
-* 
+
 * Click on the root user (local instance 3306) to connect to it, then click on "Users and Privileges" on the left under "Management"
 * Click on "Add Account" on the lower left corner
 * change "Login Name" to "admin"
