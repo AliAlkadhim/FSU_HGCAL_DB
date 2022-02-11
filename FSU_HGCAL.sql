@@ -65,3 +65,4 @@ insert into Full_Sensor values ('N4790_22', '200084', '200', 'com', 'D', '-2', '
 insert into Full_Sensor values ('N4790_23', '200085', '200', 'com', 'D', '-2', 'STD', 'FZ', 'off DF', 'CERN', 'non.irr. ref.', null, 'Done, CERN', null, null, null );
 insert into Full_Sensor values ('N4790_24', '200086', '200', 'com', 'D', '-2', 'STD', 'FZ', 'off DF', 'CERN', null, null, null, null, null, null );
 insert into Full_Sensor values ('N4790_25', '200087', '200', 'com', 'D', '-2', 'STD', 'FZ', 'off DF', 'CERN', null, null, null, null, null, null );
+select * from Full_Sensor;
