@@ -13,7 +13,7 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 * ` sudo spt-get -y install mysql-server` 
 * enter root user (remember this password), and enter on OK on everything
 
-* Double check to make sure you have the server installed by doing `ps ax | grep mysql` or by doing `sudo service mysql status` (if it shows active (Running) you're good)* 
+* Double check to make sure you have the server installed by doing `ps ax | grep mysql` or by doing `sudo service mysql status` (if it shows active (Running) you're good).
 * install mysql-workbench by doing `sudo apt-get install mysql-workbench-community` and launch it. 
 # MYSQL CONFIGURATION
 * the root user (local instance 3306) is created automatically and it is highly discouraged to use it, so create another user with the appropriate privileges.
