@@ -5,16 +5,16 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 ## linux: 
 * got to https://dev.mysql.com/downloads/repo/apt/ and click download, cd to the download path in a terminal
 
-* sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb
+* `sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb`
 
 * keep the default options and use down arrow to OK & press enter
 
-* sudo apt-get update* 
+* `sudo apt-get update`
 * ` sudo spt-get -y install mysql-server` 
 * enter root user (remember this password), and enter on OK on everything
 
-* Double check to make sure you have the server installed by doing "ps ax | grep mysql" or by doing "sudo service mysql status" (if it shows active (Running) you're good)* 
-* install mysql-workbench by doing "sudo apt-get install mysql-workbench-community" and launch it. 
+* Double check to make sure you have the server installed by doing `ps ax | grep mysql` or by doing `sudo service mysql status` (if it shows active (Running) you're good)* 
+* install mysql-workbench by doing `sudo apt-get install mysql-workbench-community` and launch it. 
 # MYSQL CONFIGURATION
 * the root user (local instance 3306) is created automatically and it is highly discouraged to use it, so create another user with the appropriate privileges.
 * Click on the root user (local instance 3306) to connect to it, then click on "Users and Privileges" on the left under "Management"
@@ -45,9 +45,9 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 * Click on the "Query 1" tab (you can close the Data Import/Restore tab)
 * on the query tab, type "show databases;" and press ctrl+enter, you should see the newly imported database, called "classicmodels" show up on the Database grid at the bottom. 
 # Reproducing FSU_HGCAL template DB
-* git clone https://github.com/AliAlkadhim/FSU_HGCAL_DB.git
-* cd FSU_HGCAL_DB
-* python generate_sql.py
+* `git clone https://github.com/AliAlkadhim/FSU_HGCAL_DB.git`
+* `cd FSU_HGCAL_DB`
+* `python generate_sql.py`
 * this should generate FSU_HGCAL.sql
 * on the workbench, press "Open a SQL script file in a new query tab" at the top left corner
 * Select FSU_HGCAL_DB.sql from the FSU_HGCAL_DB repository. Make sure you are logged in as "admin".
