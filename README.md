@@ -10,7 +10,7 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 * keep the default options and use down arrow to OK & press enter
 
 * `sudo apt-get update`
-* ` sudo spt-get -y install mysql-server` 
+* ` sudo apt-get -y install mysql-server` 
 * enter root user (remember this password), and enter on OK on everything
 
 * Double check to make sure you have the server installed by doing `ps ax | grep mysql` or by doing `sudo service mysql status` (if it shows active (Running) you're good).
