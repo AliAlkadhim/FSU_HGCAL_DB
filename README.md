@@ -36,7 +36,7 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 # CHECK THAT YOU CAN ACCESS A DATABASE WITH WORKBENCH
 
 * go to https://www.mysqltutorial.org/mysql-sample-database.aspx and click "Download MySQL Sample Database" 
-* in a terminal, cd to where you downloaded it, and do "unzip mysqlsampledatabase.zip"
+* in a terminal, cd to where you downloaded it, and do `unzip mysqlsampledatabase.zip`
 * in mysql workbench, connect to admin by clicking "admin"
 * Under Management in the left pane, click "Data Import/Restore"
 * Under Import Options, select "Import from Self-Contained File"
