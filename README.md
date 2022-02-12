@@ -43,7 +43,7 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 * Click on the ellipses button on the right to browse, go to where you downloaded the .sql file, select it and press "Open"
 * Click on the Import Progress tab and click "Start Import" on the lower right corner. (by the way it shows the command that you can execute independetly of the workbench)
 * Click on the "Query 1" tab (you can close the Data Import/Restore tab)
-* on the query tab, type "show databases;" and press ctrl+enter, you should see the newly imported database, called "classicmodels" show up on the Database grid at the bottom. 
+* on the query tab, type `show databases;` and press ctrl+enter, you should see the newly imported database, called "classicmodels" show up on the Database grid at the bottom. 
 # Reproducing FSU_HGCAL template DB
 * `git clone https://github.com/AliAlkadhim/FSU_HGCAL_DB.git`
 * `cd FSU_HGCAL_DB`
