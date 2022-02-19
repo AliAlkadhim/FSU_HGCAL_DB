@@ -31,31 +31,33 @@ def generate_sql_code(fields, rows, Tablename, DB_sql_file):
     with open(DB_sql_file,'w') as sql_file:
         database = DB_sql_file[:-4] #name of the database without .sql
         
-        sql_file.write('use %s' % database +';\n')
-        sql_file.write('drop table '+ Tablename + ';\n') #we drop it before creating it, 
+        sql_file.write('DROP DATABASE IF EXISTS %s' % database + ';\n')
+        sql_file.write('CREATE DATABASE %s' % database +';\n')
+        sql_file.write('USE %s' % database +';\n')
+        sql_file.write('DROP TABLE IF EXISTS %s' % Tablename + ';\n') #we drop it before creating it, 
         #otherwise it throws an error that table already exists
 
-        sql_file.write('create table ' + Tablename + ' ( ')
+        sql_file.write('CREATE TABLE ' + Tablename + ' ( ')
         
         for field in fields[:-1]:
 
-            sql_file.write(' ' + field + ' varchar(32),')
-        sql_file.write(' ' + fields[-1] + ' varchar(32)')
+            sql_file.write(' ' + field + ' VARCHAR(32),')
+        sql_file.write(' ' + fields[-1] + ' VARCHAR(32)')
         sql_file.write(' );\n')
-        # the syntax for inserting rows is: insert into test values (1, 'here', ' nahmean');
+        # the syntax for INSERTing rows is: INSERT INTO test VALUES (1, 'here', ' nahmean');
         for row in rows:
-            sql_file.write('insert into ' + Tablename +' values (')
+            sql_file.write('INSERT INTO ' + Tablename +' VALUES (')
             for element in row[:-1]:
-                if not element:#check if the string is empty, if it is, it should be null in sql
-                    sql_file.write('null' +', ')
+                if not element:#check if the string is empty, if it is, it should be NULL in sql
+                    sql_file.write('NULL' +', ')
                 else:
-                    sql_file.write("'" + element + "', ")
+                    sql_file.write("'" + element.strip() + "', ")
             if not row[-1]:
-                sql_file.write('null' +' ')
+                sql_file.write('NULL' +' ')
             else:
-                sql_file.write("'" + row[-1] + "' ")
+                sql_file.write("'" + row[-1].strip() + "' ")
             sql_file.write(');\n')
-        sql_file.write('select * from Full_Sensor;\n')
+        sql_file.write('SELECT * FROM %s' % Tablename + ';\n')
 
 
 print('field names are: ', fields)
@@ -117,4 +119,3 @@ fields_PQC = new_fields
 #NEXT: do markdown instructions for everything 
 # Monday: talk about Unpref business - text Harry about Monday meeting time
 # 
-
