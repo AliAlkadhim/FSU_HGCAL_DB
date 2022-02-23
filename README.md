@@ -2,6 +2,10 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 
 
 # MYSQL INSTALLATION
+## Any OS with Conda
+The easiest way to install mysql is using conda
+`conda install -c conda-forge mysql` or `conda install -c conda-forge/label/cf201901 mysql` or `conda install -c conda-forge/label/cf202003 mysql`
+
 ## linux: 
 * got to https://dev.mysql.com/downloads/repo/apt/ and click download, cd to the download path in a terminal
 
@@ -33,7 +37,7 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 * Leave everything else as they are, and press OK
 * click back on admin, you should see a new admin connection for our admin user
 * click it and type its password (you can check "save password in keychain" if you're not concerned about your computer's secturity), and click OK. 
-# CHECK THAT YOU CAN ACCESS A DATABASE WITH WORKBENCH
+# CHECK THAT YOU CAN ACCESS A DATABASE WITH WORKBENCH (optional)
 
 * go to https://www.mysqltutorial.org/mysql-sample-database.aspx and click "Download MySQL Sample Database" 
 * in a terminal, cd to where you downloaded it, and do `unzip mysqlsampledatabase.zip`
@@ -53,3 +57,24 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 * Select FSU_HGCAL_DB.sql from the FSU_HGCAL_DB repository. Make sure you are logged in as "admin".
 * press Ctrl+Shift+Enter
 * Depending on what you want in the python file, this should create the database and tables, and show the table in the database grid.
+
+# Running This code as a module 
+Currently you can go to fsudb/src and do
+
+`python fsudb.py --tablename "strip_sensors_logistics.csv" `
+
+And this generates your sql file with the desired tables. Do
+
+`python fsudb.py --help`
+
+to see more on usage available parameters.
+
+# Ideas (under construction)
+
+`pip install fsudb`
+
+`fsudb createdb --tablenames [select from options: Full_Sensor, HPK_structures, MOS_GCD, PQC, strip_sensors_logistics, HGC_CERN_Sensor_IV_Summary, HGC_HPK_Sensor_IV_Summary]`
+
+This makes an database in the file FSU_HGCAL_DB.sql in your current working directory with all the tables you asked for. Now you can query it with your favorite interface, e.g. mysql.
+
+For added functionality, this could be a python module with query functionality? 
