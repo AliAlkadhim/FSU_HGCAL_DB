@@ -57,3 +57,7 @@ The easiest way to install mysql is using conda
 * Select FSU_HGCAL_DB.sql from the FSU_HGCAL_DB repository. Make sure you are logged in as "admin".
 * press Ctrl+Shift+Enter
 * Depending on what you want in the python file, this should create the database and tables, and show the table in the database grid.
+
+# Running This code as a module (under construction)
+`pip install fsudb`
+`fsudb createdb --tablenames [select from options: Full_Sensor, HPK_structures, MOS_GCD, PQC, strip_sensors_logistics, HGC_CERN_Sensor_IV_Summary, HGC_HPK_Sensor_IV_Summary]`
