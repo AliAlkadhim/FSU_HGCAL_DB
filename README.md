@@ -59,5 +59,7 @@ The easiest way to install mysql is using conda
 * Depending on what you want in the python file, this should create the database and tables, and show the table in the database grid.
 
 # Running This code as a module (under construction)
+
 `pip install fsudb`
+
 `fsudb createdb --tablenames [select from options: Full_Sensor, HPK_structures, MOS_GCD, PQC, strip_sensors_logistics, HGC_CERN_Sensor_IV_Summary, HGC_HPK_Sensor_IV_Summary]`
