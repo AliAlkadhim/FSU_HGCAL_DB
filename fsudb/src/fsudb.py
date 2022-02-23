@@ -7,7 +7,9 @@ import argparse
 parser = argparse.ArgumentParser(description='Generate FSU DB SQL file')
 parser.add_argument('--tablename', type=str, required=True, help = '''name of the table available in /FSU_tables/. \
 Available options: ["Diodes", " Full_Sensor", "HGC_HPK_Sensor_IV_Summary_LD_and_HD","HPK_structures", "MOS_GCD", "PQC", "strip_sensors_logistics" ''')
-parser.add_argument('--sql_file', type=str, required=False, help = 'name of the SQL file for the database you wish to generate')
+parser.add_argument('--sql_file', type=str, required=False, help = 'name of the SQL file for the database you wish to generate. If this is unspecified, the generated file will be "FSU_HGCAL.sql" in your current directory')
+parser.add_argument('--tablenamelist', type=str, required=False, help = '''list of the table names available in /FSU_tables/. \
+Available options: ["Diodes", " Full_Sensor", "HGC_HPK_Sensor_IV_Summary_LD_and_HD","HPK_structures", "MOS_GCD", "PQC", "strip_sensors_logistics" ''')
 
 args = parser.parse_args()
 #filename_Full_Sensor = "FSU_tables/strip_sensors_logistics.csv"
@@ -16,6 +18,60 @@ args = parser.parse_args()
 
 table_name_path = os.path.abspath('../FSU_tables/' + args.tablename)
 
+
+#experimental
+#{table1: (fields1, rows1), table2: (fields2, rows2), etc.}
+
+#{}
+def generate_from_table_list(tablenamelist):
+    dict_db = {}
+    for table in tablenamelist:
+        fields = []
+        rows = []
+        dict_db[table] = (fields, rows)
+        with open(table, 'r') as csvfile:
+            csvreader = csv.reader(csvfile)
+            fields = next(csvreader)
+            for row in csvreader:
+                rows.append(row)
+
+        new_fields = []
+        for field in fields:
+            #we have to replace whitespace with _, field names have to be continuous
+            #we have to remove "-"" from field names and other characters
+            new_field = re.sub('\s+', '_', field)
+            new_field = re.sub('-', '', new_field)
+            new_field = re.sub('\.', '', new_field)
+            new_field = re.sub('\?', '', new_field)
+            new_field = re.sub('\(', '_', new_field)
+            new_field = re.sub('\)', '', new_field)
+            new_fields.append(new_field)
+
+        fields = new_fields
+    
+    print('DICT', dict_db)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########main
 fields = []
 rows=[]
 
@@ -84,6 +140,7 @@ if __name__ == '__main__':
 
     sql_file= 'FSU_HGCAL.sql' if args.sql_file == None else args.sql_file
     generate_sql_code(rows, fields, Tablename= args.tablename[:-4], DB_sql_file=sql_file)
+    #generate_from_table_list(tablenamelist=args.tablenamelist)
 
 
 
