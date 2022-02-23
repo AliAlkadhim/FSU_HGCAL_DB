@@ -37,7 +37,7 @@ The easiest way to install mysql is using conda
 * Leave everything else as they are, and press OK
 * click back on admin, you should see a new admin connection for our admin user
 * click it and type its password (you can check "save password in keychain" if you're not concerned about your computer's secturity), and click OK. 
-# CHECK THAT YOU CAN ACCESS A DATABASE WITH WORKBENCH (optional)
+### Optional: Check that you can access a database with Workbench
 
 * go to https://www.mysqltutorial.org/mysql-sample-database.aspx and click "Download MySQL Sample Database" 
 * in a terminal, cd to where you downloaded it, and do `unzip mysqlsampledatabase.zip`
