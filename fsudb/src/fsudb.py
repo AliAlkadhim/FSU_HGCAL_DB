@@ -5,7 +5,8 @@ import os
 import argparse
 
 parser = argparse.ArgumentParser(description='Generate FSU DB SQL file')
-parser.add_argument('--tablename', type=str, required=True, help = 'name of the table available in /FSU_tables/')
+parser.add_argument('--tablename', type=str, required=True, help = '''name of the table available in /FSU_tables/. \
+Available options: ["Diodes", " Full_Sensor", "HGC_HPK_Sensor_IV_Summary_LD_and_HD","HPK_structures", "MOS_GCD", "PQC", "strip_sensors_logistics" ''')
 parser.add_argument('--sql_file', type=str, required=False, help = 'name of the SQL file for the database you wish to generate')
 
 args = parser.parse_args()
