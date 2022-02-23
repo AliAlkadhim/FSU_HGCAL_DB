@@ -5,7 +5,9 @@ import os
 import argparse
 
 parser = argparse.ArgumentParser(description='Generate FSU DB SQL file')
-parser.add_argument('--tablename', type=str, help = 'name of the table available in /FSU_tables/')
+parser.add_argument('--tablename', type=str, required=True, help = 'name of the table available in /FSU_tables/')
+parser.add_argument('--sql_file', type=str, required=False, help = 'name of the SQL file for the database you wish to generate')
+
 args = parser.parse_args()
 #filename_Full_Sensor = "FSU_tables/strip_sensors_logistics.csv"
 
@@ -78,7 +80,9 @@ def generate_sql_code(rows, fields, Tablename, DB_sql_file):
 #generate_sql_code(fields, rows, Tablename='Full_Sensor', DB_sql_file='FSU_HGCAL.sql')
 
 if __name__ == '__main__':
-    generate_sql_code(rows, fields, Tablename= args.tablename[:-4], DB_sql_file='FSU_HGCAL.sql')
+
+    sql_file= 'FSU_HGCAL.sql' if args.sql_file == None else args.sql_file
+    generate_sql_code(rows, fields, Tablename= args.tablename[:-4], DB_sql_file=sql_file)
 
 
 
