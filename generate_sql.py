@@ -2,7 +2,8 @@ import csv
 import subprocess as sb
 import re
 
-filename_Full_Sensor = "FSU_tables/Full_Sensor.csv"
+filename_Full_Sensor = "FSU_tables/strip_sensors.csv"
+#"FSU_tables/Full_Sensor.csv"
 
 fields = []
 rows=[]
@@ -48,12 +49,14 @@ def generate_sql_code(fields, rows, Tablename, DB_sql_file):
         for row in rows:
             sql_file.write('INSERT INTO ' + Tablename +' VALUES (')
             for element in row[:-1]:
-                if not element:#check if the string is empty, if it is, it should be NULL in sql
+                if (not element) or (element=='-'):#check if the string is empty, if it is, it should be NULL in sql
                     sql_file.write('NULL' +', ')
                 else:
                     sql_file.write("'" + element.strip() + "', ")
-            if not row[-1]:
+            if (not row[-1]) or (row[-1]=='-'):
                 sql_file.write('NULL' +' ')
+            # if row[-1] == '-':
+            #     sql_file.write('NULL' +' ')
             else:
                 sql_file.write("'" + row[-1].strip() + "' ")
             sql_file.write(');\n')
@@ -62,7 +65,7 @@ def generate_sql_code(fields, rows, Tablename, DB_sql_file):
 
 print('field names are: ', fields)
 print('\n')
-print('rows are:', rows[:5])
+print('last rows are:', rows[- 1])
 
 generate_sql_code(fields, rows, Tablename='Full_Sensor', DB_sql_file='FSU_HGCAL.sql')
 
@@ -73,30 +76,30 @@ generate_sql_code(fields, rows, Tablename='Full_Sensor', DB_sql_file='FSU_HGCAL.
 ##PQC
 #next: other tables - list of fields and list of rows for each table, which are each list of lists!
 
-filename_PQC = "FSU_tables/PQC.csv"
+# filename_PQC = "FSU_tables/PQC.csv"
 
-fields_PQC = []
-rows_PQC=[]
+# fields_PQC = []
+# rows_PQC=[]
 
-with open(filename_PQC, 'r') as csvfile:
-    csvreader = csv.reader(csvfile)
-    fields_PQC = next(csvreader)
-    for row in csvreader:
-        rows_PQC.append(row)
+# with open(filename_PQC, 'r') as csvfile:
+#     csvreader = csv.reader(csvfile)
+#     fields_PQC = next(csvreader)
+#     for row in csvreader:
+#         rows_PQC.append(row)
 
-new_fields = []
-for field in fields_PQC:
-    #we have to replace whitespace with _, field names have to be continuous
-    #we have to remove "-"" from field names and other characters
-    new_field = re.sub('\s+', '_', field)
-    new_field = re.sub('-', '', new_field)
-    new_field = re.sub('\.', '', new_field)
-    new_field = re.sub('\?', '', new_field)
-    new_field = re.sub('\(', '_', new_field)
-    new_field = re.sub('\)', '', new_field)
-    new_fields.append(new_field)
+# new_fields = []
+# for field in fields_PQC:
+#     #we have to replace whitespace with _, field names have to be continuous
+#     #we have to remove "-"" from field names and other characters
+#     new_field = re.sub('\s+', '_', field)
+#     new_field = re.sub('-', '', new_field)
+#     new_field = re.sub('\.', '', new_field)
+#     new_field = re.sub('\?', '', new_field)
+#     new_field = re.sub('\(', '_', new_field)
+#     new_field = re.sub('\)', '', new_field)
+#     new_fields.append(new_field)
 
-fields_PQC = new_fields
+# fields_PQC = new_fields
 
 
 #generate_sql_code(fields_PQC, rows_PQC, Tablename='PQC', DB_sql_file='FSU_HGCAL.sql')
