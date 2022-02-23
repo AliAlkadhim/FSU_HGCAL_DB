@@ -1,14 +1,22 @@
 import csv
-import subprocess as sb
+#import subprocess as sb
 import re
+import os
+import argparse
 
-filename_Full_Sensor = "FSU_tables/strip_sensors_logistics.csv"
+parser = argparse.ArgumentParser(description='Generate FSU DB SQL file')
+parser.add_argument('--tablename', type=str, help = 'name of the table available in /FSU_tables/')
+args = parser.parse_args()
+#filename_Full_Sensor = "FSU_tables/strip_sensors_logistics.csv"
+
 #"FSU_tables/Full_Sensor.csv"
+
+table_name_path = os.path.abspath('../FSU_tables/' + args.tablename)
 
 fields = []
 rows=[]
 
-with open(filename_Full_Sensor, 'r') as csvfile:
+with open(args.tablename, 'r') as csvfile:
     csvreader = csv.reader(csvfile)
     fields = next(csvreader)
     for row in csvreader:
@@ -27,8 +35,8 @@ for field in fields:
     new_fields.append(new_field)
 
 fields = new_fields
+def generate_sql_code(rows, fields, Tablename, DB_sql_file):
 
-def generate_sql_code(fields, rows, Tablename, DB_sql_file):
     with open(DB_sql_file,'w') as sql_file:
         database = DB_sql_file[:-4] #name of the database without .sql
         
@@ -63,12 +71,14 @@ def generate_sql_code(fields, rows, Tablename, DB_sql_file):
         sql_file.write('SELECT * FROM %s' % Tablename + ';\n')
 
 
-print('field names are: ', fields)
-print('\n')
-print('last rows are:', rows[- 1])
+# print('field names are: ', fields)
+# print('\n')
+# print('last rows are:', rows[- 1])
 
-generate_sql_code(fields, rows, Tablename='Full_Sensor', DB_sql_file='FSU_HGCAL.sql')
+#generate_sql_code(fields, rows, Tablename='Full_Sensor', DB_sql_file='FSU_HGCAL.sql')
 
+if __name__ == '__main__':
+    generate_sql_code(rows, fields, Tablename= args.tablename[:-4], DB_sql_file='FSU_HGCAL.sql')
 
 
 
