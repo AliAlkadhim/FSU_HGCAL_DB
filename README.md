@@ -58,7 +58,18 @@ The easiest way to install mysql is using conda
 * press Ctrl+Shift+Enter
 * Depending on what you want in the python file, this should create the database and tables, and show the table in the database grid.
 
-# Running This code as a module (under construction)
+# Running This code as a module 
+Currently you can go to fsudb/src and do
+
+`python fsudb.py --tablename "strip_sensors_logistics.csv" `
+
+And this generates your sql file with the desired tables. Do
+
+`python fsudb.py --help`
+
+to see more on usage available parameters.
+
+# Ideas (under construction)
 
 `pip install fsudb`
 
