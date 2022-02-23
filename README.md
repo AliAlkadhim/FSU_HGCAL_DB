@@ -76,3 +76,5 @@ to see more on usage available parameters.
 `fsudb createdb --tablenames [select from options: Full_Sensor, HPK_structures, MOS_GCD, PQC, strip_sensors_logistics, HGC_CERN_Sensor_IV_Summary, HGC_HPK_Sensor_IV_Summary]`
 
 This makes an database in the file FSU_HGCAL_DB.sql in your current working directory with all the tables you asked for. Now you can query it with your favorite interface, e.g. mysql.
+
+For added functionality, this could be a python module with query functionality? 
