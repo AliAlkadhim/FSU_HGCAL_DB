@@ -1,0 +1,66 @@
+,,,,,,,,,CERN full probe card (on dicing frame),,,,CMS full probe card (off dicing frame),,,,,,CERN full probe card (on dicing frame),,,,CMS full probe card (off dicing frame),,
+Sensor ID,Scratch pad ID,Thick- ness,P- Stop,Oxide type,Flat band volt. (V),P- Stop conc.,Proc.,,V dep corresponding to thickness,Maximum variation of Vdep across sensor of ± 10% ,Thickness variation < 10 μm,,V dep corresponding to thickness,Maximum variation of Vdep across sensor of ± 10% ,Thickness variation < 10 μm,,,Sensor ID,V dep corresponding to thickness,Maximum variation of Vdep across sensor of ± 10% ,Thickness variation < 10 μm,,V dep corresponding to thickness,Maximum variation of Vdep across sensor of ± 10% ,Thickness variation < 10 μm
+N4791_1,100088,300,com,A,-5,STD,FZ,,passed: 284.9V<370V,passed: 0.9%,passed: 0.8% = 2.4 um,,passed: 285.8V<370V,passed: 0.9%,passed: 0.9% = 2.7 um,,,N4791_1,passed: 284.9V<370V,passed: 0.9%,passed: 0.8% = 2.4 um,,passed: 285.8V<370V,passed: 0.9%,passed: 0.9% = 2.7 um
+N4791_2,100089,300,com,A,-5,STD,FZ,,passed: 290.3V<370V,passed: 0.7%,passed: 0.8% = 2.4 um,,passed: 293.1V<370V,passed: 0.7%,passed: 0.8% = 2.4 um,,,N4791_2,passed: 290.3V<370V,passed: 0.7%,passed: 0.8% = 2.4 um,,passed: 293.1V<370V,passed: 0.7%,passed: 0.8% = 2.4 um
+N4791_3,100090,300,com,A,-5,STD,FZ,,,,,,,,,,,N4790_1,passed: 262.7V<370V,passed: 1.2%,passed: 0.4% = 1.2 um,,passed: 261.8V<370V,passed: 1.2%,passed: 0.4% = 1.2 um
+N4791_4,100091,300,com,A,-5,STD,FZ,,,,,,,,,,,N4790_2,passed: 267.7V<370V,passed: 1.1%,passed: 0.4% = 1.2 um,,passed: 267.6V<370V,passed: 1.2%,passed: 0.4% = 1.2 um
+N4790_1,100076,300,com,B,-2,STD,FZ,,passed: 262.7V<370V,passed: 1.2%,passed: 0.4% = 1.2 um,,passed: 261.8V<370V,passed: 1.2%,passed: 0.4% = 1.2 um,,,N4790_3,passed: 251.0V<370V,passed: 0.9%,passed: 0.6% = 1.8 um,,passed: 251.2V<370V,passed: 0.9%,passed: 0.6% = 1.8 um
+N4790_2,100077,300,com,B,-2,STD,FZ,,passed: 267.7V<370V,passed: 1.1%,passed: 0.4% = 1.2 um,,passed: 267.6V<370V,passed: 1.2%,passed: 0.4% = 1.2 um,,,N4791_6,passed: 281.2V<370V,passed: 0.4%,passed: 0.4% = 1.2 um,,passed: 282.7V<370V,passed: 0.5%,passed: 0.4% = 1.2 um
+N4790_3,100078,300,com,B,-2,STD,FZ,,passed: 251.0V<370V,passed: 0.9%,passed: 0.6% = 1.8 um,,passed: 251.2V<370V,passed: 0.9%,passed: 0.6% = 1.8 um,,,N4791_7,passed: 282.3V<370V,passed: 0.3%,passed: 0.3% = 0.9 um,,passed: 281.6V<370V,passed: 0.3%,passed: 0.4% = 1.2 um
+N4790_4,100079,300,com,B,-2,STD,FZ,,,,,,,,,,,N4791_8,passed: 283.0V<370V,passed: 0.4%,passed: 0.5% = 1.5 um,,passed: 283.0V<370V,passed: 0.4%,passed: 0.5% = 1.5 um
+N4790_5,100080,300,com,B,-2,STD,FZ,,,,,,,,,,,N4791_9,passed: 283.5V<370V,passed: 0.4%,passed: 0.4% = 1.2 um,,passed: 283.0V<370V,passed: 0.4%,passed: 0.5% = 1.5 um
+N4790_6,100081,300,com,B,-2,STD,FZ,,,,,,,,,,,N4791_18,Not available,,,,passed: 281.1V<370V,passed: 0.2%,passed: 0.4% = 1.2 um
+N4791_6,100093,300,com,C,-2,STD,FZ,,passed: 281.2V<370V,passed: 0.4%,passed: 0.4% = 1.2 um,,passed: 282.7V<370V,passed: 0.5%,passed: 0.4% = 1.2 um,,,N4791_19,,,,,passed: 281.2V<370V,passed: 0.3%,passed: 0.6% = 1.8 um
+N4791_7,100094,300,com,C,-2,STD,FZ,,passed: 282.3V<370V,passed: 0.3%,passed: 0.3% = 0.9 um,,passed: 281.6V<370V,passed: 0.3%,passed: 0.4% = 1.2 um,,,N4791_20,,,,,passed: 281.5V<370V,passed: 0.4%,passed: 0.8% = 2.4 um
+N4791_8,100095,300,com,C,-2,STD,FZ,,passed: 283.0V<370V,passed: 0.4%,passed: 0.5% = 1.5 um,,passed: 283.0V<370V,passed: 0.4%,passed: 0.5% = 1.5 um,,,N4791_21,,,,,passed: 276.2V<370V,passed: 0.5%,passed: 0.6% = 1.8 um
+N4791_9,100096,300,com,C,-2,STD,FZ,,passed: 283.5V<370V,passed: 0.4%,passed: 0.4% = 1.2 um,,passed: 283.0V<370V,passed: 0.4%,passed: 0.5% = 1.5 um,,,N4790_13,passed: 271.3V<370V,passed: 0.4%,passed: 0.5% = 1.5 um,,passed: 271.0V<370V,passed: 0.4%,passed: 0.5% = 1.5 um
+N4791_10,100097,300,com,C,-2,STD,FZ,,,,,,,,,,,N4790_14,passed: 269.8V<370V,passed: 0.5%,passed: 0.4% = 1.2 um,,passed: 269.6V<370V,passed: 0.7%,passed: 0.4% = 1.2 um
+N4791_11,100098,300,com,C,-2,STD,FZ,,,,,,,,,,,N4790_15,passed: 266.8V<370V,passed: 0.9%,passed: 0.3% = 0.9 um,,passed: 267.4V<370V,passed: 1.0%,passed: 0.3% = 0.9 um
+N4791_12,100099,300,com,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4791_13,100100,300,com,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4791_18,100105,300,ind,C,-2,STD,FZ,,,,,,passed: 281.1V<370V,passed: 0.2%,passed: 0.4% = 1.2 um,,,,,,,,,,
+N4791_19,100106,300,ind,C,-2,STD,FZ,,,,,,passed: 281.2V<370V,passed: 0.3%,passed: 0.6% = 1.8 um,,,,,,,,,,
+N4791_20,100107,300,ind,C,-2,STD,FZ,,,,,,passed: 281.5V<370V,passed: 0.4%,passed: 0.8% = 2.4 um,,,,,,,,,,
+N4791_21,100108,300,ind,C,-2,STD,FZ,,,,,,passed: 276.2V<370V,passed: 0.5%,passed: 0.6% = 1.8 um,,,,,,,,,,
+N4791_22,100109,300,ind,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4791_23,100110,300,ind,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4791_24,100111,300,ind,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4791_25,100112,300,ind,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4790_13,100082,300,com,D,-2,STD,FZ,,passed: 271.3V<370V,passed: 0.4%,passed: 0.5% = 1.5 um,,passed: 271.0V<370V,passed: 0.4%,passed: 0.5% = 1.5 um,,,,,,,,,,
+N4790_14,100083,300,com,D,-2,STD,FZ,,passed: 269.8V<370V,passed: 0.5%,passed: 0.4% = 1.2 um,,passed: 269.6V<370V,passed: 0.7%,passed: 0.4% = 1.2 um,,,,,,,,,,
+N4790_15,100084,300,com,D,-2,STD,FZ,,passed: 266.8V<370V,passed: 0.9%,passed: 0.3% = 0.9 um,,passed: 267.4V<370V,passed: 1.0%,passed: 0.3% = 0.9 um,,,,,,,,,,
+N4790_16,100085,300,com,D,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4790_17,100086,300,com,D,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4790_18,100087,300,com,D,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,
+N4792_2,200089,200,com,A,-5,STD,FZ,,,,,,,,,,,,,,,,,,
+N4792_3,200089,200,com,A,-5,STD,FZ,,,,,,,,,,,,,,,,,,
+N4792_4,200089,200,com,A,-5,STD,FZ,,,,,,passed: 94.5V<160V,failed: 12.3%,passed: 0.5% = 1.0um,,,,,,,,,,
+N4790_7,200075,200,com,B,-2,STD,FZ,,,,,,passed: 111.4V < 160V,passed: 2.9%,passed: 0.2% = 0.4um,,,,,,,,,,
+N4790_8,200076,200,com,B,-2,STD,FZ,,passed: 111.0V< 160V,passed: 1.7%,passed: 0.3% = 0.6um,,passed: 111.6V< 160V,passed: 1.5%,passed: 1.0% = 2.0um,,,,,,,,,,
+N4790_9,200077,200,com,B,-2,STD,FZ,,passed: 111.3V< 160V,passed: 1.7%,passed: 1.0% = 2.0um,,passed: 112.0V< 160V,passed: 1.4%,passed: 0.5% = 1.0um,,,,,,,,,,
+N4790_10,200078,200,com,B,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4790_11,200079,200,com,B,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4790_12,200080,200,com,B,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4792_6,200092,200,com,C,-2,STD,FZ,,,,,,passed: 126.6V < 160V,passed: 2.2%,passed: 0.3% = 0.6um,,,,,,,,,,
+N4792_7,200093,200,com,C,-2,STD,FZ,,,,,,passed: 124.6V < 160V,passed: 2.7%,passed: 0.3% = 0.6um,,,,,,,,,,
+N4792_8,200094,200,com,C,-2,STD,FZ,,,,,,passed: 123.0V< 160V,passed: 1.5%,passed: 1.8% = 3.6um,,,,,,,,,,
+N4792_9,200095,200,com,C,-2,STD,FZ,,passed: 121.7V< 160V,passed: 2.4%,passed: 2.2% = 4.4um,,passed: 122.5V< 160V,passed: 2.6%,passed: 1.8% = 3.6um,,,,,,,,,,
+N4792_10,200096,200,com,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4792_11,200097,200,com,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4792_12,200098,200,com,C,-2,STD,FZ,,,,,,passed: 117.2V< 160V,passed: 0.9%,passed: 0.4% = 0.8um,,,,,,,,,,
+N4792_13,200099,200,com,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4792_18,200104,200,ind,C,-2,STD,FZ,,,,,,passed: 121.2V < 160V,passed: 2.7%,passed: 0.3% = 0.6um,,,,,,,,,,
+N4792_19,200105,200,ind,C,-2,STD,FZ,,,,,,passed: 111.3V < 160V,passed: 2.7%,passed: 0.3% = 0.6um,,,,,,,,,,
+N4792_20,200106,200,ind,C,-2,STD,FZ,,,,,,passed: 118.5V < 160V,passed: 2.8%,passed: 0.3% = 0.6um,,,,,,,,,,
+N4792_21,200107,200,ind,C,-2,STD,FZ,,,,,,passed: 119.3V < 160V,passed: 2.4%,passed: 0.3% = 0.6um,,,,,,,,,,
+N4792_22,200108,200,ind,C,-2,STD,FZ,,,,,,passed: 109.4V < 160V,passed: 0.8%,passed: 0.4% = 0.8um,,,,,,,,,,
+N4792_23,200109,200,ind,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4792_24,200110,200,ind,C,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4790_19,200081,200,com,D,-2,STD,FZ,,,,,,passed: 115.3V < 160V,passed: 1.9%,passed: 0.3% = 0.6um,,,,,,,,,,
+N4790_20,200082,200,com,D,-2,STD,FZ,,passed: 115.5V< 160V,passed: 2.0%,passed: 0.9% = 1.8um,,passed: 116.1V< 160V,passed: 2.1%,passed: 0.2% = 0.4um,,,,,,,,,,
+N4790_21,200083,200,com,D,-2,STD,FZ,,passed: 110.3V< 160V,passed: 2.6%,passed: 0.4% = 0.8um,,passed: 110.7V< 160V,passed: 2.7%,passed: 0.4% = 0.8um,,,,,,,,,,
+N4790_22,200084,200,com,D,-2,STD,FZ,,,,,,passed: 106.9V < 160V,passed: 0.7%,passed: 0.6% = 1.2um,,,,,,,,,,
+N4790_23,200085,200,com,D,-2,STD,FZ,,,,,,passed: 118.2V < 160V,passed: 0.5%,passed: 0.6% = 1.2um,,,,,,,,,,
+N4790_24,200086,200,com,D,-2,STD,FZ,,,,,,,,,,,,,,,,,,
+N4790_25,200087,200,com,D,-2,STD,FZ,,,,,,,,,,,,,,,,,,

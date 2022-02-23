@@ -1,0 +1,27 @@
+,,,,,,,,,CERN full probe card (off dicing frame),,
+Sensor ID,Scratch pad ID,Thick- ness,P- Stop,Oxide type,Flat band volt. (V),P- Stop conc.,Proc.,,V dep corresponding to thickness,Maximum variation of Vdep across sensor of ± 10% ,Thickness variation < 10 μm
+N4788_2,300001,120,com,B,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4788_3,300002,120,com,B,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4788_4,300003,120,com,B,-2,STD,epi,,passed: 25.5<70V,passed: 2.8%,passed: 1.3%=1.6 um
+N4788_5,300004,120,com,B,-2,STD,epi,,passed: 24.7<70V,passed: 7.7%,passed: %=2.4 um
+N4788_6,300005,120,com,B,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4788_7,300006,120,com,B,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4788_8,300007,120,com,B,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4789_10,300032,120,com,C,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4789_12,300034,120,com,C,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4789_13,300035,120,com,C,-2,STD,epi,,passed: 26.0<70V,passed: 4.6%,passed: 1.5%=1.8 um
+N4789_14,300036,120,com,C,-2,STD,epi,,passed: 25.8<70V,passed: 1.7%,passed: 1.2%=1.4 um
+N4789_15,300037,120,com,C,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4789_19,300041,120,ind,C,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4789_20,300042,120,ind,C,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4789_21,300043,120,ind,C,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4789_24,300046,120,ind,C,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4789_25,300047,120,ind,C,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4788_9,300008,120,com,D,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4788_10,300009,120,com,D,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4788_11,300010,120,com,D,-2,STD,epi,,passed: 30.8V <70V,passed: 1.3%,passed: 1.3% = 1.6 um
+N4788_12,300011,120,com,D,-2,STD,epi,,passed: 26.6V <70V,passed: 6.7%,passed: 1.5% = 1.8 um
+N4788_13,300012,120,com,D,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4788_14,300013,120,com,D,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4788_15,300014,120,com,D,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive
+N4788_16,300015,120,com,D,-2,STD,epi,,non-conclusive,non-conclusive,non-conclusive

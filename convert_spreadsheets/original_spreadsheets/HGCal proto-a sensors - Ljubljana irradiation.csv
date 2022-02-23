@@ -1,0 +1,28 @@
+,"Diodes (all 6 diode parts of one wafer, only Type C common wafers)",,,,,,,,
+,Fluence / Thickeness,300um,200um,120um,,Number of parts at this fluence,Number of tubes at this fluence (3 parts per tube),"Number of tubes at this fluence, only 120um samples",
+,1.00E+15,0,,,,0,0,,
+,1.50E+15,6,,,,6,2,,
+,2.00E+15,6,6,,,12,4,,
+,3.00E+15,6,,,,6,2,,
+,4.00E+15,,6,,,6,2,,
+,5.50E+15,,6,6,,12,4,2,
+,1.00E+16,,,6,,6,2,2,
+,1.40E+16,,,6,,6,2,2,
+,,,,,Sum:,54,18,6,
+,,,,,,,,,
+,,,,,,,,,
+,"Mini-strip sensors (add number of copies, oxide Types, p-stops here)",,,,,,,,
+,Fluence / Thickeness,300um,200um,120um,,Number of parts at this fluence,Number of tubes at this fluence (3 parts per tube),,
+,1.00E+15,,,,,0,0,,the 8 pieces of each step should be: -> @Thomas from Eva: We do not have D-ind sensors. Without D-ind. there are 6 pieces each left.
+,1.50E+15,6,,,,6,2,,2 common type C
+,2.00E+15,6,6,,,12,4,,2 individual type C
+,3.00E+15,,,,,0,0,,2 common type D
+,4.00E+15,6,6,,,12,4,,"2 individual type D -> @Thomas from Eva, this type does not exist."
+,5.50E+15,,6,3,,9,3,,@Thomas from Eva: We only have 5 copies each of HD C-com and C-ind. Drop one copy at lowest fluence.
+,1.00E+16,,,6,,6,2,,
+,1.40E+16,,,6,,6,2,,
+,,,,,Sum:,51,17,,
+,,,,,,,,,
+,"Mini-strip sensors with epoxy (add number of copies, oxide Types, p-stops here)",,,,,,,,
+,Fluence / Thickeness,300um,200um,120um,,Number of parts at this fluence,Number of tubes at this fluence (3 parts per tube),,
+,1.40E+16,,,3,,3,1,,

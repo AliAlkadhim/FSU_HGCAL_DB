@@ -1,0 +1,27 @@
+,,,,,,,,,HPK full probe card (without calibration cells),,,,,,,,,CMS full probe card,,,,,,,
+Sensor ID,Scratch pad ID,Thick- ness,P- Stop,Oxide type,Flat band volt. (V),P- Stop conc.,Proc.,,I_tot_600V <100uA,I_tot_800V < 2.5* I_tot_600V,,1) Ncell with I600 > 100nA,,2) Ncell with I800 > 2.5 * I600 and I600>10nA threshold || I800>25nA and I600<10nA,3) More than 8 bad cells: requirem. 1) and 2),4) More than two neighbour cells bad: requirem. 1) and 2),,I_tot_600V <100uA,I_tot_800V < 2.5* I_tot_600V,,"1) Ncell with I600 > 100nA, per-pad characteristic",,"2) Ncell with I800 > 2.5 * I600 and I600>10nA threshold || I800>25nA and I600<10nA, per-pad characteristic",3) More than 8 bad cells: requirem. 1) and 2),4) More than two neighbour cells bad: requirem. 1) and 2)
+N4788_2,300001,120,com,B,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,1,Passed,Passed
+N4788_3,300002,120,com,B,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Failed,,0,,1,Passed,Passed
+N4788_4,300003,120,com,B,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_5,300004,120,com,B,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_6,300005,120,com,B,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_7,300006,120,com,B,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_8,300007,120,com,B,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Failed,,0,,1,Passed,Passed
+N4789_10,300032,120,com,C,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Failed,,0,,1,Passed,Passed
+N4789_12,300034,120,com,C,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4789_13,300035,120,com,C,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4789_14,300036,120,com,C,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Failed,,0,,1,Passed,Passed
+N4789_15,300037,120,com,C,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4789_19,300041,120,ind,C,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,1,Passed,Passed
+N4789_20,300042,120,ind,C,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4789_21,300043,120,ind,C,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,1,Passed,Passed
+N4789_24,300046,120,ind,C,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4789_25,300047,120,ind,C,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_9,300008,120,com,D,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_10,300009,120,com,D,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_11,300010,120,com,D,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_12,300011,120,com,D,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,1,,0,Passed,Passed
+N4788_13,300012,120,com,D,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_14,300013,120,com,D,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_15,300014,120,com,D,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
+N4788_16,300015,120,com,D,-2,STD,epi,,Passed,Passed,,0,,0,Passed,Passed,,Passed,Passed,,0,,0,Passed,Passed
