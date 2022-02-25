@@ -2,8 +2,10 @@ import csv
 import subprocess as sb
 import re
 
-filename_Full_Sensor = "FSU_tables/strip_sensors_logistics.csv"
-#"FSU_tables/Full_Sensor.csv"
+#filename_Full_Sensor = "fsudb/src/Diodes.csv"
+#filename_Full_Sensor = "fsudb/src/Full_Sensor.csv"
+#filename_Full_Sensor = "FSU_tables/HGC_HPK_Sensor_IV_Summary_LD_and_HD.csv"
+filename_Full_Sensor = "FSU_tables/PQC.csv"
 
 fields = []
 rows=[]
@@ -32,8 +34,8 @@ def generate_sql_code(fields, rows, Tablename, DB_sql_file):
     with open(DB_sql_file,'w') as sql_file:
         database = DB_sql_file[:-4] #name of the database without .sql
         
-        sql_file.write('DROP DATABASE IF EXISTS %s' % database + ';\n')
-        sql_file.write('CREATE DATABASE %s' % database +';\n')
+        #sql_file.write('DROP DATABASE IF EXISTS %s' % database + ';\n')
+        #sql_file.write('CREATE DATABASE %s' % database +';\n')
         sql_file.write('USE %s' % database +';\n')
         sql_file.write('DROP TABLE IF EXISTS %s' % Tablename + ';\n') #we drop it before creating it, 
         #otherwise it throws an error that table already exists
@@ -42,8 +44,8 @@ def generate_sql_code(fields, rows, Tablename, DB_sql_file):
         
         for field in fields[:-1]:
 
-            sql_file.write(' ' + field + ' VARCHAR(32),')
-        sql_file.write(' ' + fields[-1] + ' VARCHAR(32)')
+            sql_file.write(' ' + field + ' VARCHAR(64),')
+        sql_file.write(' ' + fields[-1] + ' VARCHAR(64)')
         sql_file.write(' );\n')
         # the syntax for INSERTing rows is: INSERT INTO test VALUES (1, 'here', ' nahmean');
         for row in rows:
@@ -61,13 +63,15 @@ def generate_sql_code(fields, rows, Tablename, DB_sql_file):
                 sql_file.write("'" + row[-1].strip() + "' ")
             sql_file.write(');\n')
         sql_file.write('SELECT * FROM %s' % Tablename + ';\n')
+        sql_file.write('SHOW tables;\n')
+       
 
 
 print('field names are: ', fields)
 print('\n')
 print('last rows are:', rows[- 1])
 
-generate_sql_code(fields, rows, Tablename='Full_Sensor', DB_sql_file='FSU_HGCAL.sql')
+generate_sql_code(fields, rows, Tablename='PQC', DB_sql_file='FSU_HGCALDB_OFFICIAL.sql')
 
 
 
