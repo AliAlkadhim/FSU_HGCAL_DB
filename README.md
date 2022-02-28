@@ -71,7 +71,14 @@ to see more on usage available parameters.
 
 # Ideas (under construction)
 
-The summary results are uploaded automatically from the hgcalanalysisworkflow code into the database. Each time an IV or CV automatic analysis is run, this package asks the user "do you want to upload these results into the database?" if the user answers with "yes", the package asks the user to double check that the information that was just added (the last row in the table corresponding to the test that was just run) looks correct (the user should at this point check the pdf results of the automatic analysis to make sure the summary results are correct). If the user answers "yes, it looks correct", the test summary results are uploaded to the DB. If the user answers with "no" then nothing is uploaded.
+The summary results are uploaded automatically from the hgcalanalysisworkflow code into the database.
+
+The hgcal automatic analysis workflow can be obtained with
+
+`docker run -it -v <data directory on host machine>:/home -v <output directory on host>:/output thorbenquast/lcd_hgc_ana_wf`
+
+
+Each time an IV or CV automatic analysis is run, this package asks the user "do you want to upload these results into the database?" if the user answers with "yes", the package asks the user to double check that the information that was just added (the last row in the table corresponding to the test that was just run) looks correct (the user should at this point check the pdf results of the automatic analysis to make sure the summary results are correct). If the user answers "yes, it looks correct", the test summary results are uploaded to the DB. If the user answers with "no" then nothing is uploaded.
 
 Also:
 
