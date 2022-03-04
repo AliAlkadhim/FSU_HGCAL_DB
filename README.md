@@ -4,7 +4,10 @@ This repo is uses mysql to build a database for the HGCAL data at FSU from exist
 # MYSQL INSTALLATION
 ## Any OS with Conda
 The easiest way to install mysql is using conda
-`conda install -c conda-forge mysql` or `conda install -c conda-forge/label/cf201901 mysql` or `conda install -c conda-forge/label/cf202003 mysql`
+
+`conda install -c conda-forge mysql` 
+
+or `conda install -c conda-forge/label/cf201901 mysql` or `conda install -c conda-forge/label/cf202003 mysql`
 
 ## linux: 
 * got to https://dev.mysql.com/downloads/repo/apt/ and click download, cd to the download path in a terminal
