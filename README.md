@@ -1,4 +1,4 @@
-This repo is uses mysql to build a database for the HGCAL data at FSU from existing spreadsheets (converted to csv tables). The instructions make the use of mysql workbench, of course using it without the workbench (by just mysql) is also possible.
+This repo is uses mysql to build a database for the HGCAL data at FSU from existing spreadsheets (converted to csv tables). The instructions make the use of mysql workbench, of course using it without the workbench (by just mysql or even sqlite) is also possible.
 
 
 # MYSQL INSTALLATION
