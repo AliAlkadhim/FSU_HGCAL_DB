@@ -9,10 +9,10 @@ def updateDB():
         print('You must do python updateDB.py IV\n (or CV)')
         return
     if sys.argv[1]== 'IV':
-        TMPFILES_DIR_IV = os.environ('TMPFILES_DIR_IV')
+        TMPFILES_DIR_IV = os.environ['TMPFILES_DIR_IV']
         
         grading_dir = TMPFILES_DIR_IV +'/-/grading/'
-        cmd = 'ls -t $TMPFILES_DIR_IV | head -n 1'
+        cmd = 'ls -t $TMPFILES_DIR_IV/-/grading | head -n 1'
         latest_sensor = sb.Popen(cmd, shell=True)
         print('the latest sensor is ', latest_sensor)
 if __name__ == '__main__':
