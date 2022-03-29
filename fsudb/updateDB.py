@@ -13,8 +13,8 @@ def updateDB():
         
         grading_dir = TMPFILES_DIR_IV +'/-/grading/'
         cmd = 'ls -t $TMPFILES_DIR_IV/-/grading | head -n 1'
-        latest_sensor = sb.Popen(cmd, shell=True)
-        print('the latest sensor is ', latest_sensor)
+        latest_sensor = sb.Popen(cmd, shell=True,stdin=sb.PIPE, stdout=sb.PIPE, stderr=sb.STDOUT).stdout.read()
+        print(latest_sensor)
 if __name__ == '__main__':
     
     updateDB()
