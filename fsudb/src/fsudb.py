@@ -94,6 +94,11 @@ for field in fields:
     new_fields.append(new_field)
 
 fields = new_fields
+
+if args.tablename == "HGC_HPK_Sensor_IV_Summary_LD_and_HD.csv":
+    #the long Ncell_with_1800_greaterthan_2_point_5_times_1600_and_1600_greaterthan_10nA_OR_1800_greaterthan_25nA_and_1600_lessthan_10nA
+    fields = ['Sensor_ID', 'Scratch_pad_ID', 'Thick_ness', 'P_Stop', 'Oxide_type', 'Flat_band_volt_V', 'P_stop_conc', 'Proc', 'HD_Or_LD', 'I_tot_600V_lessthan_100mA', 'I_tot_800V_lessthan_2_point_5_times_I_tot_600V', 'Ncell_with_1800_greaterthan_2_point_5_times_1600', 'More_than_8_bad_cells_require_1_and_2', 'More_than_two_neighbor_cells_bad_require_1_and_2']
+
 def generate_sql_code(rows, fields, Tablename, DB_sql_file):
 
     with open(DB_sql_file,'w') as sql_file:
@@ -109,8 +114,8 @@ def generate_sql_code(rows, fields, Tablename, DB_sql_file):
         
         for field in fields[:-1]:
 
-            sql_file.write(' ' + field + ' VARCHAR(32),')
-        sql_file.write(' ' + fields[-1] + ' VARCHAR(32)')
+            sql_file.write(' ' + field + ' VARCHAR(64),')
+        sql_file.write(' ' + fields[-1] + ' VARCHAR(64)')
         sql_file.write(' );\n')
         # the syntax for INSERTing rows is: INSERT INTO test VALUES (1, 'here', ' nahmean');
         for row in rows:
