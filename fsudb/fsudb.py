@@ -3,6 +3,8 @@ import csv
 import re
 import os
 import argparse
+import numpy as np
+import pandas as pd
 
 parser = argparse.ArgumentParser(description='Generate FSU DB SQL file')
 parser.add_argument('--tablename', type=str, required=True, help = '''name of the table available in /FSU_tables/. \
@@ -77,7 +79,7 @@ rows=[]
 
 with open(args.tablename, 'r') as csvfile:
     csvreader = csv.reader(csvfile)
-    fields = next(csvreader)
+    #fields = next(csvreader)
     for row in csvreader:
         rows.append(row)
 
@@ -94,6 +96,11 @@ for field in fields:
     new_fields.append(new_field)
 
 fields = new_fields
+
+if args.tablename == "HGC_HPK_Sensor_IV_Summary_LD_and_HD.csv":
+    fields = ['Sensor_ID', 'Scratch_pad_ID', 'Thick_ness', 'P_Stop', 'Oxide_type', 'Flat_band_volt__V', 'P_stop_conc', 'Proc', 'HD_Or_LD', 'I_tot_600V_lessthan_100mA', 'I_tot_800V_lessthan_2.5_times_I_tot_600V', 'N_cell_with_1600_greaterthan_100nA', 'Ncell_with_1800_greaterthan_2.5_times_1600_and_1600_greaterthan_10nA_OR_1800_greaterthan_25nA_and_1600_lessthan_10nA', 'More_than_8_bad_cells_require_1_and_2', 'More_than_two_neighbor_cells_bad_require_1_and_2']
+
+
 def generate_sql_code(rows, fields, Tablename, DB_sql_file):
 
     with open(DB_sql_file,'w') as sql_file:
@@ -106,6 +113,7 @@ def generate_sql_code(rows, fields, Tablename, DB_sql_file):
         #otherwise it throws an error that table already exists
 
         sql_file.write('CREATE TABLE ' + Tablename + ' ( ')
+        
         
         for field in fields[:-1]:
 
@@ -161,8 +169,8 @@ def generate_sqlite3_schema(conn):
 if __name__ == '__main__':
 
     sql_file= 'FSU_HGCAL.sql' if args.sql_file == None else args.sql_file
-    generate_sql_code(fields, rows, Tablename='Full_Sensor', DB_sql_file='FSU_HGCAL.sql')
-#     generate_sql_code(rows, fields, Tablename= args.tablename[:-4], DB_sql_file=sql_file)
+    #generate_sql_code(fields, rows, Tablename='Full_Sensor', DB_sql_file='FSU_HGCAL.sql')
+    generate_sql_code(rows, fields, Tablename= args.tablename[:-4], DB_sql_file=sql_file)
     #generate_from_table_list(tablenamelist=args.tablenamelist)
 
 
