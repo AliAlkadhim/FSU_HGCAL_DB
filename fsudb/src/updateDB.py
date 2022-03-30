@@ -33,10 +33,23 @@ def updateDB():
         grading_results_for_latest_sensor_file = grading_dir + latest_sensor + '/grading_results.tex'
         
 
+        #scratchpad_ID has to be obtained from the database like HGC_HPK..., I think it has to be imput manually by the user!
 
-        df = pd.DataFrame({'Sensor_ID': [latest_sensor]})
+        DUT = pd.read_csv(os.environ['WORKFLOW_DIR']+'/database/csv/DUTs.csv')
+        for row in DUT['Name']:
+            if row.endswith(latest_sensor):
+
+                Thickness = DUT['Thickness'][DUT['Name'] == row]
+                Pstop = DUT['Pstop'][DUT['Name'] == row]
+
+
+        df = pd.DataFrame({'Sensor_ID': [latest_sensor],
+        'Scratch_pad_ID':[None],
+        'Thickness' : Thickness,
+        'P_Stop' : Pstop,
+                                    })
         with open(grading_results_for_latest_sensor_file, 'r') as f:
-            for line in f.readlines():
+            for line_ind, line in enumerate(f.readlines()):
                 pass
                 # pd_dict = {'Sensor_ID': , 'Scratch_pad_ID':, 
                 #     'Thick_ness' : , 'P_Stop' : , 
