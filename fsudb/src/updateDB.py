@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess as sb
 import pandas as pd
+import fsudb
 # if args.tablename == "HGC_HPK_Sensor_IV_Summary_LD_and_HD.csv":
 #     #the long Ncell_with_1800_greaterthan_2_point_5_times_1600_and_1600_greaterthan_10nA_OR_1800_greaterthan_25nA_and_1600_lessthan_10nA
 #     fields = ['Sensor_ID', 'Scratch_pad_ID', 
@@ -15,7 +16,14 @@ import pandas as pd
 #     'More_than_two_neighbor_cells_bad_require_1_and_2']
 
 def updateDB():
-    """automatically updates the FSUDB, given either IV or CV"""
+    """automatically updates the FSUDB, given either IV or CV.
+    Big picture: running 'updateDB IV' should:
+    1. make a csv file for each table, fill it with all the necessary data from the test results (in TMP or SUMMARY directories
+    ,store it in 'new_results' directory
+    2. make sql tables from the csv data that we just got.
+    3. show pdf of compiled table of latest results.
+    4. update the necessary tables from the central fsu database"""
+
     if sys.argv[1]:
         measure = sys.argv[1]#this is either IV or CV
     else:
@@ -45,8 +53,11 @@ def updateDB():
 
         df = pd.DataFrame({'Sensor_ID': [latest_sensor],
         'Scratch_pad_ID':[None],
-        'Thickness' : Thickness,
-        'P_Stop' : Pstop,
+        'Thickness' : [Thickness,]
+        'P_Stop' : [Pstop],
+        'Oxide_type' : [None],
+        #'Flat_band_volt_V' : IDK yet
+        'P_stop_conc' : 
                                     })
         with open(grading_results_for_latest_sensor_file, 'r') as f:
             for line_ind, line in enumerate(f.readlines()):
