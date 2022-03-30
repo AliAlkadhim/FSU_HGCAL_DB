@@ -5,15 +5,17 @@ import pandas as pd
 import fsudb
 # if args.tablename == "HGC_HPK_Sensor_IV_Summary_LD_and_HD.csv":
 #     #the long Ncell_with_1800_greaterthan_2_point_5_times_1600_and_1600_greaterthan_10nA_OR_1800_greaterthan_25nA_and_1600_lessthan_10nA
-#     fields = ['Sensor_ID', 'Scratch_pad_ID', 
-#     'Thick_ness', 'P_Stop', 
-#     'Oxide_type', 'Flat_band_volt_V', 'P_stop_conc', 
-#     'Proc', 'HD_Or_LD', 
-#     'I_tot_600V_lessthan_100mA', 
-#     'I_tot_800V_lessthan_2_point_5_times_I_tot_600V', 
-#     'Ncell_with_1800_greaterthan_2_point_5_times_1600', 
-#     'More_than_8_bad_cells_require_1_and_2', 
-#     'More_than_two_neighbor_cells_bad_require_1_and_2']
+
+
+HGC_HPK_Sensor_IV_Summary_LD_and_HD_fields = ['Sensor_ID', 'Scratch_pad_ID', 
+'Thick_ness', 'P_Stop', 
+'Oxide_type', 'Flat_band_volt_V', 'P_stop_conc', 
+'Proc', 'HD_Or_LD', 
+'I_tot_600V_lessthan_100mA', 
+'I_tot_800V_lessthan_2_point_5_times_I_tot_600V', 
+'Ncell_with_1800_greaterthan_2_point_5_times_1600', 
+'More_than_8_bad_cells_require_1_and_2', 
+'More_than_two_neighbor_cells_bad_require_1_and_2']
 
 def updateDB():
     """automatically updates the FSUDB, given either IV or CV.
@@ -30,6 +32,7 @@ def updateDB():
 	    print('You must do python updateDB.py IV\n (or CV)')
         #return
     if sys.argv[1]== 'IV':
+        #HGC_HPK_Sensor_IV_Summary_LD_and_HD.csv is the only table we need to worry about updating for IV
         TMPFILES_DIR_IV = os.environ['TMPFILES_DIR_IV']
 
         grading_dir = TMPFILES_DIR_IV +'/-/grading/'
