@@ -52,15 +52,19 @@ def updateDB():
 
                 Thickness = DUT['Thickness'][DUT['Name'] == row]
                 Pstop = DUT['Pstop'][DUT['Name'] == row]
-
+                
 
         df = pd.DataFrame({'Sensor_ID': [latest_sensor],
         'Scratch_pad_ID':[None],
         'Thickness' : [Thickness,]
         'P_Stop' : [Pstop],
         'Oxide_type' : [None],
-        #'Flat_band_volt_V' : IDK yet
-        'P_stop_conc' : 
+        #'Flat_band_volt_V' : Not Sure YEt yet
+        #'P_stop_conc' : NSY,
+        #'Proc' :NSY,
+        'HD_Or_LD' : 
+
+        
                                     })
         with open(grading_results_for_latest_sensor_file, 'r') as f:
             for line_ind, line in enumerate(f.readlines()):
