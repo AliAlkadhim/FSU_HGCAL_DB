@@ -1,4 +1,9 @@
-This repo is uses mysql to build a database for the HGCAL data at FSU from existing spreadsheets (converted to csv tables). The instructions make the use of mysql workbench, of course using it without the workbench (by just mysql or even sqlite) is also possible.
+## Currently, the package is maintained in the fsudb directory.
+
+
+This repo is uses mysql to build an SQL relational database for the HGCAL data at FSU from existing spreadsheets (converted to csv tables). The power really comes when it is combined with the HGCAL automatic analysis code (at https://gitlab.cern.ch/CLICdp/HGCAL/lcd_hgcal_analysisworkflows). Thus this package, when the analysis code is also installed, allows for completely automatic updating of the database. To interact with the database (queries, etc.), our choice is to use mysql, interfaced with mysql Workbench.
+
+The instructions make the use of mysql workbench, of course using it without the workbench (by just mysql or even sqlite) is also possible.
 
 
 # MYSQL INSTALLATION
