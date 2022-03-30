@@ -1,6 +1,19 @@
 import sys
 import os
 import subprocess as sb
+import pandas as pd
+if args.tablename == "HGC_HPK_Sensor_IV_Summary_LD_and_HD.csv":
+    #the long Ncell_with_1800_greaterthan_2_point_5_times_1600_and_1600_greaterthan_10nA_OR_1800_greaterthan_25nA_and_1600_lessthan_10nA
+    fields = ['Sensor_ID', 'Scratch_pad_ID', 
+    'Thick_ness', 'P_Stop', 
+    'Oxide_type', 'Flat_band_volt_V', 'P_stop_conc', 
+    'Proc', 'HD_Or_LD', 
+    'I_tot_600V_lessthan_100mA', 
+    'I_tot_800V_lessthan_2_point_5_times_I_tot_600V', 
+    'Ncell_with_1800_greaterthan_2_point_5_times_1600', 
+    'More_than_8_bad_cells_require_1_and_2', 
+    'More_than_two_neighbor_cells_bad_require_1_and_2']
+
 def updateDB():
     """automatically updates the FSUDB, given either IV or CV"""
     if sys.argv[1]:
@@ -18,9 +31,25 @@ def updateDB():
         latest_sensor=latest_sensor[:-1]
 
         grading_results_for_latest_sensor_file = grading_dir + latest_sensor + '/grading_results.tex'
+        
+        pd_dict = {}
+
+        pd_dict['Sensor_ID'] = latest_sensor
         with open(grading_results_for_latest_sensor_file, 'r') as f:
             for line in f.readlines():
-                print(line)
+
+                # pd_dict = {'Sensor_ID': , 'Scratch_pad_ID':, 
+                #     'Thick_ness' : , 'P_Stop' : , 
+                #     'Oxide_type' : , 'Flat_band_volt_V' : , 'P_stop_conc' : , 
+                #     'Proc' : , 'HD_Or_LD' :, 
+                #     'I_tot_600V_lessthan_100mA' : , 
+                #     'I_tot_800V_lessthan_2_point_5_times_I_tot_600V' , 
+                #     'Ncell_with_1800_greaterthan_2_point_5_times_1600', 
+                #     'More_than_8_bad_cells_require_1_and_2', 
+                #     'More_than_two_neighbor_cells_bad_require_1_and_2'}
+    
+    df = pd.DataFrame.from_dict(pd_dict)
+    print(df)
 
 
 
