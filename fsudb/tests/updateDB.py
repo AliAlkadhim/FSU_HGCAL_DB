@@ -2,9 +2,9 @@ import sys
 import os
 import subprocess as sb
 import pandas as pd
-import fsudb
-## if args.tablename == "HGC_HPK_Sensor_IV_Summary_LD_and_HD.csv":
-##     #the long Ncell_with_1800_greaterthan_2_point_5_times_1600_and_1600_greaterthan_10nA_OR_1800_greaterthan_25nA_and_1600_lessthan_10nA
+# import fsudb
+# if args.tablename == "HGC_HPK_Sensor_IV_Summary_LD_and_HD.csv":
+    #the long Ncell_with_1800_greaterthan_2_point_5_times_1600_and_1600_greaterthan_10nA_OR_1800_greaterthan_25nA_and_1600_lessthan_10nA
 
 
 HGC_HPK_Sensor_IV_Summary_LD_and_HD_fields = ['Sensor_ID', 'Scratch_pad_ID', 
@@ -47,25 +47,28 @@ def updateDB():
         #scratchpad_ID has to be obtained from the database like HGC_HPK..., I think it has to be imput manually by the user!
         ###########READ INFO FROM DUT
         DUT = pd.read_csv(os.environ['WORKFLOW_DIR']+'/database/csv/DUTs.csv')
-        for row_name in DUT['Name']:
-            if row_name.endswith(latest_sensor):
+        for ind, row in DUT.iterrows():
+            if row['Name'].endswith(latest_sensor):
+                #long_name_ == DUT['Name'][DUT['Name'] == row_name]
+                long_name = row['Name']
+                Size = row['Size']
+                
+                NChannels= row['NChannels']
+                Doping = row['Doping']
+                Thickness = row['Thickness']
+                Pstop = row['Pstop']
+        # latest_sensor_row = DUT.loc[DUT['Name'].endswith(latest_sensor)]
 
-                long_name == DUT['Name'][DUT['Name'] == row_name]
-                Size = DUT['Size'][DUT['Name'] == row_name]
-                NChannels= DUT['NChannels'][DUT['Name'] == row_name]
-                Doping = DUT['Doping'][DUT['Name'] == row_name]
-                Thickness = DUT['Thickness'][DUT['Name'] == row_name]
-                Pstop = DUT['Pstop'][DUT['Name'] == row_name]
                 
         ######READ INFO FROM IVMeasurements        
         IVMeasurements = pd.read_csv(os.environ['WORKFLOW_DIR']+'/database/csv/IVMeasurements.csv')
-        for row_name in IVMeasurements['ID']:
-            if row_name.startswith(latest_sensor):
+        for ind, row in IVMeasurements.iterrows():
+            if row['ID'].startswith(latest_sensor):
                 #CURRENTLY TAKING THE BARE NAME, without _test01, _testN
-                Date = IVMeasurements['Date'][IVMeasurements['ID']==row_name]
-                Station = IVMeasurements['Station'][IVMeasurements['ID']==row_name]
-                HVResistance = IVMeasurements['HVResistance'][IVMeasurements['ID']==row_name]
-                Temperature = IVMeasurements['Temperature'][IVMeasurements['ID']==row_name]
+                Date = row['Date']
+                Station = row['Station']
+                HVResistance = row['HVResistance']
+                Temperature = row['Temperature']
 
         long_df = pd.DataFrame({
         'Sensor_ID': [latest_sensor],
@@ -76,19 +79,19 @@ def updateDB():
         'Thickness' : [Thickness],
         'P_Stop' : [Pstop],
 
-        'Date': [Date],
-        'Station':[Station],
-        'HVResistance':[HVResistance],
-        'Temperature':[Temperature],
+        # 'Date': [Date],
+        # 'Station':[Station],
+        # 'HVResistance':[HVResistance],
+        # 'Temperature':[Temperature],
 
-        'Scratch_pad_ID':[None],
+        # 'Scratch_pad_ID':[None],
   
  
-        'Oxide_type' : [None],
-        #'Flat_band_volt_V' : Not Sure YEt yet
-        #'P_stop_conc' : NSY,
-        #'Proc' :NSY,
-        #'HD_Or_LD' : 
+        # 'Oxide_type' : [None],
+        # 'Flat_band_volt_V' : Not Sure YEt yet
+        # 'P_stop_conc' : NSY,
+        # 'Proc' :NSY,
+        # 'HD_Or_LD' : 
 
         
                                     })
@@ -105,7 +108,8 @@ def updateDB():
                 #     'More_than_8_bad_cells_require_1_and_2', 
                 #     'More_than_two_neighbor_cells_bad_require_1_and_2'}
                 # df = pd.DataFrame.from_dict(pd_dict)
-    print(long_df.head())
+    #print(long_df)
+    long_df.to_csv('new_results/long_df.csv')
 
 
 
@@ -115,4 +119,3 @@ def updateDB():
 if __name__ == '__main__':
 
     updateDB()
-
