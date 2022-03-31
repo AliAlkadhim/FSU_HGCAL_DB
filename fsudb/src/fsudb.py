@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import csv
 #import subprocess as sb
 import re
