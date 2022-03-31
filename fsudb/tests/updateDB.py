@@ -126,7 +126,11 @@ def updateDB():
         'HVResistance':[HVResistance],
         'Temperature':[Temperature],
         #GRADING_RESULTS
-        'I_tot_600V_lessthan_100mA':[criteria_I_tot_600V_lessthan_100mA]
+        'I_tot_600V_lessthan_100mA':[criteria_I_tot_600V_lessthan_100mA], 
+        'I_tot_800V_lessthan_2_point_5_times_I_tot_600V':[criteria_I_tot_800V_lessthan_2_point_5_times_I_tot_600V], 
+        #'Ncell_with_1800_greaterthan_2_point_5_times_1600':[criteria_Ncell_with_1800_greaterthan_2_point_5_times_1600], 
+        'More_than_8_bad_cells_require_1_and_2':[criteria_More_than_8_bad_cells_require_1_and_2], 
+        'More_than_two_neighbor_cells_bad_require_1_and_2':[criteria_More_than_two_neighbor_cells_bad_require_1_and_2]
 
         # 'Scratch_pad_ID':[None],
   
@@ -153,8 +157,8 @@ def updateDB():
                 #     'More_than_two_neighbor_cells_bad_require_1_and_2'}
                 # df = pd.DataFrame.from_dict(pd_dict)
     #print(long_df)
-    #long_df.to_csv('new_results/long_df.csv')
-    print(criteria_More_than_two_neighbor_cells_bad_require_1_and_2)
+    long_df.to_csv('new_results/long_df.csv')
+    #print(criteria_More_than_two_neighbor_cells_bad_require_1_and_2)
 
 
 

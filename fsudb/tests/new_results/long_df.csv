@@ -1,2 +1,2 @@
-,Date,Doping,HVResistance,I_tot_600V_lessthan_100mA,NChannels,P_Stop,Sensor_ID,Size,Station,Temperature,Thickness,long_name
-0,11/5/2021,p,12.0,Passed,199,ind.,N4790_19,8,FSU,22.9,200,HPK_8in_192_N4790_19
+,Date,Doping,HVResistance,I_tot_600V_lessthan_100mA,I_tot_800V_lessthan_2_point_5_times_I_tot_600V,More_than_8_bad_cells_require_1_and_2,More_than_two_neighbor_cells_bad_require_1_and_2,NChannels,P_Stop,Sensor_ID,Size,Station,Temperature,Thickness,long_name
+0,11/5/2021,p,12.0,Passed,Passed,Passed,Passed,199,ind.,N4790_19,8,FSU,22.9,200,HPK_8in_192_N4790_19
