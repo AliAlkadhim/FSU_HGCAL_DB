@@ -1,15 +1,18 @@
 import sys
 import csv
 import re
+import os
 
 def convert_csv_to_sql(csv_file):
     """input: csv file for a table
     output: an sql table syntax for that csv file"""
     #tablename = csv_file.split('/')[-1][:-4]
-    Tablename='HGC_HPK_Sensor_IV_Summary_LD_and_HD_fields'
+    Tablename= csv_file.split('.')[0]
+    #example Tablename: 'HGC_HPK_Sensor_IV_Summary_LD_and_HD_fields'
     fields = []
     rows=[]
-    with open(csv_file,'r') as csvfile:
+    csv_file_path = 'old_tables_csv/'
+    with open(csv_file_path + csv_file,'r') as csvfile:
         csvreader = csv.reader(csvfile)
         fields = next(csvreader)
         for row in csvreader:
@@ -28,8 +31,8 @@ def convert_csv_to_sql(csv_file):
         new_fields.append(new_field)
 
     fields = new_fields
-
-    with open('new_results_sql/' + Tablename+'.sql','w') as table_sqlfile:
+    #or with open(new_results_sql/...)
+    with open('old_tables_sql/' + Tablename+'.sql','w') as table_sqlfile:
         table_sqlfile.write('CREATE TABLE ' + Tablename + ' ( ')
         
         for field in fields[:-1]:
@@ -56,6 +59,7 @@ def convert_csv_to_sql(csv_file):
 
 
 
-csv_file = 'new_results_csv/long_df.csv'
+#csv_file = 'new_results_csv/long_df.csv'
 if __name__ == '__main__':
-    convert_csv_to_sql(sys.argv[1])
+    for file in os.listdir('old_tables_csv'):
+        convert_csv_to_sql(file)
