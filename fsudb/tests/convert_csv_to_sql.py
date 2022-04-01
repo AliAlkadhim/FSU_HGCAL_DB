@@ -60,6 +60,6 @@ def convert_csv_to_sql(csv_file):
 
 
 #csv_file = 'new_results_csv/long_df.csv'
-if __name__ == '__main__':
-    for file in os.listdir('old_tables_csv'):
-        convert_csv_to_sql(file)
+# if __name__ == '__main__':
+#     # for file in os.listdir('old_tables_csv'):
+#     convert_csv_to_sql(file)
