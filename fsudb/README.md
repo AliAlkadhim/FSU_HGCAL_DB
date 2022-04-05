@@ -1,4 +1,4 @@
-### Current Functionality: ALL CURRENT USE OF THIS PACKAGE SHOULD BE DONE IN THE /tests/ directory.
+### Current Functionality: ALL CURRENT USE OF THIS PACKAGE SHOULD BE DONE IN THE `/tests/` DIRECTORY.
 
 Workflow: 
 * Go to /tests/
