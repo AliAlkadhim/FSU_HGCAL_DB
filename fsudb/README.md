@@ -1,6 +1,7 @@
-### Current Functionality: ALL CURRENT USE OF THIS PACKAGE SHOULD BE DONE IN THE `/tests/` DIRECTORY.
+# Current Functionality: ALL CURRENT USE OF THIS PACKAGE SHOULD BE DONE IN THE `/tests/` DIRECTORY.
 
-Workflow: 
+
+## Reconstruct Existing Data Into Database: 
 * Go to /tests/
 
 * First define and store your old tables (these are from the spreadsheets), such that each table is its own csv file, in `FSU_HGCAL_DB/fsudb/tests/old_tables_csv`. The Table names will be the names prior to the ".csv" extension, so make sure you're satisfied with the names!
