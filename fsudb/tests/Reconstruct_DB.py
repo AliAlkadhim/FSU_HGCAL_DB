@@ -2,7 +2,7 @@ import os
 import csv
 import subprocess as sb
 import convert_csv_to_sql as convert
-def Pipeline_Reconstruct_DB():
+def Reconstruct_DB():
 
     """
     just do python Pipeline_ReconstructDB.py in
@@ -17,5 +17,5 @@ def Pipeline_Reconstruct_DB():
     for file in os.listdir('old_tables_csv'):
         convert.convert_csv_to_sql(file)
     
-    if __name__ == '__main__':
-        Pipeline_Reconstruct_DB()
+if __name__ == '__main__':
+    Reconstruct_DB()
