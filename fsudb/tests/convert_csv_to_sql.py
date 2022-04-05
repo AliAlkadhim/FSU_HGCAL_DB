@@ -3,6 +3,7 @@ import csv
 import re
 import os
 
+
 def convert_csv_to_sql(csv_file):
     """input: csv file for a table
     output: an sql table syntax for that csv file"""
@@ -56,6 +57,34 @@ def convert_csv_to_sql(csv_file):
                 table_sqlfile.write("'" + row[-1].strip() + "' ")
             table_sqlfile.write(');\n')
 
+
+
+
+def convert_sql_tables_to_one_DB(database):
+    Complete_DB_dir = 'complete_DB/'
+    #database = 'FSU_TEST_DB'
+
+    old_sql_tables_dir = 'old_tables_sql/'
+    sql_files = os.listdir(old_sql_tables_dir)
+
+
+
+
+
+
+
+    with open(Complete_DB_dir+database+'.sql', 'w') as DB_f:
+        DB_f.write('DROP DATABASE IF EXISTS %s' % database + ';\n')
+        DB_f.write('CREATE DATABASE %s' % database +';\n')
+        DB_f.write('USE %s' % database +';\n')
+
+        for sql_file in sql_files:
+            tablename = sql_file.split('.')[0]
+            with open(old_sql_tables_dir+sql_file, 'r') as sql_f:
+                DB_f.write('DROP TABLE IF EXISTS %s' % tablename + ';\n')
+                sql_file_content = sql_f.read()
+                DB_f.write(sql_file_content)
+                
 
 
 
