@@ -8,7 +8,9 @@
 
 * You can go to `FSU_HGCAL_DB/fsudb/tests` and do `python Reconstruct_DB.py --DB <your choice of a database name>`, e.g. `python Reconstruct_DB.py --DB FSUDB` . This generates an sql table syntax for each of your tables in `FSU_HGCAL_DB/fsudb/tests/old_tables_sql` into a complete dataframe in `/complete_DB/<your choice of a database name>.sql`. 
 
-From there, you can interact with the complete DB. I like to use mysql, where you can do queries such as `select Current_location from Full_Sensor;`
+From there, you can interact with the complete DB. I like to use mysql, where you can do queries such as 
+
+`select Current_location from Full_Sensor;`
  
  or
 
