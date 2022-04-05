@@ -1,4 +1,10 @@
-## Currently, the package is maintained in the fsudb directory.
+### (For 619): 
+`git clone https://github.com/AliAlkadhim/FSU_HGCAL_DB.git`
+
+`cd FSU_HGCAL_DB/fsudb` and read the README there.
+
+
+## (For eveyone): Currently, the package is maintained in the fsudb directory.
 
 
 This repo is uses mysql to build an SQL relational database for the HGCAL data at FSU from existing spreadsheets (converted to csv tables). The power really comes when it is combined with the HGCAL automatic analysis code (at https://gitlab.cern.ch/CLICdp/HGCAL/lcd_hgcal_analysisworkflows). Thus this package, when the analysis code is also installed, allows for completely automatic updating of the database. To interact with the database (queries, etc.), our choice is to use mysql, interfaced with mysql Workbench.
