@@ -1,7 +1,7 @@
 # (For 619): 
 `git clone https://github.com/AliAlkadhim/FSU_HGCAL_DB.git`
 
-`cd FSU_HGCAL_DB/fsudb` and read the README there.
+`cd FSU_HGCAL_DB/fsudb` and read the **README** there.
 
 
 
