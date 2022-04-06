@@ -23,4 +23,8 @@ or
 
 ------------
 ## Update DB to Include Latest Analysis Results (do this second) - Workflow:
+The automatic updates are meant to be run after the `AnalyseMeasurement` command (e.g. `AnalyseMeasurement_IV 2 N3308_5` where N3308_5 is the sensor ID) but before deleting the output of the analysis result with the command `DeleteAnalysisFiles` (e.g. `DeleteAnalysisFiles_IV N3308_5`). After you run `AnalyseMeasurement_IV <Sensor ID>` do the following:
+
 * Go to /tests/
+
+* Do `python updateDB.py <IV or CV>` (currently only IV works). This then generates a csv file with all summary results of the latest measurement in `/new_results_csv/`, and an sql database, that is formatted in the same way as you original database (which is in `/complete_DB/`) with the same tables for only the latest measuremtn. It then appends these tables to your databse, and prints a summary results for you to confirm that the results are correct.
