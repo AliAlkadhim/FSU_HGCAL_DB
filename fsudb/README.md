@@ -8,15 +8,15 @@
 
 * You can go to `FSU_HGCAL_DB/fsudb/tests` and do `python Reconstruct_DB.py --DB <your choice of a database name>`, e.g. `python Reconstruct_DB.py --DB FSUDB` . This generates an sql table syntax for each of your tables in `FSU_HGCAL_DB/fsudb/tests/old_tables_sql` into a complete dataframe in `/complete_DB/<your choice of a database name>.sql`. Do `python Reconstruct_DB.py --help` for help.
 
-* From there, you can interact with the complete DB. I like to use mysql, where you can do queries such as 
+* From there, you can interact with the complete DB. I like to use mysql, if you want a really nice way to use mysql, use mysql Workbench, the instructions to install it is in the README in https://github.com/AliAlkadhim/FSU_HGCAL_DB . Suppose you want to look at the locations of the sensors in the `Full_Sensor` table, you can do the following query: 
 
 `select Current_location from Full_Sensor;`
  
- or
+ or, say you want to look at the sensor ID and location, do:
 
 `select Sensor_ID, Current_location from Full_Sensor;`
 
-or
+or, say you want to find the location of the sensor whose sensor ID is 'N4791_1' from the `Full_Sensor` table, do:
 
 `select Current_location from Full_Sensor where Sensor_ID='N4791_1';`
 
