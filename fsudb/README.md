@@ -27,4 +27,4 @@ The automatic updates are meant to be run after the `AnalyseMeasurement` command
 
 * Go to /tests/
 
-* Do `python updateDB.py <IV or CV>` (currently only IV works). This then generates a csv file with all summary results of the latest measurement in `/new_results_csv/`, and an sql database, that is formatted in the same way as you original database (which is in `/complete_DB/`) with the same tables for only the latest measuremtn. It then appends these tables to your databse, and prints a summary results for you to confirm that the results are correct. Do python `updateDB.py --help` for help.
+* Do `python updateDB.py <IV or CV>` (currently only IV works). This then generates a csv file with all summary results of the latest measurement in `/new_results_csv/`, and an sql database, that is formatted in the same way as you original database (which is in `/complete_DB/`) with the same tables for only the latest measuremtn. It then appends these tables to your databse, and prints a summary results for you to confirm that the results are correct. Do `python updateDB.py --help` for help.
