@@ -1,7 +1,7 @@
 # Current Functionality: ALL CURRENT USE OF THIS PACKAGE SHOULD BE DONE IN THE `/tests/` DIRECTORY.
 ----------
 
-## Reconstruct Existing Data Into Database - Workflow: 
+# Reconstruct Existing Data Into Database (do this first)- Workflow: 
 * Go to /tests/
 
 * First define and store your old tables (these are from the spreadsheets), such that each table is its own csv file, in `FSU_HGCAL_DB/fsudb/tests/old_tables_csv`. The Table names will be the names prior to the ".csv" extension, so make sure you're satisfied with the names! We have added our tables in there, but some attributes of the tables might be changed soon...
@@ -22,5 +22,5 @@ or
 
 
 ------------
-## Update DB to Include Latest Analysis Results
+## Update DB to Include Latest Analysis Results (do this second) - Workflow:
 * Go to /tests/
