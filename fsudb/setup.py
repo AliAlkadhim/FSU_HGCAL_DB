@@ -22,8 +22,7 @@ setup(
     license='MIT',
     author = 'Ali Al Kadhim',
     url = 'https://github.com/AliAlkadhim/FSU_HGCAL_DB/fsudb',
-    install_requires = ['numpy', 'pandas',
-                       #mysql, sqlite3,
+    install_requires = ['numpy', 'pandas', sqlite3,
                        ]
 
 )
