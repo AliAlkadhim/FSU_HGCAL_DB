@@ -13,12 +13,17 @@ def load_requirements(file_name):
 
 
 setup(
-    name= 'fsudb' #'FSU_HGCAL_DB',
+    name= 'fsudb',
+    description='Florida State University Intenrnal Database for CMS HGCAL Testing',
     version = '0.1.0',
     packages = ['fsudb'],
-    entry_points = {'console_scripts': ['fsudbd = fsudb.httpd:main',
-    ]},
+    #entry_points = {'console_scripts': ['fsudbd = fsudb.httpd:main',]},
     #install_requires = load_requirements()
-    license=
+    license='MIT',
+    author = 'Ali Al Kadhim',
+    url = 'https://github.com/AliAlkadhim/FSU_HGCAL_DB/fsudb',
+    install_requires = ['numpy', 'pandas',
+                       #mysql, sqlite3,
+                       ]
 
 )
