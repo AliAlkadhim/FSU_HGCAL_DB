@@ -4,6 +4,8 @@ import subprocess as sb
 import csv
 import re
 import pandas as pd
+import time
+import datetime
 # from fsudb.utils import convert_to_csv
 # if args.tablename == "HGC_HPK_Sensor_IV_Summary_LD_and_HD.csv":
     #the long Ncell_with_1800_greaterthan_2_point_5_times_1600_and_1600_greaterthan_10nA_OR_1800_greaterthan_25nA_and_1600_lessthan_10nA
@@ -56,6 +58,11 @@ def updateDB():
     # #print(long_df)
 
         ########################## READ GRADING RESULTS ################################
+        # source setup.sh
+        sb.call('source /home/lcd_hgcal_analysisworkflows/setup.sh', shell=True)
+        sb.call('source ./home/lcd_hgcal_analysisworkflows/setup.sh', shell=True)
+        time.sleep(1)
+        
         TMPFILES_DIR_IV = os.environ['TMPFILES_DIR_IV']
 
         grading_dir = TMPFILES_DIR_IV +'/-/grading/'
