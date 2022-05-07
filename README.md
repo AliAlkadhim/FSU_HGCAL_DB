@@ -14,7 +14,7 @@ PLEASE INSPECT OUR SQLITE DATABASE CALLED `TESTME.db` WITH SQLITE BROWSER. THIS 
 This can also be done by anyone at home! Sqlite3 comes preinstalled with most python installations, and if you don't have sqlitebrowser, install it with the command
 `sudo apt-get install sqlitebrowser` for Debian or `brew install --cask db-browser-for-sqlite` for MacOS.
 
-After opening `TESTME.db`, there are countless things you can do with sqlitebrowser (including queries and updating!). However, for these checks, go to the `Browse Data` tab, and choose which table you want from the `Table` dropdown menu. You'll see that for IV we have
+After opening `TESTME.db`, there are countless things you can do with sqlitebrowser (including queries and updating!). However, for these checks, go to the `Browse Data` tab, and choose which table you want from the `Table` dropdown menu. You'll see that for IV we have the following tables:
 1) FULL_SENSOR_LOGISTICS <br>
 2) MOS_GCD_LOGISTICS <br>
 3) STRIP_SENSOR_LOGISTICS <br>
