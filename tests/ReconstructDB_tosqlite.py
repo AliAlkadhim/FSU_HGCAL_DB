@@ -29,6 +29,7 @@ def tuple_field_names(fields):
     return s
 
 def convert_row_to_tuple(row):
+    """Given a list of strings, which constitutes a row, convert it to ('row[0]', 'row[1]', ... """
     row_tuple = '('
     for element in row[:-1]:
         row_tuple=row_tuple+ "'" + element + "', "
@@ -103,9 +104,13 @@ def convert_csv_to_sqlite_table(csv_file):
         row_ex_command1 = 'INSERT INTO ' + Tablename 
         row_ex_command2 = tuple_field_names(fields)
         row_ex_command3 = ' VALUES'
+        row_ex_command4 = convert_row_to_tuple(row)
 
 
-    row_ex_command = row_ex_command1 + row_ex_command2 + row_ex_command3# + row_ex_command4
+
+        row_ex_command = row_ex_command1 + row_ex_command2 + row_ex_command3 + row_ex_command4
+        print(row_ex_command)
+        cursor.execute(row_ex_command)
         # for element in row[:-1]:
         #     if (not element) or (element=='-'):#check if the string is empty, if it is, it should be NULL in sql
         #         row_ex_command = row_ex_command + 'NONE'
@@ -114,6 +119,9 @@ def convert_csv_to_sqlite_table(csv_file):
 
         #  cursor.executemany(row_ex_command)
 
+    connection.commit()
+    cursor.close()
+    connection.close()
 
 
 
@@ -130,6 +138,5 @@ def convert_csv_to_sqlite_table(csv_file):
 # cursor.execute(SQL_COMMAND)
 
 if __name__ == '__main__':
-    convert_row_to_tuple(['hi1', 'hi2', 'hi3'])
-    print('\n')
+
     convert_csv_to_sqlite_table('Full_Sensor.csv')
