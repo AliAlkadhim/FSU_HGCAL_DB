@@ -1,4 +1,4 @@
-This repo is uses mysql to build an SQL relational database for the HGCAL data at FSU from existing spreadsheets (converted to csv tables). The power really comes when it is combined with the HGCAL automatic analysis code (at https://gitlab.cern.ch/CLICdp/HGCAL/lcd_hgcal_analysisworkflows). Thus this package, when the analysis code is also installed, allows for completely automatic updating of the database. To interact with the database (queries, etc.), our choice is to use mysql, interfaced with mysql Workbench.
+This repo is uses mysql (as well as sqlite3) to build an SQL relational database for the HGCAL data at FSU from existing spreadsheets (converted to csv tables). The power really comes when it is combined with the HGCAL automatic analysis code (at https://gitlab.cern.ch/CLICdp/HGCAL/lcd_hgcal_analysisworkflows). Thus this package, when the analysis code is also installed, allows for completely automatic updating of the database. To interact with the database (queries, etc.), our choice is to use mysql, interfaced with mysql Workbench.
 
 # ALL CURRENT USE OF THIS PACKAGE SHOULD BE DONE IN THE `/tests/` DIRECTORY. WE HAVE FUNCTIONALITY FOR BOTH MYSQL AND SQLITE, WHERE SQLITE IS MUCH FASTER AND MORE LIGHTWEIGHT FOR QUICK AND EASY QUERIES
 
@@ -16,7 +16,7 @@ This can also be done by anyone at home! Sqlite3 comes preinstalled with most py
 
 After opening `TESTME.db`, there are countless things you can do with sqlitebrowser (including queries and updating). However, for these checks, go to the `Browse Data` tab, and type any query you would like under the column(s) that you would like to use (i.e. type under the columns where it says "Filter").
 
-MORE SPECIFICALLY, CHECK THAT IV_GRADING_RESULTS TABLE AGREES WITH THE SPREADSHEETS ìLD Sensor IV Gradingî and ìHD Sensor IV Gradingî ON GOOGLE DOCS. 
+MORE SPECIFICALLY, CHECK THAT IV_GRADING_RESULTS TABLE AGREES WITH THE SPREADSHEETS ‚ÄúLD Sensor IV Grading‚Äù and ‚ÄúHD Sensor IV Grading‚Äù ON GOOGLE DOCS. 
 
 # Test 2)
 
