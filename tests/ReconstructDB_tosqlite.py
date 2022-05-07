@@ -83,19 +83,25 @@ def convert_csv_to_sqlite_table(csv_file):
         new_field = re.sub('-', '', new_field)
         new_field = re.sub('\.', '', new_field)
         new_field = re.sub('\?', '', new_field)
-        new_field = re.sub('\<', 'LT', new_field)#LESS THAN
-        new_field = re.sub('\>', 'MT', new_field)#MORE THAN
+        new_field = re.sub('\<', '_LT_', new_field)#LESS THAN
+        new_field = re.sub('\>', '_GT_', new_field)#GREATER THAN
         new_field = re.sub('\*', 'TIMES', new_field)
-        new_field = re.sub('1_', 'ONE_', new_field)
+        new_field = re.sub('1_', 'ONE_', new_field)#CHANGE REQUIREMENT NUMBERS TO WORDS
+        new_field = re.sub('2_', 'TWO_', new_field)
+        new_field = re.sub('3_', 'THREE_', new_field)
+        new_field = re.sub('4_', 'FOUR_', new_field)
         new_field = re.sub('\/', '', new_field)
         new_field = re.sub('\(', '_', new_field)
         new_field = re.sub('\)', '', new_field)
+        new_field = re.sub('\&', 'AND', new_field)
+        new_field = re.sub(':', '_', new_field)
+        # new_field = re.sub('\||', 'OR', new_field)
         new_fields.append(new_field)
 
     fields = new_fields
     print(fields)
     try:
-        DB_NAME =   'TEST_2.db'
+        DB_NAME =   'TESTME.db'
         connection = sql.connect(DB_NAME)
 
         cursor = connection.cursor()
