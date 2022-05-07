@@ -14,11 +14,19 @@ PLEASE INSPECT OUR SQLITE DATABASE CALLED `TESTME.db` WITH SQLITE BROWSER. THIS 
 This can also be done by anyone at home! Sqlite3 comes preinstalled with most python installations, and if you don't have sqlitebrowser, install it with the command
 `sudo apt-get install sqlitebrowser` for Debian or `brew install --cask db-browser-for-sqlite` for MacOS.
 
-After opening `TESTME.db`, there are countless things you can do with sqlitebrowser (including queries and updating). However, for these checks, go to the `Browse Data` tab, and type any query you would like under the column(s) that you would like to use (i.e. type under the columns where it says "Filter").
+After opening `TESTME.db`, there are countless things you can do with sqlitebrowser (including queries and updating). However, for these checks, go to the `Browse Data` tab, and choose which table you want from the `Table` dropdown menu. You'll see that for IV we have
+1) FULL_SENSOR_PLANNING <br>
+2) MOS_GCD PLANNING <br>
+3) STRIP_SENSOR_LOGISTICS <br>
+4) DIODES_NP_LOGISTICS <br>
+5) PQC_LOGISTICS <br>
+6) HPK_STRUCTURES_LOGISTICS
+7) IV_GRADING_RESULTS
+
+After choosing a table from the dropdown, type any query you would like under the column(s) that you would like to use (i.e. type under the columns where it says "Filter").
 
 MORE SPECIFICALLY, CHECK THAT IV_GRADING_RESULTS TABLE AGREES WITH THE SPREADSHEETS “LD Sensor IV Grading” and “HD Sensor IV Grading” ON GOOGLE DOCS. 
 
-# Test 2)
 
 
 
@@ -26,6 +34,8 @@ MORE SPECIFICALLY, CHECK THAT IV_GRADING_RESULTS TABLE AGREES WITH THE SPREADSHE
 
 
 
+
+# Other tests (these use mysql, so slower and not as important for now)
 
 # Reconstruct Existing Data Into Database (do this first)- Workflow: 
 * Go to /tests/
