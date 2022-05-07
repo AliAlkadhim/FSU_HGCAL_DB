@@ -58,8 +58,9 @@ or, say you want to find the location of the sensor whose sensor ID is 'N4791_1'
 
 
 ------------
-## Update DB to Include Latest Analysis Results (do this second) - Workflow:
+## Update DB to Include Latest Analysis Results (YOU NEED TO BE INSIDE THE `lcd_hgcal_analysisworkflows` DOCKER CONTAINER TO DO THIS TEST) Workflow:
 The automatic updates are meant to be run after the `AnalyseMeasurement` command (e.g. `AnalyseMeasurement_IV 2 N3308_5` where N3308_5 is the sensor ID) but before deleting the output of the analysis result with the command `DeleteAnalysisFiles` (e.g. `DeleteAnalysisFiles_IV N3308_5`). After you run `AnalyseMeasurement_IV <Sensor ID>` do the following:
+
 
 * Go to /tests/
 
