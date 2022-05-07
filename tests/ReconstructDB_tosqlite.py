@@ -12,17 +12,21 @@ except ImportError:
     have_sqlite3=False
     print("you don't have sqlite3, do 'sudo apt-get install sqlite3'")
 
+csv_file_dir = 'old_tables_csv/'
 
 def format_field(fields):
-    '''CONVERT FIELDS TO SQLITE SYNTAX WHEN CREATING A NEW TABLE'''
+    '''CONVERT FIELDS TO SQLITE SYNTAX WHEN CREATING A NEW TABLE
+    '''
     ex_statement = ''
-    for f in fields[1:]:
-        ex_statement=ex_statement + ' '+ f + ' TEXT ' 
-    return '( ' + ex_statement + ')'
+    for f in fields[:-1]:
+        ex_statement=ex_statement + ' '+ f + ' TEXT '  +','
+    ex_statement = ex_statement + fields[-1] + ' TEXT'
+    return '  (  '   + ex_statement + ' ) '
+
 
 def tuple_field_names(fields):
     """Return tuple of field names for sqlite like ( Sensor_ID, Scratch_pad_ID, Thick_ness, P_Stop, ...)"""
-    s = '( ' + fields[0]
+    s = ' ( ' + fields[0]
     for f in fields[1:]:
         s = s+ ', ' + f
     s = s + ' )'
@@ -32,6 +36,11 @@ def convert_row_to_tuple(row):
     """Given a list of strings, which constitutes a row, convert it to ('row[0]', 'row[1]', ... """
     row_tuple = '('
     for element in row[:-1]:
+        # element = ''.join(element)
+        # element = re.sub('\,', '_', element)
+        # split_element = element.split(' ')
+        # if len(split_element) > 1:
+        #     element = split_element[0] + split_element[1]
         row_tuple=row_tuple+ "'" + element + "', "
     row_tuple = row_tuple + "'" + row[-1] + "'"
     row_tuple = row_tuple + ')'
@@ -45,13 +54,16 @@ def convert_csv_to_sqlite_table(csv_file):
     """input: csv file for a table
     output: an sql table syntax for that csv file"""
     #tablename = csv_file.split('/')[-1][:-4]
+    # csv_file_path = csv_file_dir
     Tablename= csv_file.split('.')[0]
 
     #example Tablename: 'HGC_HPK_Sensor_IV_Summary_LD_and_HD_fields'
     fields = []
     rows=[]
-    csv_file_path = 'old_tables_csv/'
-    with open(csv_file_path + csv_file,'r') as csvfile:
+    csv_file_dir = 'old_tables_csv/'
+
+    #with open(csv_file_dir + csv_file,'r') as csvfile: #use this if you are running on one file, where the command is something like "convert_csv_to_sqlite_table('Full_Sensor.csv')
+    with open(csv_file_dir + csv_file,'r') as csvfile:    #use this when running on multiple files (tables), where the command is for file in os.listdir(csv_file_dir): convert_csv_to_sqlite_table(csv_file)
         csvreader = csv.reader(csvfile)
         fields = next(csvreader)
         for row in csvreader:
@@ -65,6 +77,11 @@ def convert_csv_to_sqlite_table(csv_file):
         new_field = re.sub('-', '', new_field)
         new_field = re.sub('\.', '', new_field)
         new_field = re.sub('\?', '', new_field)
+        new_field = re.sub('\<', 'LT', new_field)#LESS THAN
+        new_field = re.sub('\>', 'MT', new_field)#MORE THAN
+        new_field = re.sub('\*', 'TIMES', new_field)
+        new_field = re.sub('1_', 'ONE_', new_field)
+        new_field = re.sub('\/', '', new_field)
         new_field = re.sub('\(', '_', new_field)
         new_field = re.sub('\)', '', new_field)
         new_fields.append(new_field)
@@ -72,7 +89,7 @@ def convert_csv_to_sqlite_table(csv_file):
     fields = new_fields
     print(fields)
     try:
-        DB_NAME =   'SQLITE_TEST.db'
+        DB_NAME =   'TEST_2.db'
         connection = sql.connect(DB_NAME)
 
         cursor = connection.cursor()
@@ -83,7 +100,10 @@ def convert_csv_to_sqlite_table(csv_file):
     # cursor.execute("CREATE DATABASE ?",  DB_NAME)
     # cursor.execute("USE ?",  DB_NAME)
 
-    execute_command1 = 'CREATE TABLE IF NOT EXISTS {}'.format(Tablename)
+    execute_command0 = 'DROP TABLE IF EXISTS {}'.format(Tablename)
+    cursor.execute(execute_command0)
+
+    execute_command1 = 'CREATE TABLE IF NOT EXISTS {} '.format(Tablename)
     # execute_command2 = ''.join(
     # execute_command = '''CREATE TABLE IF NOT EXISTS %s  (
     # Sensor_ID INTEGER PRIMARY KEY, Scratch_pad_ID TEXT, Thick_ness TEXT, 
@@ -92,9 +112,11 @@ def convert_csv_to_sqlite_table(csv_file):
     # Sent_to_RINSC TEXT, RINSC_irrad_round TEXT, Post_irrad_test TEXT 
     # )
     # ''' % Tablename
+    
     execute_command2 = format_field(fields)
+ 
     execute_command = execute_command1 + execute_command2
-    print(execute_command)
+    print('\nexecute command=', execute_command)
 
     cursor.execute(execute_command)
     # print(Tablename)
@@ -103,12 +125,13 @@ def convert_csv_to_sqlite_table(csv_file):
     for row in rows:
         row_ex_command1 = 'INSERT INTO ' + Tablename 
         row_ex_command2 = tuple_field_names(fields)
+        print('tuple_field_names(fields) = ', tuple_field_names(fields))
         row_ex_command3 = ' VALUES'
         row_ex_command4 = convert_row_to_tuple(row)
 
 
 
-        row_ex_command = row_ex_command1 + row_ex_command2 + row_ex_command3 + row_ex_command4
+        row_ex_command =  row_ex_command1 + row_ex_command2 + row_ex_command3 + row_ex_command4 
         print(row_ex_command)
         cursor.execute(row_ex_command)
         # for element in row[:-1]:
@@ -138,5 +161,6 @@ def convert_csv_to_sqlite_table(csv_file):
 # cursor.execute(SQL_COMMAND)
 
 if __name__ == '__main__':
-
-    convert_csv_to_sqlite_table('Full_Sensor.csv')
+    for csv_file in os.listdir('old_tables_csv'):
+        if csv_file.endswith('.csv'):
+            convert_csv_to_sqlite_table(csv_file)
