@@ -41,8 +41,14 @@ def convert_row_to_tuple(row):
         # split_element = element.split(' ')
         # if len(split_element) > 1:
         #     element = split_element[0] + split_element[1]
-        row_tuple=row_tuple+ "'" + element + "', "
-    row_tuple = row_tuple + "'" + row[-1] + "'"
+        # if (not element) or (element=='-'):
+        #     element = 'NULL, '
+        # else:
+        #     element =  element.strip() 
+        
+        row_tuple=row_tuple+ "'" + element.strip() + "', "
+
+    row_tuple = row_tuple + "'" + row[-1].strip() + "'"
     row_tuple = row_tuple + ')'
     return row_tuple
 
