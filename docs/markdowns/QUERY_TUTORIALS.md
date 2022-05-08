@@ -5,6 +5,11 @@ May, 2022 <br>
 
 # sqlite3 Basics
 
+Before anything, of course make sure you have the repository cloned by doing
+
+`git clone https://github.com/AliAlkadhim/FSU_HGCAL_DB.git`
+
+
 sqlite is a full-featured relational database system. Sqlite does not use a client-server architecture: all the code for the database is contained in the driver . All the data for each database is contained in a simple *platform-independent* file. It is powerful,  secure, and especially efficient since it doesn't use a server. It is included in most python distributions, so it was preinstalled on 619. 
 If your python distribution for some reason doesn't include sqlite3, install it with the command:
 
