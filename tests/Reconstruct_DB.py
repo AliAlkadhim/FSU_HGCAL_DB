@@ -2,6 +2,7 @@ import os
 import csv
 import subprocess as sb
 import argparse
+import convert_csv_to_sql as convert
 
 parser = argparse.ArgumentParser(description='Generate FSU DB SQL file by doing, e.g. python Reconstruct_DB.py --DB FSU_DB')
 parser.add_argument('--DB', type=str, required=False, help = '''name of the complete database (which includes all tables)
@@ -9,7 +10,7 @@ parser.add_argument('--DB', type=str, required=False, help = '''name of the comp
 args = parser.parse_args()
 
 
-import convert_csv_to_sql as convert
+
 def Reconstruct_DB():
 
     """

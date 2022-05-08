@@ -62,7 +62,7 @@ def updateDB():
         sb.call('source /home/lcd_hgcal_analysisworkflows/setup.sh', shell=True)
         sb.call('source ./home/lcd_hgcal_analysisworkflows/setup.sh', shell=True)
         time.sleep(1)
-        
+
         TMPFILES_DIR_IV = os.environ['TMPFILES_DIR_IV']
 
         grading_dir = TMPFILES_DIR_IV +'/-/grading/'
@@ -185,6 +185,7 @@ def updateDB():
 
 
 if __name__ == '__main__':
-
+    
     updateDB()
+    #EXECUTE STATEMENT
 #     #convert_csv_to_sql(csv_file)

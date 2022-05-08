@@ -8,10 +8,10 @@ def preprocess(file):
         csvreader = csv.reader(csvfile)
         fields = next(csvreader)
         for row in csvreader:
-            for element in row:
+            for element in row[:-1]:
                 # if element.startswith('"'):
-                if ',' in element:
-                    element = re.sub(',', '-', element)
+                if not element:
+                    
             rows.append(row)
             print(row)
 
