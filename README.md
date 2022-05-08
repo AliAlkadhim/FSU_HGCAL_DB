@@ -1,4 +1,4 @@
-This repo is uses mysql (as well as sqlite3) to build an SQL relational database for the HGCAL data at FSU from existing spreadsheets (converted to csv tables). The power really comes when it is combined with the HGCAL automatic analysis code (at https://gitlab.cern.ch/CLICdp/HGCAL/lcd_hgcal_analysisworkflows). Thus this package, when the analysis code is also installed, allows for completely automatic updating of the database. To interact with the database (queries, etc.), our choice is to use mysql, interfaced with mysql Workbench.
+This repo is uses mysql (as well as sqlite3) to build an SQL relational database for the HGCAL data at FSU from existing spreadsheets (converted to csv tables). The power really comes when it is combined with the HGCAL automatic analysis code (at https://gitlab.cern.ch/CLICdp/HGCAL/lcd_hgcal_analysisworkflows). Thus this package, when the analysis code is also installed, allows for completely automatic updating of the database. To interact with the database (queries, etc.), you can use sqlitebrowser for the files ending with .db. For the complete SQL database (requiring server, user and password), ending in .sql, our choice is to use mysql, interfaced with mysql Workbench.
 
 # ALL CURRENT USE OF THIS PACKAGE SHOULD BE DONE IN THE `/tests/` DIRECTORY. WE HAVE FUNCTIONALITY FOR BOTH MYSQL AND SQLITE, WHERE SQLITE IS MUCH FASTER AND MORE LIGHTWEIGHT FOR QUICK AND EASY QUERIES
 
@@ -14,9 +14,9 @@ PLEASE INSPECT OUR SQLITE DATABASE CALLED `TESTME.db` WITH SQLITE BROWSER. THIS 
 This can also be done by anyone at home! Sqlite3 comes preinstalled with most python installations, and if you don't have sqlitebrowser, install it with the command
 `sudo apt-get install sqlitebrowser` for Debian or `brew install --cask db-browser-for-sqlite` for MacOS.
 
-After opening `TESTME.db`, there are countless things you can do with sqlitebrowser (including queries and updating). However, for these checks, go to the `Browse Data` tab, and choose which table you want from the `Table` dropdown menu. You'll see that for IV we have
-1) FULL_SENSOR_PLANNING <br>
-2) MOS_GCD PLANNING <br>
+After opening `TESTME.db`, there are countless things you can do with sqlitebrowser (including queries and updating!). However, for these checks, go to the `Browse Data` tab, and choose which table you want from the `Table` dropdown menu. You'll see that for IV we have the following tables:
+1) FULL_SENSOR_LOGISTICS <br>
+2) MOS_GCD_LOGISTICS <br>
 3) STRIP_SENSOR_LOGISTICS <br>
 4) DIODES_NP_LOGISTICS <br>
 5) PQC_LOGISTICS <br>
@@ -58,8 +58,9 @@ or, say you want to find the location of the sensor whose sensor ID is 'N4791_1'
 
 
 ------------
-## Update DB to Include Latest Analysis Results (do this second) - Workflow:
+## Update DB to Include Latest Analysis Results (YOU NEED TO BE INSIDE THE `lcd_hgcal_analysisworkflows` DOCKER CONTAINER TO DO THIS TEST) Workflow:
 The automatic updates are meant to be run after the `AnalyseMeasurement` command (e.g. `AnalyseMeasurement_IV 2 N3308_5` where N3308_5 is the sensor ID) but before deleting the output of the analysis result with the command `DeleteAnalysisFiles` (e.g. `DeleteAnalysisFiles_IV N3308_5`). After you run `AnalyseMeasurement_IV <Sensor ID>` do the following:
+
 
 * Go to /tests/
 
