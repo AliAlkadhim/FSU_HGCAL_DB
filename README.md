@@ -35,7 +35,7 @@ MORE SPECIFICALLY, CHECK THAT IV_GRADING_RESULTS TABLE AGREES WITH THE SPREADSHE
 
 
 
-# Other tests (these use mysql, so slower and not as important for now)
+# Other tests (these use mysql, so slower and not as important for now, but has the very important capability of *automatic updating* to the DB)
 
 # Reconstruct Existing Data Into Database (do this first)- Workflow: 
 * Go to /tests/
