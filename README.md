@@ -1,3 +1,5 @@
+### Feel free to do `git pull origin main` to update this repo in your local installation, as it is being updated a lot lately.
+
 This repo is uses mysql (as well as sqlite3) to build an SQL relational database for the HGCAL data at FSU from existing spreadsheets (converted to csv tables). The power really comes when it is combined with the HGCAL automatic analysis code (at https://gitlab.cern.ch/CLICdp/HGCAL/lcd_hgcal_analysisworkflows). Thus this package, when the analysis code is also installed, allows for completely automatic updating of the database. To interact with the database (queries, etc.), you can use sqlitebrowser for the files ending with .db. For the complete SQL database (requiring server, user and password), ending in .sql, our choice is to use mysql, interfaced with mysql Workbench.
 
 # All current use of this package should be done in the `/tests/` directory. We have built two clones of the DB, one with sql and one with sqlite, where sqlite is much faster and more lightweight for quick and easy queries
