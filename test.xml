@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<HEADER>
+	<TYPE>
+		<EXTENSION_TABLE_NAME> HGC_SENSOR_IV</EXTENSION_TABLE_NAME>
+		<NAME> HGC Sensor Manufacturer IV Test</NAME>
+	<TYPE>
+		<RUN>
+			<RUN_TYPE>N4792_18_03242022_FullRetest
+<RUN_TYPE>
+			<RUN_NUMER>N4792_18_03242022_FullRetest
+<RUN_NUMER>
+			<RUN_BEGIN_TIMESTAMP>24.3.2022 13:44 
+</RUN_BEGIN_TIMESTAMP>
+			<RUN_END_TIMESTAMP>24.3.2022 13:44 
+</RUN_END_TIMESTAMP>
+			<INITIATED_BY_USER>Ali<INITIATED_BY_USER>
+			<LOCATION>FSU<LOCATION>
+			<COMMENT_DESCRIPTION>Example table<COMMENT_DESCRIPTION>
+		</RUN>
+ </HEADER>
+		<DATA_SET>
+			<PART>
+				<KIND_OF_PART>200um Si Sensor SD Full</KIND_OF_PART>
+				<SERIAL_NUMBER>HPK_8in_198ch_N4792_18<SERIAL_NUMBER>
+			<PART>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-41.0<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-41.0<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-41.0<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.8<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.8<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.8<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.8<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-41.1<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.7<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.9<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+				<CURRENT>-40.8<CURRENT>
+			<DATA>
+				<VOLTS>-1.0    <VOLTS>
+		<DATA_SET>
+<ROOT>

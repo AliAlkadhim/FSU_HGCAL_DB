@@ -3,15 +3,15 @@ import argparse
 
 
 parser=argparse.ArgumentParser(description='Covert test results to xml schemas')
-parser.add_argument('--f', type=str, help='the .txt filname', required=False)
-parser.add_argument('--t', type=str, help='the XML: Tablename you wish to priduce', required=False)
+parser.add_argument('--f', type=str, help='the .txt filname', required=True)
+parser.add_argument('--t', type=str, help='the XML: Tablename you wish to priduce', required=True)
 
 args = parser.parse_args()
 
 filename = args.f
 XML_tablename=args.t
 
-
+# filename="HPK_8in_198ch_2019_N4792_18_03242022_FullRetest_IV.txt"
 
 # with open(filename) as f:
 #     f_csv = csv.reader(f)
@@ -120,13 +120,13 @@ def get_everything(file):
 
     everything_dict['Sensor_tye'] =Sensor_type
     everything_dict['Timestamp'] =Timestamp
-    everything_dict['Identifier'] =Run_name
+    everything_dict['Identifier'] =Identifier
     everything_dict['Comments'] =Comments
 
         
     everything_dict['V_list'] =V_list
 
-    everything_dict['Channel_Current_list'] = Channel_Current_list
+    everything_dict['Channel_Current_list'=Channel_Current_list
     everything_dict['Error_Current_list']=Error_Current_list
     everything_dict['Tot_Current_list']=Tot_Current_list
 
@@ -142,7 +142,7 @@ def get_everything(file):
 
 
 
-def make_xml_schema_HGC__CERN_SENSOR_IV(Sensor_type, Timestamp, Run_name, V_list, Tot_Current_list):
+def make_xml_schema_HGC_SENSOR_IV(Sensor_type, Timestamp, Run_name, V_list, Tot_Current_list):
     # XML_tablename = 'HGC_SENSOR_IV'
 
     Name = 'HGC Sensor Manufacturer IV Test'
@@ -236,9 +236,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(everything_dict):
 
                 
 if __name__ == '__main__':
-    # if XML_tablename=='HGC_SENSOR_IV':
-    #     Sensor_type, Timestamp, Run_name, V_list, Tot_Current_list = get_V_I_lists(filename)
-    #     make_xml_schema_HGC_SENSOR_IV(Sensor_type, Timestamp, Run_name, V_list, I_list)
+    if XML_tablename=='HGC_SENSOR_IV':
+        Sensor_type, Timestamp, Run_name, V_list, Tot_Current_list = get_V_I_lists(filename)
+        make_xml_schema_HGC_SENSOR_IV(Sensor_type, Timestamp, Run_name, V_list, I_list)
     # elif XML_tablename=='HGC_CERN_SENSOR_IV':         
-    filename="HPK_8in_198ch_2019_N4792_18_03242022_FullRetest_IV.txt"
-print(get_everything(filename))
