@@ -1,6 +1,6 @@
 # Making IV/CV XML Tables for CMS HGCAL DB
 
-To make tables to upload to the `int2r` CMS HGCAL DB, based on the XML table tempates in `CMS_HGCAL_DB/from_Umesh/CMS_HGCAL_DB/from_Umesh/`, do
+To make tables to upload to the `int2r` CMS HGCAL DB, based on the XML table tempates in `CMS_HGCAL_DB/from_Umesh/CMS_HGCAL_DB/from_Umesh/XML Templates HGCAL Si Sensors.docx`, do
 
 `python TXT_TO_XML.py --f <.TXT DATA FILE NAME> --t <TABLE NAME>`
 
