@@ -1,4 +1,5 @@
-import csv; import re
+import csv 
+import re
 filename="HPK_8in_198ch_2019_N4792_18_03242022_FullRetest_IV.txt"
 
 # with open(filename) as f:
