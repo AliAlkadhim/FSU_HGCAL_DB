@@ -2,7 +2,7 @@
 
 To make tables to upload to the `int2r` CMS HGCAL DB, based on the XML table tempates in `CMS_HGCAL_DB/from_Umesh/CMS_HGCAL_DB/from_Umesh/XML Templates HGCAL Si Sensors.docx`, do
 
-`python TXT_TO_XML.py --f <.TXT DATA FILE NAME> --t <TABLE NAME>`
+**`python TXT_TO_XML.py --f <.TXT DATA FILE NAME> --t <TABLE NAME>`**
 
 For example, to produce an xml file for the `HGC_CERN_SENSOR_IV` table associated with the test results in `HPK_8in_198ch_2019_N4792_18_03242022_FullRetest_IV.txt` do
 
