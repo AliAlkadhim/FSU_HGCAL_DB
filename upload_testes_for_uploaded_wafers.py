@@ -1,6 +1,13 @@
 import pandas as pd
 import os
 import subprocess as sb
+import get_iv_cv_dicts as dicts
+#import TXT_TO_XML 
+
+INPUT_DIR=os.environ['INPUT_DIR']
+
+FSUDB_OUTPUT_DIR='CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'
+
 # sb.call('source ')
 # 100113 was the first one that was uploaded and checked
 ## PRiority is the list of sensors in the preseries spreadsheets (FSU preseries)
@@ -69,8 +76,54 @@ all_preseries_df = pd.concat([preseries_dict_120,preseries_dict_200, preseries_d
 
 scratchpad_id_wafers_FSU = all_preseries_df[all_preseries_df.current_location == 'FSU']
 
+print('scratchpad ids for uploaded wafers testede at FSU') 
 for scratphad_id in scratchpad_id_wafers_FSU['scratchpad_id']:
     print(scratphad_id)
+
+
+dirs_in_input = os.listdir(INPUT_DIR)
+IV_file_l=[]; CV_file_l=[];dirs_l=[]
+
+for scratchpad_id in scratchpad_id_wafers_FSU['scratchpad_id']:
+	for dir in dirs_in_input:
+		if  scratchpad_id in dir:
+			dirs_l.append(dir)
+			files_in_dir=os.listdir(INPUT_DIR+dir)
+			for file in files_in_dir:
+				if file.endswith('IV.txt'):
+					IV_file=file
+					IV_file_l.append(IV_file)
+				elif file.endswith('CV.txt'):
+					CV_file=file
+					CV_file_l.append(CV_file)
+
+#scratchpad_id_wafers_FSU['dirs']=dirs_l
+print(dirs_l)
+#for dir in dirs_in_input:
+#	if '300057' in dir:
+#		files_in_dir=os.listdir(INPUT_DIR+dir)
+#		for file in files_in_dir:
+#			if file.endswith('IV.txt'):
+#				IV_file=file
+#			elif file.endswith('CV.txt'):
+#				CV_file=file
+
+
+print(IV_file_l)
+print(CV_file_l)
+#take away 'HPK_8in_198ch_2019_200119_20220707_test1_IV.txt' from IV because it was retested
+print('number of preseries at fsu uploaded = ', len(scratchpad_id_wafers_FSU['scratchpad_id']))
+IV_file_l.remove('HPK_8in_198ch_2019_200119_20220707_test1_IV.txt')
+print('length of IV file list = ', len(IV_file_l))
+print('length of CV file list = ', len(CV_file_l))
+
+
+#for preseries_IV_file in IV_file_l:
+#	os.system('python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV' % preseries_IV_file)
+
+
+#print(dirs_in_input)
+
 # if __name__=='__main__':
     
     # print(scratchpad_id_wafers_FSU)

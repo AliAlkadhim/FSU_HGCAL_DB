@@ -18,7 +18,7 @@ XML_tablename=args.t
 
 
 
-
+FSUDB_OUTPUT_DIR='CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'
 
 
 # def make_xml_schema_HGC_SENSOR_IV(Sensor_type, Timestamp, Run_name, V_list, Tot_Current_list):
@@ -80,7 +80,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
     if Kind_of_part == '200um Si Sensor SD Full':
         serial_number ='HPK_8in_198ch_' +Run_Name
     # serial_number = Sensor_Type + Run_Name
-    xml_table_file = Run_Name + '_'+ XML_tablename + '_TEST.xml'
+    xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_TEST.xml'
 
     with open(xml_table_file, 'w+') as xmlf:
         xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
@@ -151,7 +151,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
         serial_number ='HPK_8in_198ch_' +Run_Name
     # serial_number = Sensor_Type + Run_Name
 
-    xml_table_file = Run_Name + '_'+ XML_tablename + '_TEST.xml'
+    xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_TEST.xml'
 
     with open(xml_table_file, 'w+') as xmlf:
         xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
