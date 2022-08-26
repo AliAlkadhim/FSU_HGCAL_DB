@@ -38,6 +38,7 @@ def get_V_I_lists(file):
 
 def get_iv_dict(file):
     '''
+    The input "file" is the raw txt file for the IV test
     store the results of EVERY CELL at EVERY VOLTAGE STEP. Return a dictionary
     <VOLTS>: V_list
      <CURNT_NANOAMP>: Channel_Current_list
@@ -240,10 +241,10 @@ def get_cv_dict(file):
 
 
 
-if __name__ == '__main__':
-    #Test IV
-    # filename="HPK_8in_198ch_2019_N4792_18_03242022_FullRetest_IV.txt"
-    # get_iv_dict(filename)
-    #Test CV
-    filename = 'HPK_8in_198ch_2019_200118_20220707_test1_CV.txt'
-    get_cv_dict(filename)
+# if __name__ == '__main__':
+#     #Test IV
+#     # filename="HPK_8in_198ch_2019_N4792_18_03242022_FullRetest_IV.txt"
+#     # get_iv_dict(filename)
+#     #Test CV
+#     filename = 'HPK_8in_198ch_2019_200118_20220707_test1_CV.txt'
+#     get_cv_dict(filename)
