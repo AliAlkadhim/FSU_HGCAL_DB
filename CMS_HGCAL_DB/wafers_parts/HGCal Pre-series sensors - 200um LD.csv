@@ -1,0 +1,53 @@
+,,,,,,,,HPK full probe card,,,,,,,,,CMS full probe card,,,,,,,,,,CMS full probe card,,
+Delivery,Sensor ID,Scratch pad ID,Thick- ness,Current location wafer,Current location half moons,wafer seen on top of stack of five sensors,Comments after visual inspection,I_tot_600V <100uA,I_tot_800V < 2.5* I_tot_600V,,1) Ncell with I600 > 100nA,,2) Ncell with I800 > 2.5 * I600 & I600>10nA threshold || I800>25nA & I600<10nA,3) More than 8 bad cells: requirem. 1) and 2),4) More than two neighbour cells bad: requirem. 1) and 2),,Measurement performed at,I_tot_600V <100uA,I_tot_800V < 2.5* I_tot_600V,,1) Ncell with I600 > 100nA,,2) Ncell with I800 > 2.5 * I600 & I600>10nA threshold || I800>25nA & I600<10nA,3) More than 8 bad cells: requirem. 1) and 2),4) More than two neighbour cells bad: requirem. 1) and 2),,V dep corresponding to thickness,Maximum variation of Vdep across sensor of ± 10% ,Thickness variation < 10 / X μm
+1,N8740_1,200111,200,UCSB,CERN,Seen 9.6.22,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 119.5 V < 160 V,Passed: 1.1%,Passed: 0.3%
+1,N8740_2,200112,200,UCSB,CERN,,,Passed,Passed,,1,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 109.3 V < 160 V,Passed: 0.4%,Passed: 0.4%
+1,N8740_3,200113,200,UCSB,CERN,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 122.7 V < 160 V,Passed: 0.4%,Passed: 0.5%
+1,N8740_4,200114,200,UCSB,CERN,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 116.8 V < 160 V,Passed: 0.4%,Passed: 0.3%
+1,N8740_5,200115,200,UCSB,CERN,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,1,Passed,Passed,,Passed: 122.4 V < 160 V,Passed: 0.4%,Passed: 0.2%
+1,N8740_6,200116,200,FSU,HEPHY,Seen 9.6.22,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 117.1 V < 160 V,Passed: 0.4%,Passed: 0.3%
+1,N8740_7,200117,200,FSU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 117.4 V < 160 V,Passed: 0.5%,Passed: 0.4%
+1,N8740_8,200118,200,FSU,HEPHY,,,Passed,Passed,,0,,1,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 121.7 V < 160 V,Passed: 0.4%,Passed: 0.3%
+1,N8740_9,200119,200,FSU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Failed,,3,,1,Passed,Passed,,Passed: 116.7 V < 160 V,Passed: 0.3%,Passed: 0.3%
+1,N8740_10,200120,200,FSU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,1,Passed,Passed,,Passed: 116.5 V < 160 V,Passed: 0.7%,Passed: 0.5%
+1,N8740_11,200121,200,TTU,HEPHY,Seen 9.6.22,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8740_12,200122,200,TTU,HEPHY,,,Passed,Passed,,0,,1,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8740_13,200123,200,TTU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8740_14,200124,200,TTU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8740_15,200125,200,TTU,HEPHY,,,Passed,Passed,,1,,1,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8740_16,200126,200,NCU,FSU,Seen 9.6.22,scratch on channel 175,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8740_17,200127,200,NCU,FSU,,"scratch on channel 150, 47",Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8740_18,200128,200,NCU,FSU,,"scratch on channel 150, 47",Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8740_19,200129,200,NCU,FSU,,"scratch on channel 150, 47",Passed,Passed,,1,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8740_20,200130,200,NCU,FSU,,"scratch on channel 150, 47",Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8740_21,200131,200,NCU,FSU,Seen 9.6.22,,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8740_22,200132,200,NCU,FSU,,scratch on channel 47,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8740_23,200133,200,NCU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8740_24,200134,200,NCU,FSU,,scratch on channel 47,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8740_25,200135,200,NCU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3,N8741_1,200136,200,CERN,HEPHY,Seen 20.7.,,,,,,,,,,,CERN,,,,,,,,,,,,
+3,N8741_2,200137,200,CERN,HEPHY,,,,,,,,,,,,CERN,,,,,,,,,,,,
+3,N8741_3,200138,200,CERN,HEPHY,,,,,,,,,,,,CERN,,,,,,,,,,,,
+3,N8741_4,200139,200,CERN,HEPHY,,,,,,,,,,,,CERN,,,,,,,,,,,,
+3,N8741_5,200140,200,CERN,HEPHY,,,,,,,,,,,,CERN,,,,,,,,,,,,
+3,N8741_6,200141,200,FSU,HEPHY,Seen 20.7.,scratch on top left contact pad of cell 150,,,,,,,,,,FSU,,,,,,,,,,,,
+3,N8741_7,200142,200,FSU,HEPHY,,scratch on top left contact pad of cell 150,,,,,,,,,,FSU,,,,,,,,,,,,
+3,N8741_8,200143,200,FSU,HEPHY,,scratch on top left contact pad of cell 150,,,,,,,,,,FSU,,,,,,,,,,,,
+3,N8741_9,200144,200,FSU,HEPHY,,scratch on top left contact pad of cell 150,,,,,,,,,,FSU,,,,,,,,,,,,
+3,N8741_10,200145,200,FSU,HEPHY,,scratch on top left contact pad of cell 150,,,,,,,,,,FSU,,,,,,,,,,,,
+3,N8741_11,200146,200,CERN->TTU,HEPHY,Seen 20.7.,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8741_12,200147,200,CERN->TTU,HEPHY,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8741_13,200148,200,CERN->TTU,HEPHY,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8741_14,200149,200,CERN->TTU,HEPHY,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8741_15,200150,200,CERN->TTU,HEPHY,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8741_16,200151,200,CERN->TTU,HEPHY,Seen 20.7.,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8741_17,200152,200,CERN->TTU,HEPHY,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8741_18,200153,200,CERN->TTU,HEPHY,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8741_19,200154,200,CERN->TTU,HEPHY,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8741_20,200155,200,CERN->TTU,HEPHY,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8741_21,200156,200,CERN->NCU,HEPHY,Seen 20.7.,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8741_22,200157,200,CERN->NCU,HEPHY,,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8741_23,200158,200,CERN->NCU,HEPHY,,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8741_24,200159,200,CERN->NCU,HEPHY,,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8741_25,200160,200,CERN->NCU,HEPHY,,,,,,,,,,,,NCU,,,,,,,,,,,,

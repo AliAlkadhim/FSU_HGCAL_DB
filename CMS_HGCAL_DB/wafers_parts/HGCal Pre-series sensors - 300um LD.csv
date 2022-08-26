@@ -1,0 +1,53 @@
+,,,,,,,,HPK full probe card,,,,,,,,,CMS full probe card,,,,,,,,,,CMS full probe card,,
+Delivery,Sensor ID,Scratch pad ID,Thick- ness,Current location sensor,Current location half moons,wafer seen on top of stack of five sensors,Comments after visual inspection,I_tot_600V <100uA,I_tot_800V < 2.5* I_tot_600V,,1) Ncell with I600 > 100nA,,2) Ncell with I800 > 2.5 * I600 & I600>10nA threshold || I800>25nA & I600<10nA,3) More than 8 bad cells: requirem. 1) and 2),4) More than two neighbour cells bad: requirem. 1) and 2),,Measurement performed at ,I_tot_600V <100uA,I_tot_800V < 2.5* I_tot_600V,,1) Ncell with I600 > 100nA,,2) Ncell with I800 > 2.5 * I600 & I600>10nA threshold || I800>25nA & I600<10nA,3) More than 8 bad cells: requirem. 1) and 2),4) More than two neighbour cells bad: requirem. 1) and 2),,V dep corresponding to thickness,Maximum variation of Vdep across sensor of ± 10% ,Thickness variation < 10 / X μm
+1,N8738_1,100113,300,FSU,CERN,Seen 9.6.22,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 248.6 V < 370 V,Passed: 0.3%,Passed: 0.3%
+1,N8738_2,100114,300,FSU,CERN,,,Passed,Passed,,1,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 248.9 V < 370 V,Passed: 0.3%,Passed: 0.4%
+1,N8738_3,100115,300,UCSB,CERN,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,1,Passed,Passed,,Passed: 248.8 V < 370 V,Passed: 0.3%,Passed: 0.5%
+1,N8738_4,100116,300,UCSB,CERN,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 249.1 V < 370 V,Passed: 0.4%,Passed: 0.6%
+1,N8738_5,100117,300,UCSB,CERN,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,1,Passed,Passed,,Passed: 239.4 V < 370 V,Passed: 0.7%,Passed: 0.5%
+1,N8738_6,100118,300,UCSB,HEPHY,Seen 9.6.22,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 238.0 V < 370 V ,Passed: 0.4%,Passed: 0.4%
+1,N8738_7,100119,300,UCSB,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,1,Passed,Passed,,Passed: 238.3 V < 370 V,Passed: 0.5%,Passed: 0.5%
+1,N8738_8,100120,300,FSU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 236.1 V < 370 V,Passed: 0.8%,Passed: 0.5%
+1,N8738_9,100121,300,FSU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,0,Passed,Passed,,Passed: 239.9 V < 370 V,Passed: 0.5%,Passed: 0.4%
+1,N8738_10,100122,300,FSU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,FSU,Passed,Passed,,0,,1,Passed,Passed,,Passed: 242.0 V < 370 V,Passed: 0.2%,Passed: 0.5%
+1,N8738_11,100123,300,TTU,HEPHY,Seen 9.6.22,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8738_12,100124,300,TTU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8738_13,100125,300,TTU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8738_14,100126,300,TTU,HEPHY,,,Passed,Passed,,1,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8738_15,100127,300,TTU,HEPHY,,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8738_16,100128,300,TTU,FSU,Seen 9.6.22,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8738_17,100129,300,TTU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8738_18,100130,300,TTU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8738_19,100131,300,TTU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8738_20,100132,300,TTU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,TTU,,,,,,,,,,,,
+1,N8738_21,100133,300,NCU,FSU,Seen 9.6.22,,Passed,Passed,,0,,1,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8738_22,100134,300,NCU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8738_23,100135,300,NCU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8738_24,100136,300,NCU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+1,N8738_25,100137,300,NCU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3,N8739_1,100138,300,CERN,FSU,Seen 20.7.,,,,,,,,,,,CERN,,,,,,,,,,,,
+3,N8739_2,100139,300,CERN,FSU,,,,,,,,,,,,CERN,,,,,,,,,,,,
+3,N8739_3,100140,300,CERN,FSU,,,,,,,,,,,,CERN,,,,,,,,,,,,
+3,N8739_4,100141,300,CERN,FSU,,,,,,,,,,,,CERN,,,,,,,,,,,,
+3,N8739_5,100142,300,CERN,FSU,,,,,,,,,,,,CERN,,,,,,,,,,,,
+3,N8739_6,100143,300,FSU,FSU,Seen 20.7.,,,,,,,,,,,FSU,,,,,,,,,,,,
+3,N8739_7,100144,300,FSU,FSU,,,,,,,,,,,,FSU,,,,,,,,,,,,
+3,N8739_8,100145,300,FSU,FSU,,,,,,,,,,,,FSU,,,,,,,,,,,,
+3,N8739_9,100146,300,FSU,FSU,,,,,,,,,,,,FSU,,,,,,,,,,,,
+3,N8739_10,100147,300,FSU,FSU,,,,,,,,,,,,FSU,,,,,,,,,,,,
+3,N8739_11,100148,300,CERN->TTU,FSU,Seen 20.7.,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8739_12,100149,300,CERN->TTU,FSU,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8739_13,100150,300,CERN->TTU,FSU,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8739_14,100151,300,CERN->TTU,FSU,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8739_15,100152,300,CERN->TTU,FSU,,,,,,,,,,,,TTU,,,,,,,,,,,,
+3,N8739_16,100153,300,CERN->NCU,FSU,Seen 20.7.,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8739_17,100154,300,CERN->NCU,FSU,,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8739_18,100155,300,CERN->NCU,FSU,,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8739_19,100156,300,CERN->NCU,FSU,,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8739_20,100157,300,CERN->NCU,FSU,,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8739_21,100158,300,CERN->NCU,FSU,Seen 20.7.,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8739_22,100159,300,CERN->NCU,FSU,,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8739_23,100160,300,CERN->NCU,FSU,,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8739_24,100161,300,CERN->NCU,FSU,,,,,,,,,,,,NCU,,,,,,,,,,,,
+3,N8739_25,100162,300,CERN->NCU,FSU,,,,,,,,,,,,NCU,,,,,,,,,,,,

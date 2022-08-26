@@ -77,7 +77,8 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
     Run_Name = IVDICT['Identifier'].split()[0]
     location=args.location
     Kind_of_part = '200um Si Sensor SD Full'
-    serial_number ='HPK_8in_198ch_N4792_18'
+    if Kind_of_part == '200um Si Sensor SD Full':
+        serial_number ='HPK_8in_198ch_' +Run_Name
     # serial_number = Sensor_Type + Run_Name
     xml_table_file = Run_Name + '_'+ XML_tablename + '_TEST.xml'
 
@@ -143,10 +144,11 @@ def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
     XML_tablename = 'HGC_CERN_SENSOR_CV'
 
     Name = 'HGC Sensor Manufacturer IV Test'
-    Run_Name = CVDICT['Identifier'].split()[0]
+    Run_Name = CVDICT['Identifier'].split('_')[0]
     location=args.location
     Kind_of_part = '200um Si Sensor SD Full'
-    serial_number ='HPK_8in_198ch_N4792_18'
+    if Kind_of_part == '200um Si Sensor SD Full':
+        serial_number ='HPK_8in_198ch_' +Run_Name
     # serial_number = Sensor_Type + Run_Name
 
     xml_table_file = Run_Name + '_'+ XML_tablename + '_TEST.xml'
