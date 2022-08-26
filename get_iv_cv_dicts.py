@@ -101,7 +101,7 @@ def get_iv_dict(file):
                     Humidity_list.append(Humidity_list)
 
 
-    everything_dict['Sensor_tye'] =Sensor_type
+    everything_dict['Sensor_type'] =Sensor_type
     everything_dict['Timestamp'] =Timestamp
     everything_dict['Identifier'] =Run_name
     everything_dict['Comments'] =Comments
