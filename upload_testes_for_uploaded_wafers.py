@@ -23,7 +23,17 @@ FSUDB_OUTPUT_DIR='CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'
 # for ind, row in preseries_tested.iterrows():
 #     print(row['Scratch pad ID'])
 
+wafers_spreadsheet_preseries_120='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 120um HD_AUG26.csv'
+wafers_spreadsheet_preseries_200='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 200um LD.csv'
+wafers_spreadsheet_preseries_300='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 300um LD.csv'
+
 def return_preseries_list_from_spreadsheet(spreadsheet):
+    if spreadsheet==wafers_spreadsheet_preseries_120:
+        length=23+1
+    elif spreadsheet==wafers_spreadsheet_preseries_200:
+        length=49+1
+    elid spreadsheet==wafers_spreadsheet_preseries_300:
+        length=49+1
     with open(spreadsheet, 'r') as f:
         sensor_id_l=[]; Scratchpad_id_l=[]; current_location_l=[]
         
@@ -31,7 +41,7 @@ def return_preseries_list_from_spreadsheet(spreadsheet):
         for line_ind, line in enumerate(f_readlines):
             if 'Delivery' in line:
                 begin_data_ind = line_ind + 1
-                for i in range(24):
+                for i in range(length):
                     sensor_id = f_readlines[begin_data_ind].split(',')[1]
                     sensor_id_l.append(sensor_id)
                     Scratchpad_id = f_readlines[begin_data_ind].split(',')[2]
@@ -64,11 +74,8 @@ def return_uploaded_wafers_list_from_zip_file(directory):
 
 
 ######## spreadsheet analysis
-wafers_spreadsheet_preseries_120='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 120um HD_AUG26.csv'
 preseries_dict_120 = return_preseries_list_from_spreadsheet(wafers_spreadsheet_preseries_120)
-wafers_spreadsheet_preseries_200='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 200um LD.csv'
 preseries_dict_200 = return_preseries_list_from_spreadsheet(wafers_spreadsheet_preseries_200)
-wafers_spreadsheet_preseries_300='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 300um LD.csv'
 preseries_dict_300 = return_preseries_list_from_spreadsheet(wafers_spreadsheet_preseries_300)
 
 
