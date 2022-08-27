@@ -25,7 +25,6 @@ Delivery,Sensor ID,Scratch pad ID,Thick- ness,Current location wafer,Current loc
 1,N8740_23,200133,200,NCU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
 1,N8740_24,200134,200,NCU,FSU,,scratch on channel 47,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
 1,N8740_25,200135,200,NCU,FSU,,,Passed,Passed,,0,,0,Passed,Passed,,NCU,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 3,N8741_1,200136,200,CERN,HEPHY,Seen 20.7.,,,,,,,,,,,CERN,,,,,,,,,,,,
 3,N8741_2,200137,200,CERN,HEPHY,,,,,,,,,,,,CERN,,,,,,,,,,,,
 3,N8741_3,200138,200,CERN,HEPHY,,,,,,,,,,,,CERN,,,,,,,,,,,,
