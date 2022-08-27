@@ -23,11 +23,18 @@ FSUDB_OUTPUT_DIR='CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'
 # for ind, row in preseries_tested.iterrows():
 #     print(row['Scratch pad ID'])
 
+<<<<<<< HEAD
 wafers_spreadsheet_preseries_120='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 120um HD.csv'
 wafers_spreadsheet_preseries_200='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 200um LD.csv'
 wafers_spreadsheet_preseries_300='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 300um LD.csv'
 
 
+=======
+wafers_spreadsheet_preseries_120='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 120um HD_AUG26.csv'
+wafers_spreadsheet_preseries_200='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 200um LD.csv'
+wafers_spreadsheet_preseries_300='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 300um LD.csv'
+
+>>>>>>> 1157766e328ed47e48a31232145c22a6f31a065b
 def return_preseries_list_from_spreadsheet(spreadsheet):
     if spreadsheet==wafers_spreadsheet_preseries_120:
         length=23+1
@@ -42,7 +49,7 @@ def return_preseries_list_from_spreadsheet(spreadsheet):
         for line_ind, line in enumerate(f_readlines):
             if 'Delivery' in line:
                 begin_data_ind = line_ind + 1
-                for i in range(24):
+                for i in range(length):
                     sensor_id = f_readlines[begin_data_ind].split(',')[1]
                     sensor_id_l.append(sensor_id)
                     Scratchpad_id = f_readlines[begin_data_ind].split(',')[2]
