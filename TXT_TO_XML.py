@@ -4,8 +4,8 @@ import get_iv_cv_dicts as dicts
 
 
 parser=argparse.ArgumentParser(description='Covert test results to xml schemas')
-parser.add_argument('--f', type=str, help='the .txt filname', required=True)
-parser.add_argument('--t', type=str, help='the XML: Tablename you wish to priduce. Available options are: [HGC_CERN_SENSOR_IV,HGC_CERN_SENSOR_IV_SUMRY]', required=True)
+parser.add_argument('--f', type=str, help='the .txt filname', required=False)
+parser.add_argument('--t', type=str, help='the XML: Tablename you wish to priduce. Available options are: [HGC_CERN_SENSOR_IV,HGC_CERN_SENSOR_IV_SUMRY]', required=False)
 parser.add_argument('--user', type=str, help='The name of the user who did this test. Default is Alex.', required=False, default='Alex')
 parser.add_argument('--location', type=str, help='The locatino where this test was carried. Default is "FSU"', required=False, default='FSU')
 parser.add_argument('--comment', type=str, help='Any comments on this test. Default is the comment from the .txt file', required=False,)

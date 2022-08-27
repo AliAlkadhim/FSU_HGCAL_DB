@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import subprocess as sb
 import get_iv_cv_dicts as dicts
-#import TXT_TO_XML 
+import TXT_TO_XML as XML
 
 INPUT_DIR=os.environ['INPUT_DIR']
 
@@ -112,17 +112,33 @@ print(dirs_l)
 print(IV_file_l)
 print(CV_file_l)
 #take away 'HPK_8in_198ch_2019_200119_20220707_test1_IV.txt' from IV because it was retested
+
 print('number of preseries at fsu uploaded = ', len(scratchpad_id_wafers_FSU['scratchpad_id']))
-IV_file_l.remove('HPK_8in_198ch_2019_200119_20220707_test1_IV.txt')
+#IV_file_l.remove('HPK_8in_198ch_2019_200119_20220707_test1_IV.txt')
 print('length of IV file list = ', len(IV_file_l))
 print('length of CV file list = ', len(CV_file_l))
 
 
-#for preseries_IV_file in IV_file_l:
-#	os.system('python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV' % preseries_IV_file)
+for dir, preseries_IV_file in zip(dirs_l,IV_file_l):
+	command='python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV --location FSU' % str('$INPUT_DIR'+'/'+dir+'/'+preseries_IV_file)	 
+	full_path=str(os.path.abspath(os.path.join(INPUT_DIR, dir, preseries_IV_file)) )
+	print(full_path)
+	IV_DICT = dicts.get_iv_dict(full_path)
+	#print(IV_DICT)
+	XML.make_xml_schema_HGC_CERN_SENSOR_IV(full_path)
+	#os.system('python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV' % full_path)
+	
+
+for dir, preseries_CV_file in zip(dirs_l,CV_file_l): 
+	command='python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV --location FSU' % str('$INPUT_DIR'+'/'+dir+'/'+preseries_IV_file) 
+	full_path=str(os.path.abspath(os.path.join(INPUT_DIR, dir, preseries_CV_file)) )          
+	print(full_path)
+	CV_DICT = dicts.get_cv_dict(full_path)
+	XML.make_xml_schema_HGC_CERN_SENSOR_CV(full_path)
 
 
-#print(dirs_in_input)
+#with open(os.path.join(INPUT_DIR, 'HPK_8in_198ch_2019_100113_20220701','HPK_8in_198ch_2019_100113_20220701_IV.txt')) as f:
+#	print(f.readlines())
 
 # if __name__=='__main__':
     
@@ -131,4 +147,4 @@ print('length of CV file list = ', len(CV_file_l))
 
 #############
 #to test upload for test file 100113 do 
-#python TXT_TO_XML.py --f $INPUT_DIR/HPK_8in_198ch_2019_100113_20220701/HPK_8in_198ch_2019_100113_20220701_IV.txt HGC_CERN_SENSOR_IV
+#python TXT_TO_XML.py --f $INPUT_DIR/HPK_8in_198ch_2019_100113_20220701/HPK_8in_198ch_2019_100113_20220701_IV.txt --t HGC_CERN_SENSOR
