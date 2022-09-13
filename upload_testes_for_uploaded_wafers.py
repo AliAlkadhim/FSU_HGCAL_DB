@@ -85,9 +85,9 @@ def return_uploaded_wafers_list_from_zip_file(directory):
 
 def Replace(ll, orig, replaced):                                                                                                                                                                                   
     for i, n in enumerate(ll):                                                                                                                                                                                         
-    if n==orig:                                                                                                                                                                                                        
-    ll[i] = replaced                                                                                                                                                                                       
-return ll 
+        if n==orig:                                                                                                                                                                                                        
+            ll[i] = replaced                                                                                                                                                                                       
+    return ll 
 
 
 def main():
@@ -125,10 +125,10 @@ def main():
                 for file in files_in_dir:
                     if file.endswith('IV.txt'):
                         IV_file=file
-                        IV_file_l.append(IV_file[0])
+                        IV_file_l.append(IV_file)
                     elif file.endswith('CV.txt'):
                         CV_file=file
-                        CV_file_l.append(CV_file)[0]
+                        CV_file_l.append(CV_file)
 
     #scratchpad_id_wafers_FSU['dirs']=dirs_l
 
@@ -179,7 +179,6 @@ def main():
 
 if __name__=='__main__':
     main()
-    print(scratchpad_id_wafers_FSU)
 
 
 #############
