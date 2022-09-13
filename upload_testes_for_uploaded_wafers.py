@@ -24,9 +24,9 @@ FSUDB_OUTPUT_DIR=os.environ['FSUDB_OUTPUT_DIR']
 # for ind, row in preseries_tested.iterrows():
 #     print(row['Scratch pad ID'])
 
-# wafers_spreadsheet_preseries_120='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 120um HD.csv'
-# wafers_spreadsheet_preseries_200='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 200um LD.csv'
-# wafers_spreadsheet_preseries_300='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 300um LD.csv'
+wafers_spreadsheet_preseries_120='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 120um HD.csv'
+wafers_spreadsheet_preseries_200='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 200um LD.csv'
+wafers_spreadsheet_preseries_300='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 300um LD.csv'
 
 def return_preseries_dict_from_spreadsheet(spreadsheet):
     """ This returns a dataframe of {sensor_ID, scratchpad_ID, current_location} from the preseries spreadsheets, 
@@ -83,15 +83,15 @@ def return_uploaded_wafers_list_from_zip_file(directory):
 
 
 
-
+def Replace(ll, orig, replaced):                                                                                                                                                                                   
+    for i, n in enumerate(ll):                                                                                                                                                                                         
+    if n==orig:                                                                                                                                                                                                        
+    ll[i] = replaced                                                                                                                                                                                       
+return ll 
 
 
 def main():
     ######## spreadsheet analysis
-    wafers_spreadsheet_preseries_120='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 120um HD.csv'
-    wafers_spreadsheet_preseries_200='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 200um LD.csv'
-    wafers_spreadsheet_preseries_300='CMS_HGCAL_DB/wafers_parts/HGCal Pre-series sensors - 300um LD.csv'
-
     preseries_dict_120 = return_preseries_dict_from_spreadsheet(wafers_spreadsheet_preseries_120)
     preseries_dict_200 = return_preseries_dict_from_spreadsheet(wafers_spreadsheet_preseries_200)
     preseries_dict_300 = return_preseries_dict_from_spreadsheet(wafers_spreadsheet_preseries_300)
@@ -108,6 +108,12 @@ def main():
 
     FSU_scratchpad_IDs=scratchpad_id_wafers_FSU['scratchpad_id']
     dirs_in_input = os.listdir(INPUT_DIR)
+    #Replace the stuff for sensor 200119
+
+    dirs_in_input = Replace(dirs_in_input, 'HPK_8in_198ch_2019_200119_20220713_ivretest','HPK_8in_198ch_2019_200119_20220707_test1')
+    #remove duplicates
+    dirs_in_input=list(set(dirs_in_input))
+
     IV_file_l=[]; CV_file_l=[];dirs_l=[]
 
     for scratchpad_id in FSU_scratchpad_IDs:
@@ -119,13 +125,17 @@ def main():
                 for file in files_in_dir:
                     if file.endswith('IV.txt'):
                         IV_file=file
-                        IV_file_l.append(IV_file)
+                        IV_file_l.append(IV_file[0])
                     elif file.endswith('CV.txt'):
                         CV_file=file
-                        CV_file_l.append(CV_file)
+                        CV_file_l.append(CV_file)[0]
 
     #scratchpad_id_wafers_FSU['dirs']=dirs_l
-    print(dirs_l)
+
+    print('dirs_l with no duplicates', dirs_l)
+    print('IV_file_l with no duplicates', IV_file_l)
+
+    # CV_file_l.replace('HPK_8in_198ch_2019_200119_20220707_test1_CV.txt', )
     #for dir in dirs_in_input:
     #	if '300057' in dir:
     #		files_in_dir=os.listdir(INPUT_DIR+dir)
@@ -136,7 +146,7 @@ def main():
     #				CV_file=file
 
 
-    print(IV_file_l)
+    # print(IV_file_l)
     print(CV_file_l)
     #take away 'HPK_8in_198ch_2019_200119_20220707_test1_IV.txt' from IV because it was retested
 
