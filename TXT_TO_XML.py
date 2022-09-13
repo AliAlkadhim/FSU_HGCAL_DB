@@ -1,6 +1,7 @@
 import csv; import re
 import argparse
 import get_iv_cv_dicts as dicts
+import os
 
 
 parser=argparse.ArgumentParser(description='Covert test results to xml schemas')
@@ -18,7 +19,7 @@ XML_tablename=args.t
 
 
 
-FSUDB_OUTPUT_DIR='CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'
+FSUDB_OUTPUT_DIR=os.environ['FSUDB_OUTPUT_DIR']
 
 
 # def make_xml_schema_HGC_SENSOR_IV(Sensor_type, Timestamp, Run_name, V_list, Tot_Current_list):

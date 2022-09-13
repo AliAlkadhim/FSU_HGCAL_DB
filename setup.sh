@@ -22,6 +22,7 @@ source $WORKFLOW_DIR/workflow_CV/setup.sh;
 ######Add input directory
 
 export INPUT_DIR="/home/input/"
+export FSUDB_OUTPUT_DIR="CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/"
 
 
 
