@@ -24,7 +24,7 @@ source $WORKFLOW_DIR/workflow_CV/setup.sh;
 export INPUT_DIR="/home/input/"
 export FSUDB_OUTPUT_DIR="CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/"
 
-
+export PRESERIES_IV_SUMMARY_DIR = "/home/output/summaryhgsensor_iv/Preseries/"
 
 
 

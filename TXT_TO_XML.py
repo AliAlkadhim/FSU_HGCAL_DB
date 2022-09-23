@@ -78,8 +78,8 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
     Run_Name = IVDICT['Identifier'].split()[0]
     location=args.location
     Kind_of_part = '200um Si Sensor SD Full'
-    if Kind_of_part == '200um Si Sensor SD Full':
-        serial_number ='HPK_8in_198ch_' +Run_Name
+
+    serial_number =IVDICT['Scratchpad_ID'] #+Run_Name#REMEMBER, SERIAL NUMBER IS SCRATCHPAD ID
     # serial_number = Sensor_Type + Run_Name
     xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_TEST.xml'
 
@@ -152,7 +152,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
         serial_number ='HPK_8in_198ch_' +Run_Name
     # serial_number = Sensor_Type + Run_Name
 
-    xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_TEST.xml'
+    xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_TEST_PRESERIES.xml'
 
     with open(xml_table_file, 'w+') as xmlf:
         xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')

@@ -1,6 +1,7 @@
 import csv; import re
 import argparse
 
+PRESERIES=True
 
 def get_V_I_lists(file):
     V_list=[]; I_list=[]
@@ -67,8 +68,11 @@ def get_iv_dict(file):
                 Timestamp=line.split('\t')[2]
             if 'Identifier' in line:
                 Run_name = line.split('\t')[2]
+                Scratchpad_ID = Run_name.split('_')[0]
+                
+
             if 'Comments' in line:
-                Comments=line.split('\t')[2:]
+                Comments=line.split('\t')[2:][0]#take zeroeth element because we want a string
 
 
 
@@ -104,6 +108,7 @@ def get_iv_dict(file):
     everything_dict['Sensor_type'] =Sensor_type
     everything_dict['Timestamp'] =Timestamp
     everything_dict['Identifier'] =Run_name
+    everything_dict['Scratchpad_ID'] = Scratchpad_ID
     everything_dict['Comments'] =Comments
 
         
@@ -165,8 +170,11 @@ def get_cv_dict(file):
                 Timestamp=line.split('\t')[2]
             if 'Identifier' in line:
                 Run_name = line.split('\t')[2]
+                Scratchpad_ID = Run_name.split('_')[0]
             if 'Comments' in line:
                 Comments=line.split('\t')[2:]
+                
+                
 
 
 
@@ -213,7 +221,8 @@ def get_cv_dict(file):
     everything_dict['Sensor_type'] =Sensor_type
     everything_dict['Timestamp'] =Timestamp
     everything_dict['Identifier'] =Run_name
-    everything_dict['Comments'] =Comments
+    everything_dict['Scratchpad_ID'] = Scratchpad_ID
+    everything_dict['Comments'] =str(Comments[0])#because its a list
 
         
 
@@ -241,10 +250,13 @@ def get_cv_dict(file):
 
 
 
-# if __name__ == '__main__':
-#     #Test IV
-#     # filename="HPK_8in_198ch_2019_N4792_18_03242022_FullRetest_IV.txt"
-#     # get_iv_dict(filename)
-#     #Test CV
-#     filename = 'HPK_8in_198ch_2019_200118_20220707_test1_CV.txt'
-#     get_cv_dict(filename)
+if __name__ == '__main__':
+    #Test IV
+    if PRESERIES:
+        filename="HPK_8in_198ch_2019_200144_20220823_test1_IV.txt"
+    else:
+        filename="HPK_8in_198ch_2019_N4792_18_03242022_FullRetest_IV.txt"
+    print(get_iv_dict(filename)['Scratchpad_ID'])
+    #Test CV
+    # filename = 'HPK_8in_198ch_2019_200118_20220707_test1_CV.txt'
+    # get_cv_dict(filename)

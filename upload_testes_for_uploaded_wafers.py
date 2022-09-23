@@ -8,7 +8,7 @@ INPUT_DIR=os.environ['INPUT_DIR']#this is just export INPUT_DIR="/home/input/"
 
 # FSUDB_OUTPUT_DIR='CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'#where the head of it is the git repo
 FSUDB_OUTPUT_DIR=os.environ['FSUDB_OUTPUT_DIR']
-
+PRESERIES_IV_SUMMARY_DIR = os.environ['PRESERIES_IV_SUMMARY_DIR']
 
 # 100113 was the first one that was uploaded and checked
 ## PRiority is the list of sensors in the preseries spreadsheets (FSU preseries)
@@ -89,7 +89,10 @@ def Replace(ll, orig, replaced):
             ll[i] = replaced                                                                                                                                                                                       
     return ll 
 
+def get_kind_of_part(tex_summary):
 
+    kind_of_part= thickness + ' Si Sensor' + HDorLD + ' Full'
+    return kind_of_part
 def main():
     ######## spreadsheet analysis
     preseries_dict_120 = return_preseries_dict_from_spreadsheet(wafers_spreadsheet_preseries_120)
