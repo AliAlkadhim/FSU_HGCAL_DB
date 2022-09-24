@@ -37,18 +37,18 @@ if PRESERIES:
 
 print('IV_SUMMARY_FULL_DIRS= ', IV_SUMMARY_FULL_DIRS)
 
-def get_kind_of_part(scratchpad_ID, IV_or_CV):
-    pass
-    #search the summary directories for this scratcpadid then find the tex file
-    if IV_or_CV=="IV":
-        for dir in os.listdir(PRESERIES_IV_SUMMARY_DIR):
-            if scratchpad_ID in dir:
+# def get_kind_of_part(scratchpad_ID, IV_or_CV):
+#     pass
+#     #search the summary directories for this scratcpadid then find the tex file
+#     if IV_or_CV=="IV":
+#         for dir in os.listdir(PRESERIES_IV_SUMMARY_DIR):
+#             if scratchpad_ID in dir:
 
 
 
-    kind_of_part= thickness + ' Si Sensor' + HDorLD + ' Full'
-    print('kind of part = ', kind_of_part)
-    return kind_of_part
+#     kind_of_part= thickness + ' Si Sensor' + HDorLD + ' Full'
+#     print('kind of part = ', kind_of_part)
+#     return kind_of_part
 
 
 # def make_xml_schema_HGC_SENSOR_IV(Sensor_type, Timestamp, Run_name, V_list, Tot_Current_list):
@@ -246,6 +246,10 @@ if __name__ == '__main__':
     # elif XML_tablename=='HGC_CERN_SENSOR_IV':         
     # filename="HPK_8in_198ch_2019_N4792_18_0324iv_dict2022_FullRetest_IV.txt"
     filename=args.f
+    # if PRESERIES:
+        # filename="HPK_8in_198ch_2019_200144_20220823_test1_IV.txt"
+    # else:
+        # filename="HPK_8in_198ch_2019_N4792_18_03242022_FullRetest_IV.txt"
     if args.t == 'HGC_CERN_SENSOR_IV':
         make_xml_schema_HGC_CERN_SENSOR_IV(filename)
     elif args.t == 'HGC_CERN_SENSOR_CV':
