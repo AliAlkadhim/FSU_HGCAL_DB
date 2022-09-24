@@ -17,9 +17,38 @@ filename = args.f
 XML_tablename=args.t
 
 
-
+PRESERIES=True
 
 FSUDB_OUTPUT_DIR=os.environ['FSUDB_OUTPUT_DIR']
+
+PRESERIES_IV_SUMMARY_DIR = os.environ['PRESERIES_IV_SUMMARY_DIR']
+OLD_PRESERIES_IV_SUMMARY_DIR = os.environ['OLD_PRESERIES_IV_SUMMARY_DIR']
+
+
+PRESERIES_CV_SUMMARY_DIR = os.environ['PRESERIES_CV_SUMMARY_DIR']
+OLD_PRESERIES_CV_SUMMARY_DIR = os.environ['OLD_PRESERIES_CV_SUMMARY_DIR']
+
+if PRESERIES:
+    IV_SUMMARY_FULL_DIRS=[]
+    for dir in os.listdir(PRESERIES_IV_SUMMARY_DIR):
+        IV_SUMMARY_FULL_DIRS.append(os.path.join(PRESERIES_IV_SUMMARY_DIR, dir))
+    for dir in os.listdir(OLD_PRESERIES_IV_SUMMARY_DIR):
+        IV_SUMMARY_FULL_DIRS.append(os.path.join(OLD_PRESERIES_IV_SUMMARY_DIR, dir))       
+
+print('IV_SUMMARY_FULL_DIRS= ', IV_SUMMARY_FULL_DIRS)
+
+def get_kind_of_part(scratchpad_ID, IV_or_CV):
+    pass
+    #search the summary directories for this scratcpadid then find the tex file
+    if IV_or_CV=="IV":
+        for dir in os.listdir(PRESERIES_IV_SUMMARY_DIR):
+            if scratchpad_ID in dir:
+
+
+
+    kind_of_part= thickness + ' Si Sensor' + HDorLD + ' Full'
+    print('kind of part = ', kind_of_part)
+    return kind_of_part
 
 
 # def make_xml_schema_HGC_SENSOR_IV(Sensor_type, Timestamp, Run_name, V_list, Tot_Current_list):
@@ -80,7 +109,8 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
     Kind_of_part = '200um Si Sensor SD Full'
 
     serial_number =IVDICT['Scratchpad_ID'] #+Run_Name#REMEMBER, SERIAL NUMBER IS SCRATCHPAD ID
-    # serial_number = Sensor_Type + Run_Name
+    if PRESERIES:
+        serial_number = serial_number +'_'
     xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_TEST.xml'
 
     with open(xml_table_file, 'w+') as xmlf:
