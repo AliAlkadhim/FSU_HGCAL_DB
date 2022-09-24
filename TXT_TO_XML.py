@@ -37,12 +37,21 @@ if PRESERIES:
 
 print('IV_SUMMARY_FULL_DIRS= ', IV_SUMMARY_FULL_DIRS)
 
-# def get_kind_of_part(scratchpad_ID, IV_or_CV):
-#     pass
-#     #search the summary directories for this scratcpadid then find the tex file
-#     if IV_or_CV=="IV":
-#         for dir in os.listdir(PRESERIES_IV_SUMMARY_DIR):
-#             if scratchpad_ID in dir:
+def get_kind_of_part(scratchpad_ID, IV_or_CV):
+    scratchpad_ID=scratchpad_ID.split('_')[0]
+    #search the summary directories for this scratcpadid then find the tex file
+    if IV_or_CV=="IV":
+        for fullpath in IV_SUMMARY_FULL_DIRS:
+            if scratchpad_ID in fullpath:
+                scratchpad_ID_fullpath=fullpath
+                for file in os.listdir(scratchpad_ID_fullpath):
+                    if file=='IV_' + scratchpad_ID +'.tex':
+                        summary_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
+                        f_tex=open(summary_tex_file_path,'r')
+                        for line in f_tex:
+                            if "thickness" in line:
+                                print(line)
+                        f_tex.close() 
 
 
 
@@ -111,7 +120,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
     serial_number =IVDICT['Scratchpad_ID'] #+Run_Name#REMEMBER, SERIAL NUMBER IS SCRATCHPAD ID
     if PRESERIES:
         serial_number = serial_number +'_'
-    xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_TEST.xml'
+    xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_PRESERIES_TEST.xml'
 
     with open(xml_table_file, 'w+') as xmlf:
         xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
