@@ -172,7 +172,7 @@ def get_cv_dict(file):
                 Run_name = line.split('\t')[2]
                 Scratchpad_ID = Run_name.split('_')[0]
             if 'Comments' in line:
-                Comments=line.split('\t')[2:]
+                Comments=line.split('\t')[2:][0]
                 
                 
 
