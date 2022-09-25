@@ -34,7 +34,12 @@ if PRESERIES:
         IV_SUMMARY_FULL_DIRS.append(os.path.join(PRESERIES_IV_SUMMARY_DIR, dir))
     for dir in os.listdir(OLD_PRESERIES_IV_SUMMARY_DIR):
         IV_SUMMARY_FULL_DIRS.append(os.path.join(OLD_PRESERIES_IV_SUMMARY_DIR, dir))       
-
+    
+    CV_SUMMARY_FULL_DIRS=[]
+    for dir in os.listdir(PRESERIES_CV_SUMMARY_DIR):
+        CV_SUMMARY_FULL_DIRS.append(os.path.join(PRESERIES_CV_SUMMARY_DIR, dir))
+    for dir in os.listdir(OLD_PRESERIES_CV_SUMMARY_DIR):
+        CV_SUMMARY_FULL_DIRS.append(os.path.join(OLD_PRESERIES_CV_SUMMARY_DIR, dir))  
 print('IV_SUMMARY_FULL_DIRS= ', IV_SUMMARY_FULL_DIRS)
 
 def get_kind_of_part(scratchpad_ID, IV_or_CV):
@@ -44,14 +49,45 @@ def get_kind_of_part(scratchpad_ID, IV_or_CV):
         for fullpath in IV_SUMMARY_FULL_DIRS:
             if scratchpad_ID in fullpath:
                 scratchpad_ID_fullpath=fullpath
+                print('\n scratchpadID path=', scratchpad_ID_fullpath)
                 for file in os.listdir(scratchpad_ID_fullpath):
-                    if file=='IV_' + scratchpad_ID +'.tex':
+                    if file.endswith('.tex') and "elog" not in file:
                         summary_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
+                        print('\n SUMMARY TEX FILE', summary_tex_file_path)
                         f_tex=open(summary_tex_file_path,'r')
                         for line in f_tex:
-                            if "thickness" in line:
-                                print(line)
-                        f_tex.close() 
+                            if "item active thickness:" in line:
+                                print('thickness=', line.split()[3])
+                                thickness= int(line.split()[3])
+                        f_tex.close()
+
+    if IV_or_CV=="CV":
+        for fullpath in CV_SUMMARY_FULL_DIRS:
+            if scratchpad_ID in fullpath:
+                scratchpad_ID_fullpath=fullpath
+                print('\n scratchpadID path=', scratchpad_ID_fullpath)
+                for file in os.listdir(scratchpad_ID_fullpath):
+                    if file.endswith('.tex') and "elog" not in file:
+                        summary_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
+                        print('\n SUMMARY TEX FILE', summary_tex_file_path)
+                        f_tex=open(summary_tex_file_path,'r')
+                        for line in f_tex:
+                            if "item active thickness:" in line:
+                                print('thickness=', line.split()[3])
+                                thickness= int(line.split()[3])
+                        f_tex.close()
+
+    if thickness==120:
+        HDorLD='HD'
+    elif thickness==200:
+        HDorLD='LD'
+    elif thickness==300:
+        HDorLD='LD'
+    else:
+        print('couldnt find the thickness for sensor with %d scratchpad_ID (serial number)' % scratchpad_ID)
+    kind_of_part= str(thickness)+ ' Si Sensor' +  HDorLD + ' Full'
+    print('kind of part = ', kind_of_part)
+    return kind_of_part
 
 
 
@@ -115,11 +151,14 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
     Sensor_Type = IVDICT['Sensor_type']
     Run_Name = IVDICT['Identifier'].split()[0]
     location=args.location
-    Kind_of_part = '200um Si Sensor SD Full'
+    # Kind_of_part = '200um Si Sensor SD Full'
 
     serial_number =IVDICT['Scratchpad_ID'] #+Run_Name#REMEMBER, SERIAL NUMBER IS SCRATCHPAD ID
     if PRESERIES:
         serial_number = serial_number +'_'
+
+    Kind_of_part = get_kind_of_part(serial_number, "IV")
+
     xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_PRESERIES_TEST.xml'
 
     with open(xml_table_file, 'w+') as xmlf:
@@ -186,10 +225,12 @@ def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
     Name = 'HGC Sensor Manufacturer IV Test'
     Run_Name = CVDICT['Identifier'].split('_')[0]
     location=args.location
-    Kind_of_part = '200um Si Sensor SD Full'
-    if Kind_of_part == '200um Si Sensor SD Full':
-        serial_number ='HPK_8in_198ch_' +Run_Name
-    # serial_number = Sensor_Type + Run_Name
+    # Kind_of_part = '200um Si Sensor SD Full'
+    serial_number =IVDICT['Scratchpad_ID'] #+Run_Name#REMEMBER, SERIAL NUMBER IS SCRATCHPAD ID
+    if PRESERIES:
+        serial_number = serial_number +'_'
+
+    Kind_of_part = get_kind_of_part(serial_number, "CV")
 
     xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_TEST_PRESERIES.xml'
 
