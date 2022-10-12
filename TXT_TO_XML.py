@@ -140,6 +140,20 @@ def get_kind_of_part(scratchpad_ID, IV_or_CV):
 #         xmlf.write('\t\t<DATA_SET>\n')
 #         xmlf.write('<ROOT>\n')
 
+#####################################################3
+def convert_timestamp(orig_format):                                                                                                                                              
+    '''orig_example = 15.8.2022 12:39                                                                                                                                           
+    desired_format=2012-09-19 14:04:00 '''                                                                                                                                       
+    #print('original time', orig_format)                                                                                                                                         
+    date, time = orig_format.split()                                                                                                                                             
+    day, month, year = date.split('.')                                                                                                                                           
+    month='0'+month if len(month)==1 else month                                                                                                                                  
+    hour, minutes = time.split(':')                                                                                                                                              
+    desired_format = f"{year}-{month}-{day} {hour}:{minutes}:00"                                                                                                                 
+    #print(desired_format)                                                                                                                                                       
+    return desired_format 
+
+
 ##################### #####################  IV TABLES #####################  ##################### 
 
 def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
@@ -171,8 +185,8 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
         xmlf.write('\t</TYPE>\n')
         xmlf.write('\t\t<RUN>\n')
         xmlf.write('\t\t\t<RUN_NAME>' + Run_Name + '</RUN_NAME>\n')
-        xmlf.write('\t\t\t<RUN_BEGIN_TIMESTAMP>'+IVDICT['Timestamp'].replace("\n", "").rstrip()+'</RUN_BEGIN_TIMESTAMP>\n')
-        xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+IVDICT['Timestamp'].replace("\n", "").rstrip()+'</RUN_END_TIMESTAMP>\n')
+        xmlf.write('\t\t\t<RUN_BEGIN_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_BEGIN_TIMESTAMP>\n')
+        xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_END_TIMESTAMP>\n')
         xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user.rstrip()+'</INITIATED_BY_USER>\n')
         xmlf.write('\t\t\t<LOCATION>'+location.rstrip()+'</LOCATION>\n')
         if args.comment:
@@ -244,8 +258,8 @@ def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
         xmlf.write('\t</TYPE>\n')
         xmlf.write('\t\t<RUN>\n')
         xmlf.write('\t\t\t<RUN_NAME>' + Run_Name.rstrip() + '</RUN_NAME>\n')
-        xmlf.write('\t\t\t<RUN_BEGIN_TIMESTAMP>'+CVDICT['Timestamp'].replace("\n", "").rstrip()+'</RUN_BEGIN_TIMESTAMP>\n')
-        xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+CVDICT['Timestamp'].replace("\n", "").rstrip()+'</RUN_END_TIMESTAMP>\n')
+        xmlf.write('\t\t\t<RUN_BEGIN_TIMESTAMP>'+convert_timestamp(CVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_BEGIN_TIMESTAMP>\n')
+        xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+convert_timestamp(CVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_END_TIMESTAMP>\n')
         xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user.rstrip()+'</INITIATED_BY_USER>\n')
         xmlf.write('\t\t\t<LOCATION>'+location.rstrip()+'</LOCATION>\n')
         if args.comment:
