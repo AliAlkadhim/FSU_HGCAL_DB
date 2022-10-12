@@ -167,7 +167,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
         xmlf.write('<HEADER>\n')
         xmlf.write('\t<TYPE>\n')
         xmlf.write('\t\t<EXTENSION_TABLE_NAME>HGC_SENSOR_IV</EXTENSION_TABLE_NAME>\n')
-        xmlf.write('\t\t<NAME>HGC CERN Sensor IV Test</NAME>\n')
+        xmlf.write('\t\t<NAME>HGC CERN Sensor IV</NAME>\n')
         xmlf.write('\t</TYPE>\n')
         xmlf.write('\t\t<RUN>\n')
         xmlf.write('\t\t\t<RUN_NAME>' + Run_Name + '</RUN_NAME>\n')
@@ -232,7 +232,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
 
     Kind_of_part = get_kind_of_part(serial_number, "CV")
 
-    xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_TEST_PRESERIES.xml'
+    xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_PRESERIES.xml'
 
     with open(xml_table_file, 'w+') as xmlf:
         xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
@@ -265,7 +265,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
         for i in range(len(CVDICT['V_list'])):
             xmlf.write('\t\t\t<DATA>\n')
             xmlf.write('\t\t\t\t<VOLTS>'+str(CVDICT['V_list'][i]).rstrip()+'</VOLTS>\n')
-            xmlf.write('\t\t\t\t<CPCTNCE_PFRD>'+str(CVDICT['Cs_list'][i]).rstrip()+'</CPCTNCE_PFRD>:\n')
+            xmlf.write('\t\t\t\t<CPCTNCE_PFRD>'+str(CVDICT['Cs_list'][i]).rstrip()+'</CPCTNCE_PFRD>\n')
             xmlf.write('\t\t\t\t<ERR_CPCTNC_PFRD>'+str(CVDICT['Error_capacitance_list'][i]).rstrip()+'</ERR_CPCTNC_PFRD>\n')
 
             xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP>'+str(CVDICT['Tot_Current_list'][i]).rstrip()+'</TOT_CURNT_NANOAMP>\n')
