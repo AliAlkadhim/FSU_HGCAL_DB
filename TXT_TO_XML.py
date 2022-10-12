@@ -85,7 +85,7 @@ def get_kind_of_part(scratchpad_ID, IV_or_CV):
         HDorLD='LD'
     else:
         print('couldnt find the thickness for sensor with %d scratchpad_ID (serial number)' % scratchpad_ID)
-    kind_of_part= str(thickness)+ ' Si Sensor' +  HDorLD + ' Full'
+    kind_of_part= str(thickness)+ 'um Si Sensor ' +  HDorLD + ' Full'
     print('kind of part = ', kind_of_part)
     return kind_of_part
 
@@ -140,6 +140,20 @@ def get_kind_of_part(scratchpad_ID, IV_or_CV):
 #         xmlf.write('\t\t<DATA_SET>\n')
 #         xmlf.write('<ROOT>\n')
 
+#####################################################3
+def convert_timestamp(orig_format):                                                                                                                                              
+    '''orig_example = 15.8.2022 12:39                                                                                                                                           
+    desired_format=2012-09-19 14:04:00 '''                                                                                                                                       
+    #print('original time', orig_format)                                                                                                                                         
+    date, time = orig_format.split()                                                                                                                                             
+    day, month, year = date.split('.')                                                                                                                                           
+    month='0'+month if len(month)==1 else month                                                                                                                                  
+    hour, minutes = time.split(':')                                                                                                                                              
+    desired_format = f"{year}-{month}-{day} {hour}:{minutes}:00"                                                                                                                 
+    #print(desired_format)                                                                                                                                                       
+    return desired_format 
+
+
 ##################### #####################  IV TABLES #####################  ##################### 
 
 def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
@@ -149,13 +163,13 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
 
     Name = 'HGC Sensor Manufacturer IV Test'
     Sensor_Type = IVDICT['Sensor_type']
-    Run_Name = IVDICT['Identifier'].split()[0]
+    Run_Name = IVDICT['Identifier'].split('_')[0]
     location=args.location
     # Kind_of_part = '200um Si Sensor SD Full'
 
     serial_number =IVDICT['Scratchpad_ID'] #+Run_Name#REMEMBER, SERIAL NUMBER IS SCRATCHPAD ID
     if PRESERIES:
-        serial_number = serial_number +'_'
+        serial_number = serial_number +'_0'
 
     Kind_of_part = get_kind_of_part(serial_number, "IV")
 
@@ -166,50 +180,50 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
         xmlf.write('<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n')
         xmlf.write('<HEADER>\n')
         xmlf.write('\t<TYPE>\n')
-        xmlf.write('\t\t<EXTENSION_TABLE_NAME> HGC_SENSOR_IV</EXTENSION_TABLE_NAME>\n')
-        xmlf.write('\t\t<NAME> HGC CERN Sensor IV Test</NAME>\n')
-        xmlf.write('\t<TYPE>\n')
+        xmlf.write('\t\t<EXTENSION_TABLE_NAME>HGC_SENSOR_IV</EXTENSION_TABLE_NAME>\n')
+        xmlf.write('\t\t<NAME>HGC CERN Sensor IV</NAME>\n')
+        xmlf.write('\t</TYPE>\n')
         xmlf.write('\t\t<RUN>\n')
-        xmlf.write('\t\t\t<RUN_NAME>' + Run_Name + '<RUN_NAME>\n')
-        xmlf.write('\t\t\t<RUN_BEGIN_TIMESTAMP>'+IVDICT['Timestamp']+'</RUN_BEGIN_TIMESTAMP>\n')
-        xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+IVDICT['Timestamp']+'</RUN_END_TIMESTAMP>\n')
-        xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user+'<INITIATED_BY_USER>\n')
-        xmlf.write('\t\t\t<LOCATION>'+location+'<LOCATION>\n')
+        xmlf.write('\t\t\t<RUN_NAME>' + Run_Name + '</RUN_NAME>\n')
+        xmlf.write('\t\t\t<RUN_BEGIN_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_BEGIN_TIMESTAMP>\n')
+        xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_END_TIMESTAMP>\n')
+        xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user.rstrip()+'</INITIATED_BY_USER>\n')
+        xmlf.write('\t\t\t<LOCATION>'+location.rstrip()+'</LOCATION>\n')
         if args.comment:
-            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+args.comment+ '<COMMENT_DESCRIPTION>\n')
+            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+args.comment.replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
         else:
-            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(IVDICT['Comments'])+ '<COMMENT_DESCRIPTION>\n')
+            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(IVDICT['Comments']).replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
         xmlf.write('\t\t</RUN>\n')
         xmlf.write(' </HEADER>\n')
 
         xmlf.write('\t\t<DATA_SET>\n')
         xmlf.write('\t\t\t<PART>\n')
-        xmlf.write('\t\t\t\t<KIND_OF_PART>'+Kind_of_part+'</KIND_OF_PART>\n')
-        xmlf.write('\t\t\t\t<SERIAL_NUMBER>'+serial_number+'<SERIAL_NUMBER>\n')
-        xmlf.write('\t\t\t<PART>\n')
+        xmlf.write('\t\t\t\t<KIND_OF_PART>'+Kind_of_part.rstrip()+'</KIND_OF_PART>\n')
+        xmlf.write('\t\t\t\t<SERIAL_NUMBER>'+serial_number.rstrip()+'</SERIAL_NUMBER>\n')
+        xmlf.write('\t\t\t</PART>\n')
 
 
         for i in range(len(IVDICT['V_list'])):
             xmlf.write('\t\t\t<DATA>\n')
-            xmlf.write('\t\t\t\t<VOLTS>'+str(IVDICT['V_list'][i])+'<VOLTS>\n')
+            xmlf.write('\t\t\t\t<VOLTS>'+str(IVDICT['V_list'][i]).rstrip()+'</VOLTS>\n')
             #BELLOW IS CHANNEL CURRENT
-            xmlf.write('\t\t\t\t<CURNT_NANOAMP>'+str(IVDICT['Channel_Current_list'][i])+'<CURNT_NANOAMP>\n')
+            xmlf.write('\t\t\t\t<CURNT_NANOAMP>'+str(IVDICT['Channel_Current_list'][i]).rstrip()+'</CURNT_NANOAMP>\n')
             #BLLOW IS CHANNEL ERROR CURRENT
-            xmlf.write('\t\t\t\t<ERR_CURNT_NANOAMP>'+str(IVDICT['Error_Current_list'][i])+'<ERR_CURNT_NANOAMP>\n')
+            xmlf.write('\t\t\t\t<ERR_CURNT_NANOAMP>'+str(IVDICT['Error_Current_list'][i]).rstrip()+'</ERR_CURNT_NANOAMP>\n')
             #BELLOW IS TOT CURRENT 
-            xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP>'+str(IVDICT['Tot_Current_list'][i])+'<TOT_CURNT_NANOAMP>\n')
-            xmlf.write('\t\t\t\t<ACTUAL_VOLTS>'+str(IVDICT['Act_Volts_list'][i])+'<ACTUAL_VOLTS>\n')
-            xmlf.write('\t\t\t\t<TIME_SECS>'+str(IVDICT['Time_list'][i])+'<TIME_SECS>\n')
-            xmlf.write('\t\t\t\t<TEMP_DEGC>'+str(IVDICT['Temp_list'][i])+'<TEMP_DEGC>\n')
-            # xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(IVDICT['Humidity_list'][i])+'<HUMIDITY_PRCNT>\n')
-            xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(0.000000E+0)	+'<HUMIDITY_PRCNT>\n')
+            xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP>'+str(IVDICT['Tot_Current_list'][i]).rstrip()+'</TOT_CURNT_NANOAMP>\n')
+            xmlf.write('\t\t\t\t<ACTUAL_VOLTS>'+str(IVDICT['Act_Volts_list'][i]).rstrip()+'</ACTUAL_VOLTS>\n')
+            xmlf.write('\t\t\t\t<TIME_SECS>'+str(IVDICT['Time_list'][i]).rstrip()+'</TIME_SECS>\n')
+            xmlf.write('\t\t\t\t<TEMP_DEGC>'+str(IVDICT['Temp_list'][i]).rstrip()+'</TEMP_DEGC>\n')
+            xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(IVDICT['Humidity_list'][i]).rstrip()+'</HUMIDITY_PRCNT>\n')
+            # xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(0.000000E+0)	+'</HUMIDITY_PRCNT>\n')
 
-            xmlf.write('\t\t\t\t<CELL_NR>'+str(IVDICT['Cell_Number_list'][i])+'<CELL_NR>\n')
-
+            xmlf.write('\t\t\t\t<CELL_NR>'+str(IVDICT['Cell_Number_list'][i]).rstrip()+'</CELL_NR>\n')
+            xmlf.write('\t\t\t</DATA>\n')
 
         
-        xmlf.write('\t\t<DATA_SET>\n')
-        xmlf.write('<ROOT>\n')
+        xmlf.write('\t\t</DATA_SET>\n')
+        xmlf.write('</ROOT>\n')
 
 
                     
@@ -226,64 +240,65 @@ def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
     Run_Name = CVDICT['Identifier'].split('_')[0]
     location=args.location
     # Kind_of_part = '200um Si Sensor SD Full'
-    serial_number =IVDICT['Scratchpad_ID'] #+Run_Name#REMEMBER, SERIAL NUMBER IS SCRATCHPAD ID
+    serial_number =CVDICT['Scratchpad_ID'] #+Run_Name#REMEMBER, SERIAL NUMBER IS SCRATCHPAD ID
     if PRESERIES:
-        serial_number = serial_number +'_'
+        serial_number = serial_number +'_0'
 
     Kind_of_part = get_kind_of_part(serial_number, "CV")
 
-    xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_TEST_PRESERIES.xml'
+    xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_PRESERIES.xml'
 
     with open(xml_table_file, 'w+') as xmlf:
         xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
         xmlf.write('<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n')
         xmlf.write('<HEADER>\n')
         xmlf.write('\t<TYPE>\n')
-        xmlf.write('\t\t<EXTENSION_TABLE_NAME> HGC_SENSOR_CV</EXTENSION_TABLE_NAME>\n')
-        xmlf.write('\t\t<NAME> HGC CERN Sensor CV Test</NAME>\n')
-        xmlf.write('\t<TYPE>\n')
+        xmlf.write('\t\t<EXTENSION_TABLE_NAME>HGC_SENSOR_CV</EXTENSION_TABLE_NAME>\n')
+        xmlf.write('\t\t<NAME>HGC CERN Sensor CV</NAME>\n')
+        xmlf.write('\t</TYPE>\n')
         xmlf.write('\t\t<RUN>\n')
-        xmlf.write('\t\t\t<RUN_NAME>' + Run_Name + '<RUN_NAME>\n')
-        xmlf.write('\t\t\t<RUN_BEGIN_TIMESTAMP>'+CVDICT['Timestamp']+'</RUN_BEGIN_TIMESTAMP>\n')
-        xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+CVDICT['Timestamp']+'</RUN_END_TIMESTAMP>\n')
-        xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user+'<INITIATED_BY_USER>\n')
-        xmlf.write('\t\t\t<LOCATION>'+location+'<LOCATION>\n')
+        xmlf.write('\t\t\t<RUN_NAME>' + Run_Name.rstrip() + '</RUN_NAME>\n')
+        xmlf.write('\t\t\t<RUN_BEGIN_TIMESTAMP>'+convert_timestamp(CVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_BEGIN_TIMESTAMP>\n')
+        xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+convert_timestamp(CVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_END_TIMESTAMP>\n')
+        xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user.rstrip()+'</INITIATED_BY_USER>\n')
+        xmlf.write('\t\t\t<LOCATION>'+location.rstrip()+'</LOCATION>\n')
         if args.comment:
-            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+args.comment+ '<COMMENT_DESCRIPTION>\n')
+            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+args.comment.rstrip()+ '</COMMENT_DESCRIPTION>\n')
         else:
-            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(CVDICT['Comments'])+ '<COMMENT_DESCRIPTION>\n')
+            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(CVDICT['Comments']).replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
         xmlf.write('\t\t</RUN>\n')
         xmlf.write(' </HEADER>\n')
 
         xmlf.write('\t\t<DATA_SET>\n')
         xmlf.write('\t\t\t<PART>\n')
-        xmlf.write('\t\t\t\t<KIND_OF_PART>'+Kind_of_part+'</KIND_OF_PART>\n')
-        xmlf.write('\t\t\t\t<SERIAL_NUMBER>'+serial_number+'<SERIAL_NUMBER>\n')
-        xmlf.write('\t\t\t<PART>\n')
+        xmlf.write('\t\t\t\t<KIND_OF_PART>'+Kind_of_part.rstrip()+'</KIND_OF_PART>\n')
+        xmlf.write('\t\t\t\t<SERIAL_NUMBER>'+serial_number.rstrip()+'</SERIAL_NUMBER>\n')
+        xmlf.write('\t\t\t</PART>\n')
 
 
         for i in range(len(CVDICT['V_list'])):
             xmlf.write('\t\t\t<DATA>\n')
-            xmlf.write('\t\t\t\t<VOLTS>'+str(CVDICT['V_list'][i])+'<VOLTS>\n')
-            xmlf.write('\t\t\t\t<CPCTNCE_PFRD>'+str(CVDICT['Cs_list'][i])+'<CPCTNCE_PFRD>:\n')
-            xmlf.write('\t\t\t\t<ERR_CPCTNC_PFRD>'+str(CVDICT['Error_capacitance_list'][i])+'<ERR_CPCTNC_PFRD>\n')
+            xmlf.write('\t\t\t\t<VOLTS>'+str(CVDICT['V_list'][i]).rstrip()+'</VOLTS>\n')
+            xmlf.write('\t\t\t\t<CPCTNCE_PFRD>'+str(CVDICT['Cs_list'][i]).rstrip()+'</CPCTNCE_PFRD>\n')
+            xmlf.write('\t\t\t\t<ERR_CPCTNC_PFRD>'+str(CVDICT['Error_capacitance_list'][i]).rstrip()+'</ERR_CPCTNC_PFRD>\n')
 
-            xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP>'+str(CVDICT['Tot_Current_list'][i])+'<TOT_CURNT_NANOAMP>\n')
+            xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP>'+str(CVDICT['Tot_Current_list'][i]).rstrip()+'</TOT_CURNT_NANOAMP>\n')
 
-            xmlf.write('\t\t\t\t<ACTUAL_VOLTS>'+str(CVDICT['Act_Volts_list'][i])+'<ACTUAL_VOLTS>\n')
-            xmlf.write('\t\t\t\t<ORG_CPCTNC_PFRD>'+str(CVDICT['Cs_uncorr_list'][i])+'<ORG_CPCTNC_PFRD>\n')
-            xmlf.write('\t\t\t\t<TEMP_DEGC>'+str(CVDICT['Temp_list'][i])+'<TEMP_DEGC>\n')
-            xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(CVDICT['Humidity_list'][i])+'<HUMIDITY_PRCNT>\n')
+            xmlf.write('\t\t\t\t<ACTUAL_VOLTS>'+str(CVDICT['Act_Volts_list'][i]).rstrip()+'</ACTUAL_VOLTS>\n')
+            xmlf.write('\t\t\t\t<ORG_CPCTNC_PFRD>'+str(CVDICT['Cs_uncorr_list'][i]).rstrip()+'</ORG_CPCTNC_PFRD>\n')
+            xmlf.write('\t\t\t\t<TEMP_DEGC>'+str(CVDICT['Temp_list'][i]).rstrip()+'</TEMP_DEGC>\n')
+            xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(CVDICT['Humidity_list'][i]).rstrip()+'</HUMIDITY_PRCNT>\n')
         # xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(0.000000E+0)	+'<HUMIDITY_PRCNT>\n')
-            xmlf.write('\t\t\t\t<IMP_OHM>'+str(CVDICT['Impedence_list'][i])+'<IMP_OHM>n')
-            xmlf.write('\t\t\t\t<PHS_RAD>'+str(CVDICT['Phase_list'][i])+'<PHS_RAD>n')
-            xmlf.write('\t\t\t\t<TIME_SECS>'+str(CVDICT['Time_list'][i])+'<TIME_SECS>\n')
-            xmlf.write('\t\t\t\t<CELL_NR>'+str(CVDICT['Cell_Number_list'][i])+'<CELL_NR>\n')
+            xmlf.write('\t\t\t\t<IMP_OHM>'+str(CVDICT['Impedence_list'][i]).rstrip()+'</IMP_OHM>\n')
+            xmlf.write('\t\t\t\t<PHS_RAD>'+str(CVDICT['Phase_list'][i]).rstrip()+'</PHS_RAD>\n')
+            xmlf.write('\t\t\t\t<TIME_SECS>'+str(CVDICT['Time_list'][i]).rstrip()+'</TIME_SECS>\n')
+            xmlf.write('\t\t\t\t<CELL_NR>'+str(CVDICT['Cell_Number_list'][i]).rstrip()+'</CELL_NR>\n')
+            xmlf.write('\t\t\t</DATA>\n')
 
 
         
-        xmlf.write('\t\t<DATA_SET>\n')
-        xmlf.write('<ROOT>\n')
+        xmlf.write('\t\t</DATA_SET>\n')
+        xmlf.write('</ROOT>\n')
 
 
 
