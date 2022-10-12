@@ -85,7 +85,7 @@ def get_kind_of_part(scratchpad_ID, IV_or_CV):
         HDorLD='LD'
     else:
         print('couldnt find the thickness for sensor with %d scratchpad_ID (serial number)' % scratchpad_ID)
-    kind_of_part= str(thickness)+ ' um Si Sensor ' +  HDorLD + ' Full'
+    kind_of_part= str(thickness)+ 'um Si Sensor ' +  HDorLD + ' Full'
     print('kind of part = ', kind_of_part)
     return kind_of_part
 
@@ -240,7 +240,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
         xmlf.write('<HEADER>\n')
         xmlf.write('\t<TYPE>\n')
         xmlf.write('\t\t<EXTENSION_TABLE_NAME>HGC_SENSOR_CV</EXTENSION_TABLE_NAME>\n')
-        xmlf.write('\t\t<NAME>HGC CERN Sensor CV Test</NAME>\n')
+        xmlf.write('\t\t<NAME>HGC CERN Sensor CV</NAME>\n')
         xmlf.write('\t</TYPE>\n')
         xmlf.write('\t\t<RUN>\n')
         xmlf.write('\t\t\t<RUN_NAME>' + Run_Name.rstrip() + '</RUN_NAME>\n')
