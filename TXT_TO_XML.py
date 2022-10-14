@@ -149,7 +149,7 @@ def convert_timestamp(orig_format):
     day, month, year = date.split('.')                                                                                                                                           
     month='0'+month if len(month)==1 else month                                                                                                                                  
     hour, minutes = time.split(':')                                                                                                                                              
-    desired_format = f"{year}-{month}-{day} {hour}:{minutes}:00"                                                                                                                 
+    desired_format = year+'-'+month+'-'+day+' '+ hour+':'+minutes+':00' #an f string would have been so much nicer! (but lcd uses python 2)                                                                                                                
     #print(desired_format)                                                                                                                                                       
     return desired_format 
 
