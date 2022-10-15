@@ -102,7 +102,7 @@ def get_iv_dict(file):
                     Temp=fields[7]
                     Temp_list.append(Temp)
                     Humidity=fields[8]
-                    Humidity_list.append(Humidity_list)
+                    Humidity_list.append(Humidity)
 
 
     everything_dict['Sensor_type'] =Sensor_type
