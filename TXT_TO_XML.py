@@ -124,20 +124,42 @@ def GET_GRADING_CRITERIA_IV(scratchpad_ID):
                     print('\n SUMMARY TEX FILE IV', summary_tex_file_path)
                     f_tex=open(summary_tex_file_path,'r')
                     for line in f_tex:
-                        if "item Number of bad pads 0 <= 8 for full-sized sensors:":
-                            NUM_BAD_CELLS_PASS = line.split()[-1]
+                        if "item Number of bad pads 0 <= 8 for full-sized sensors:" in line:
+                            print(line.split())
+                            if "Passed" in line:
+                                NUM_BAD_CELLS_PASS = "PASSED"
+                            else:
+                                NUM_BAD_CELLS_PASS = "FAILED"
                             print("NUM_BAD_CELLS_PASS=", NUM_BAD_CELLS_PASS)
+
                         if "item Current at 600V I600 (normalised to 20 deg Celsius): <= 100 $\mu$A integrated over the sensor and guard rings" in line:
-                            CURNT_600V_LESSTHAN_100uA = line.split()[-1]
+                            print(line.split())
+                            if "Passed" in line:
+                                CURNT_600V_LESSTHAN_100uA = "PASSED"
+                            else:
+                                CURNT_600V_LESSTHAN_100uA = "FAILED"
                             print('CURNT_600V_LESSTHAN_100uA=', CURNT_600V_LESSTHAN_100uA)
+
                         if "item I800 < 2.5 x I600:" in line:
-                            CURNT_800V_LESSTHAN_2POINT5_CURNT_600V = line.split()[-1]
+                            print(line.split())
+                            if "Passed" in line:
+                                CURNT_800V_LESSTHAN_2POINT5_CURNT_600V = "PASSED"
+                            else:
+                                CURNT_800V_LESSTHAN_2POINT5_CURNT_600V="FAILED"
                             print("CURNT_800V_LESSTHAN_2POINT5_CURNT_600V", CURNT_800V_LESSTHAN_2POINT5_CURNT_600V)
-                        if "item Allowed number of adjacent bad pads <= 2:":
-                            NUM_BAD_ADJ_CELLS_PASS = line.split()[-1]
+
+                        if "item Allowed number of adjacent bad pads <= 2:" in line:
+                            print(line.split())
+                            if "Passed" in line:
+                                NUM_BAD_ADJ_CELLS_PASS = "PASSED"
+                            else:
+                                NUM_BAD_ADJ_CELLS_PASS = "FAIL"
                             print("NUM_BAD_ADJ_CELLS_PASS", NUM_BAD_ADJ_CELLS_PASS)
                         if "the requirements" in line:
-                            PASS = line.split()[2]
+                            if "Passed" in line:
+                                PASS = 'Y'
+                            else:
+                                PASS='N'
                             print("PASS", PASS)
                     f_tex.close()
 
@@ -210,7 +232,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
         xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_END_TIMESTAMP>\n')
         xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user.rstrip()+'</INITIATED_BY_USER>\n')
         xmlf.write('\t\t\t<LOCATION>'+location.rstrip()+'</LOCATION>\n')
-        if args.comment:python TXT_TO_XML.py --f HPK_8in_198ch_2019_200144_20220823_test1_IV.txt --t HGC_CERN_SENSOR_IV_SUMRY
+        if args.comment:
             xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+args.comment.replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
         else:
             xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(IVDICT['Comments']).replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
@@ -365,7 +387,6 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
 
     xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_PRESERIES_TEST.xml'
 
-    print('IVDICT', IVDICT)
     # TOT_CURRENT_600V=get_TOT_CURRENT_600V(IVDICT)
     # print('TOT_CURRENT_600V ',TOT_CURRENT_600V)
     NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, PASS = GET_GRADING_CRITERIA_IV(serial_number)
