@@ -113,7 +113,7 @@ def get_kind_of_part(scratchpad_ID, IV_or_CV):
 def GET_GRADING_CRITERIA_IV(scratchpad_ID):
     scratchpad_ID=scratchpad_ID.split('_')[0]
     #search the summary directories for this scratcpadid then find the tex file
-    
+    #BAD BADS ARE STORED IN EG "/home/output/hgsensor_iv/grading/N3313_9_DF/bad_pads.txt"
     for fullpath in IV_SUMMARY_FULL_DIRS:
         if scratchpad_ID in fullpath:
             scratchpad_ID_fullpath=fullpath
@@ -156,14 +156,14 @@ def GET_GRADING_CRITERIA_IV(scratchpad_ID):
                                 NUM_BAD_ADJ_CELLS_PASS = "FAIL"
                             print("NUM_BAD_ADJ_CELLS_PASS", NUM_BAD_ADJ_CELLS_PASS)
                         if "the requirements" in line:
-                            if "Passed" in line:
+                            if "PASSED" in line:
                                 PASS = 'Y'
                             else:
                                 PASS='N'
                             print("PASS", PASS)
                     f_tex.close()
 
-    return NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, PASS
+    return NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, NUM_BAD_ADJ_CELLS_PASS, PASS
 
 ####################################################################################################
 
@@ -389,40 +389,54 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
 
     # TOT_CURRENT_600V=get_TOT_CURRENT_600V(IVDICT)
     # print('TOT_CURRENT_600V ',TOT_CURRENT_600V)
-    NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, PASS = GET_GRADING_CRITERIA_IV(serial_number)
-    # with open(xml_table_file, 'w+') as xmlf:
-    #     xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
-    #     xmlf.write('<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n')
-    #     xmlf.write('<HEADER>\n')
-    #     xmlf.write('\t<TYPE>\n')
-    #     xmlf.write('\t\t<EXTENSION_TABLE_NAME>HGC_CERN_SENSOR_IV_SUMRY</EXTENSION_TABLE_NAME>\n')
-    #     xmlf.write('\t\t<NAME>HGC CERN Sensor IV Summary</NAME>\n')
-    #     xmlf.write('\t</TYPE>\n')
-    #     xmlf.write('\t\t<RUN>\n')
-    #     xmlf.write('\t\t\t<RUN_NAME>' + Run_Name + '</RUN_NAME>\n')
-    #     xmlf.write('\t\t\t<RUN_BEGIN_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_BEGIN_TIMESTAMP>\n')
-    #     xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_END_TIMESTAMP>\n')
-    #     xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user.rstrip()+'</INITIATED_BY_USER>\n')
-    #     xmlf.write('\t\t\t<LOCATION>'+location.rstrip()+'</LOCATION>\n')
-    #     if args.comment:
-    #         xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+args.comment.replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
-    #     else:
-    #         xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(IVDICT['Comments']).replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
-    #     xmlf.write('\t\t</RUN>\n')
-    #     xmlf.write(' </HEADER>\n')
+    NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, NUM_BAD_ADJ_CELLS_PASS, PASS = GET_GRADING_CRITERIA_IV(serial_number)
+    with open(xml_table_file, 'w+') as xmlf:
+        xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
+        xmlf.write('<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n')
+        xmlf.write('<HEADER>\n')
+        xmlf.write('\t<TYPE>\n')
+        xmlf.write('\t\t<EXTENSION_TABLE_NAME>HGC_CERN_SENSOR_IV_SUMRY</EXTENSION_TABLE_NAME>\n')
+        xmlf.write('\t\t<NAME>HGC CERN Sensor IV Summary</NAME>\n')
+        xmlf.write('\t</TYPE>\n')
+        xmlf.write('\t\t<RUN>\n')
+        xmlf.write('\t\t\t<RUN_NAME>' + Run_Name + '</RUN_NAME>\n')
+        xmlf.write('\t\t\t<RUN_BEGIN_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_BEGIN_TIMESTAMP>\n')
+        xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_END_TIMESTAMP>\n')
+        xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user.rstrip()+'</INITIATED_BY_USER>\n')
+        xmlf.write('\t\t\t<LOCATION>'+location.rstrip()+'</LOCATION>\n')
+        if args.comment:
+            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+args.comment.replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
+        else:
+            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(IVDICT['Comments']).replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
+        xmlf.write('\t\t</RUN>\n')
+        xmlf.write(' </HEADER>\n')
 
-    #     xmlf.write('\t\t<DATA_SET>\n')
-    #     xmlf.write('\t\t\t<PART>\n')
-    #     xmlf.write('\t\t\t\t<KIND_OF_PART>'+Kind_of_part.rstrip()+'</KIND_OF_PART>\n')
-    #     xmlf.write('\t\t\t\t<SERIAL_NUMBER>'+serial_number.rstrip()+'</SERIAL_NUMBER>\n')
-    #     xmlf.write('\t\t\t</PART>\n')
+        xmlf.write('\t\t<DATA_SET>\n')
+        xmlf.write('\t\t\t<PART>\n')
+        xmlf.write('\t\t\t\t<KIND_OF_PART>'+Kind_of_part.rstrip()+'</KIND_OF_PART>\n')
+        xmlf.write('\t\t\t\t<SERIAL_NUMBER>'+serial_number.rstrip()+'</SERIAL_NUMBER>\n')
+        xmlf.write('\t\t\t</PART>\n')
 
 
-    #     xmlf.write('\t\t\t<DATA>\n')
-    #     TOT_CURRENT_600, TOT_CURRENT_800 = get_TOT_CURRENT(IVDICT)
-    #     #ask if this is correct - this will be just a random cell at this voltage?
-    #     xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_600V>'+TOT_CURRENT_600+'<TOT_CURNT_NANOAMP_600V>\n')
-    #     xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_800V>'+TOT_CURRENT_800+'<TOT_CURNT_NANOAMP_800V>\n')
+        xmlf.write('\t\t\t<DATA>\n')
+        #ask if this is correct - this will be just a random cell at this voltage?
+        xmlf.write('\t\t\t\t #############################################################################\n')
+        xmlf.write('\t\t\t\t are these <TOT_CURNT_NANOAMP_600V> and  <TOT_CURNT_NANOAMP_800V> still a part of the template? If so, to which cells should they be recorded?\n') 
+        TOT_CURRENT_600, TOT_CURRENT_800 = get_TOT_CURRENT(IVDICT)
+        xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_600V>'+TOT_CURRENT_600+'</TOT_CURNT_NANOAMP_600V>\n')
+        xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_800V>'+TOT_CURRENT_800+'</TOT_CURNT_NANOAMP_800V>\n')
+        xmlf.write('\t\t\t\t #############################################################################\n')
+        xmlf.write('\t\t\t\t<CURNT_600V_LESSTHAN_100uA>'+CURNT_600V_LESSTHAN_100uA+'</CURNT_600V_LESSTHAN_100uA>\n')
+        xmlf.write('\t\t\t\t<CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>'+CURNT_800V_LESSTHAN_2POINT5_CURNT_600V+'</CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>\n')
+        xmlf.write('\t\t\t\t<NUM_BAD_CELLS>'+ 'Is this a necessarry field to have? Its a bit harder to fetch' + '</NUM_BAD_CELLS>\n')
+        xmlf.write('\t\t\t\t<NUM_BAD_CELLS_PASS>'+NUM_BAD_CELLS_PASS+'</NUM_BAD_CELLS_PASS>\n')
+        xmlf.write('\t\t\t\t<PASS>'+PASS+'</PASS>\n')
+        xmlf.write('\t\t\t\t<NUM_BAD_ADJ_CELLS_PASS>'+NUM_BAD_ADJ_CELLS_PASS+'</NUM_BAD_ADJ_CELLS_PASS>\n')
+        xmlf.write('\t\t\t<DATA>\n')
+        xmlf.write('\t\t</DATA_SET>\n')
+        xmlf.write('</ROOT>\n')
+        
+
 
 
     # #IF SAVING SUMMARY FOR EVERY CELL, UNCEOMMNET BELLOW
