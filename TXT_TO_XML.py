@@ -110,56 +110,38 @@ def get_kind_of_part(scratchpad_ID, IV_or_CV):
     return kind_of_part
 
 ############################################################################################################
-def GET_NUM_BAD_CELLS(scratchpad_ID, IV_or_CV):
+def GET_GRADING_CRITERIA_IV(scratchpad_ID):
     scratchpad_ID=scratchpad_ID.split('_')[0]
     #search the summary directories for this scratcpadid then find the tex file
-    if IV_or_CV=="IV":
-        for fullpath in IV_SUMMARY_FULL_DIRS:
-            if scratchpad_ID in fullpath:
-                scratchpad_ID_fullpath=fullpath
-                print('\n scratchpadID path=', scratchpad_ID_fullpath)
-                for file in os.listdir(scratchpad_ID_fullpath):
-                    if file.endswith('.tex') and "elog" not in file:
-                        summary_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
-                        print('\n SUMMARY TEX FILE', summary_tex_file_path)
-                        f_tex=open(summary_tex_file_path,'r')
-                        for line in f_tex:
-                            if "item active thickness:" in line:
-                                print('thickness=', line.split()[3])
-                                thickness= int(line.split()[3])
-                        f_tex.close()
+    
+    for fullpath in IV_SUMMARY_FULL_DIRS:
+        if scratchpad_ID in fullpath:
+            scratchpad_ID_fullpath=fullpath
+            print('\n scratchpadID path=', scratchpad_ID_fullpath)
+            for file in os.listdir(scratchpad_ID_fullpath):
+                if file.endswith('.tex') and "elog" not in file:
+                    summary_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
+                    print('\n SUMMARY TEX FILE IV', summary_tex_file_path)
+                    f_tex=open(summary_tex_file_path,'r')
+                    for line in f_tex:
+                        if "item Number of bad pads 0 <= 8 for full-sized sensors:":
+                            NUM_BAD_CELLS_PASS = line.split()[-1]
+                            print("NUM_BAD_CELLS_PASS=", NUM_BAD_CELLS_PASS)
+                        if "item Current at 600V I600 (normalised to 20 deg Celsius): <= 100 $\mu$A integrated over the sensor and guard rings" in line:
+                            CURNT_600V_LESSTHAN_100uA = line.split()[-1]
+                            print('CURNT_600V_LESSTHAN_100uA=', CURNT_600V_LESSTHAN_100uA)
+                        if "item I800 < 2.5 x I600:" in line:
+                            CURNT_800V_LESSTHAN_2POINT5_CURNT_600V = line.split()[-1]
+                            print("CURNT_800V_LESSTHAN_2POINT5_CURNT_600V", CURNT_800V_LESSTHAN_2POINT5_CURNT_600V)
+                        if "item Allowed number of adjacent bad pads <= 2:":
+                            NUM_BAD_ADJ_CELLS_PASS = line.split()[-1]
+                            print("NUM_BAD_ADJ_CELLS_PASS", NUM_BAD_ADJ_CELLS_PASS)
+                        if "the requirements" in line:
+                            PASS = line.split()[2]
+                            print("PASS", PASS)
+                    f_tex.close()
 
-    if IV_or_CV=="CV":
-        for fullpath in CV_SUMMARY_FULL_DIRS:
-            if scratchpad_ID in fullpath:
-                scratchpad_ID_fullpath=fullpath
-                print('\n scratchpadID path=', scratchpad_ID_fullpath)
-                for file in os.listdir(scratchpad_ID_fullpath):
-                    if file.endswith('.tex') and "elog" not in file:
-                        summary_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
-                        print('\n SUMMARY TEX FILE', summary_tex_file_path)
-                        f_tex=open(summary_tex_file_path,'r')
-                        for line in f_tex:
-                            if "item active thickness:" in line:
-                                print('thickness=', line.split()[3])
-                                thickness= int(line.split()[3])
-                        f_tex.close()
-
-    if thickness==120:
-        HDorLD='HD'
-    elif thickness==200:
-        HDorLD='LD'
-    elif thickness==300:
-        HDorLD='LD'
-    else:
-        print('couldnt find the thickness for sensor with %d scratchpad_ID (serial number)' % scratchpad_ID)
-    kind_of_part= str(thickness)+ 'um Si Sensor ' +  HDorLD + ' Full'
-    print('kind of part = ', kind_of_part)
-    return kind_of_part
-
-
-
-
+    return NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, PASS
 
 ####################################################################################################
 
@@ -176,11 +158,16 @@ def convert_timestamp(orig_format):
     #print(desired_format)                                                                                                                                                       
     return desired_format 
 
-def get_TOT_CURRENT_600V(DICT):
-    """ DICT could be IVDICT or CVDICT"""
-    mask = DICT[DICT['V_list']==600]
-    TOT_CURRENT = DICT[mask]['Tot_Current_list']
-    return TOT_CURRENT
+def get_TOT_CURRENT_600_800V(DICT):
+    """ DICT could be IVDICT or CVDICT
+    To use: TOT_CURRENT_600, TOT_CURRENT_800 = get_TOT_CURRENT(IVDICT)
+    """
+    DF = pd.DataFrame.from_dict(DICT)
+    mask_600 = DF[DF['V_list']==str(-600.0)]
+    TOT_CURRENT_600 = DF[mask_600]['Tot_Current_list'][0]
+    mask_800 = DF[DF['V_list']==str(-800.0)]
+    TOT_CURRENT_800 = DF[mask_800]['Tot_Current_list'][0]
+    return TOT_CURRENT_600, TOT_CURRENT_800
 
 ####################################################################################################
 
@@ -223,7 +210,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
         xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_END_TIMESTAMP>\n')
         xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user.rstrip()+'</INITIATED_BY_USER>\n')
         xmlf.write('\t\t\t<LOCATION>'+location.rstrip()+'</LOCATION>\n')
-        if args.comment:
+        if args.comment:python TXT_TO_XML.py --f HPK_8in_198ch_2019_200144_20220823_test1_IV.txt --t HGC_CERN_SENSOR_IV_SUMRY
             xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+args.comment.replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
         else:
             xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(IVDICT['Comments']).replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
@@ -262,11 +249,11 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
 
                     
 
-####################################################CV TABLES######################################################3
+#################################################### CV TABLES ######################################################3
 
 
 def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
-    
+
     CVDICT = dicts.get_cv_dict(filename)
     XML_tablename = 'HGC_CERN_SENSOR_CV'
 
@@ -344,7 +331,19 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
     """
     This generates An output XML file, based on the HGCAL DB XML template for 
     HGC_CERN_SENSOR_IV_SUMRY from text files of sensor IV results generated by HEXDAQ
-
+    
+    Fields that this fills:
+    <VOLTS> (removed)
+    <TOT_CURNT_NANOAMP_600V>
+    <TOT_CURNT_NANOAMP_800V>
+    <NUM_BAD_CELLS>: integer 
+    <PASS>: Y or N
+    <GRADE> (REMOVED)
+    <NUM_BAD_ADJ_CELLS>: integer
+    <CURNT_600V_LESSTHAN_100uA>: PASS or FAIL
+    <CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>: PASS or FAIL
+    <NUM_BAD_CELLS_PASS>: PASS or FAIL  from \item Number of bad pads 0 <= 8 for full-sized sensors: textcolor{green}{Passed})
+    <NUM_BAD_ADJ_CELLS_PASS>: PASS or FAIL
     Args:s
         filename (.txt file): output file of HEXDAQ results
     """
@@ -369,14 +368,14 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
     print('IVDICT', IVDICT)
     # TOT_CURRENT_600V=get_TOT_CURRENT_600V(IVDICT)
     # print('TOT_CURRENT_600V ',TOT_CURRENT_600V)
-
+    NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, PASS = GET_GRADING_CRITERIA_IV(serial_number)
     # with open(xml_table_file, 'w+') as xmlf:
     #     xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
     #     xmlf.write('<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n')
     #     xmlf.write('<HEADER>\n')
     #     xmlf.write('\t<TYPE>\n')
-    #     xmlf.write('\t\t<EXTENSION_TABLE_NAME>HGC_CERN_SENSOR_IV</EXTENSION_TABLE_NAME>\n')
-    #     xmlf.write('\t\t<NAME>HGC CERN Sensor IV</NAME>\n')
+    #     xmlf.write('\t\t<EXTENSION_TABLE_NAME>HGC_CERN_SENSOR_IV_SUMRY</EXTENSION_TABLE_NAME>\n')
+    #     xmlf.write('\t\t<NAME>HGC CERN Sensor IV Summary</NAME>\n')
     #     xmlf.write('\t</TYPE>\n')
     #     xmlf.write('\t\t<RUN>\n')
     #     xmlf.write('\t\t\t<RUN_NAME>' + Run_Name + '</RUN_NAME>\n')
@@ -398,23 +397,33 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
     #     xmlf.write('\t\t\t</PART>\n')
 
 
-    #     for i in range(len(IVDICT['V_list'])):
-    #         xmlf.write('\t\t\t<DATA>\n')
-    #         xmlf.write('\t\t\t\t<VOLTS>'+str(IVDICT['V_list'][i]).rstrip()+'</VOLTS>\n')
-    #         #BELLOW IS CHANNEL CURRENT
-    #         xmlf.write('\t\t\t\t<CURNT_NANOAMP>'+str(IVDICT['Channel_Current_list'][i]).rstrip()+'</CURNT_NANOAMP>\n')
-    #         #BLLOW IS CHANNEL ERROR CURRENT
-    #         xmlf.write('\t\t\t\t<ERR_CURNT_NANOAMP>'+str(IVDICT['Error_Current_list'][i]).rstrip()+'</ERR_CURNT_NANOAMP>\n')
-    #         #BELLOW IS TOT CURRENT 
-    #         xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP>'+str(IVDICT['Tot_Current_list'][i]).rstrip()+'</TOT_CURNT_NANOAMP>\n')
-    #         xmlf.write('\t\t\t\t<ACTUAL_VOLTS>'+str(IVDICT['Act_Volts_list'][i]).rstrip()+'</ACTUAL_VOLTS>\n')
-    #         xmlf.write('\t\t\t\t<TIME_SECS>'+str(IVDICT['Time_list'][i]).rstrip()+'</TIME_SECS>\n')
-    #         xmlf.write('\t\t\t\t<TEMP_DEGC>'+str(IVDICT['Temp_list'][i]).rstrip()+'</TEMP_DEGC>\n')
-    #         xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(IVDICT['Humidity_list'][i]).rstrip()+'</HUMIDITY_PRCNT>\n')
-    #         # xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(0.000000E+0)	+'</HUMIDITY_PRCNT>\n')
+    #     xmlf.write('\t\t\t<DATA>\n')
+    #     TOT_CURRENT_600, TOT_CURRENT_800 = get_TOT_CURRENT(IVDICT)
+    #     #ask if this is correct - this will be just a random cell at this voltage?
+    #     xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_600V>'+TOT_CURRENT_600+'<TOT_CURNT_NANOAMP_600V>\n')
+    #     xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_800V>'+TOT_CURRENT_800+'<TOT_CURNT_NANOAMP_800V>\n')
 
-    #         xmlf.write('\t\t\t\t<CELL_NR>'+str(IVDICT['Cell_Number_list'][i]).rstrip()+'</CELL_NR>\n')
-    #         xmlf.write('\t\t\t</DATA>\n')
+
+    # #IF SAVING SUMMARY FOR EVERY CELL, UNCEOMMNET BELLOW
+    # ################################################################################
+    # #     for i in range(len(IVDICT['V_list'])):
+    # #         xmlf.write('\t\t\t<DATA>\n')
+    # #         xmlf.write('\t\t\t\t<VOLTS>'+str(IVDICT['V_list'][i]).rstrip()+'</VOLTS>\n')
+    # #         #BELLOW IS CHANNEL CURRENT
+    # #         xmlf.write('\t\t\t\t<CURNT_NANOAMP>'+str(IVDICT['Channel_Current_list'][i]).rstrip()+'</CURNT_NANOAMP>\n')
+    # #         #BLLOW IS CHANNEL ERROR CURRENT
+    # #         xmlf.write('\t\t\t\t<ERR_CURNT_NANOAMP>'+str(IVDICT['Error_Current_list'][i]).rstrip()+'</ERR_CURNT_NANOAMP>\n')
+    # #         #BELLOW IS TOT CURRENT 
+    # #         xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP>'+str(IVDICT['Tot_Current_list'][i]).rstrip()+'</TOT_CURNT_NANOAMP>\n')
+    # #         xmlf.write('\t\t\t\t<ACTUAL_VOLTS>'+str(IVDICT['Act_Volts_list'][i]).rstrip()+'</ACTUAL_VOLTS>\n')
+    # #         xmlf.write('\t\t\t\t<TIME_SECS>'+str(IVDICT['Time_list'][i]).rstrip()+'</TIME_SECS>\n')
+    # #         xmlf.write('\t\t\t\t<TEMP_DEGC>'+str(IVDICT['Temp_list'][i]).rstrip()+'</TEMP_DEGC>\n')
+    # #         xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(IVDICT['Humidity_list'][i]).rstrip()+'</HUMIDITY_PRCNT>\n')
+    # #         # xmlf.write('\t\t\t\t<HUMIDITY_PRCNT>'+str(0.000000E+0)	+'</HUMIDITY_PRCNT>\n')
+
+    # #         xmlf.write('\t\t\t\t<CELL_NR>'+str(IVDICT['Cell_Number_list'][i]).rstrip()+'</CELL_NR>\n')
+    # #         xmlf.write('\t\t\t</DATA>\n')
+    # ################################################################################
 
         
     #     xmlf.write('\t\t</DATA_SET>\n')
