@@ -250,11 +250,16 @@ def get_TOT_CURRENT_600_800V(DICT):
     To use: TOT_CURRENT_600, TOT_CURRENT_800 = get_TOT_CURRENT_600_800V(IVDICT)
     """
     DF = pd.DataFrame.from_dict(DICT)
-    mask_600 = DF[DF['V_list']==str(-600.0)]
-    TOT_CURRENT_600 = DF[mask_600]['Tot_Current_list'][0]
-    mask_800 = DF[DF['V_list']==str(-800.0)]
-    TOT_CURRENT_800 = DF[mask_800]['Tot_Current_list'][0]
-    return TOT_CURRENT_600, TOT_CURRENT_800
+    mask_600 = DF['V_list']==str(-600.0)
+    TOT_CURRENT_600 = DF[mask_600]['Tot_Current_list'].values
+    TOT_CURRENT_600_first = TOT_CURRENT_600[0]
+    print('total current for first cell reaching 600 V', TOT_CURRENT_600_first)
+
+    mask_800 = DF['V_list']==str(-800.0)
+    TOT_CURRENT_800 = DF[mask_800]['Tot_Current_list'].values
+    TOT_CURRENT_800_first=TOT_CURRENT_800[0]
+    print('total current for first cell reaching 800 V', TOT_CURRENT_800_first)
+    return TOT_CURRENT_600_first, TOT_CURRENT_800_first
 
 ####################################################################################################
 
