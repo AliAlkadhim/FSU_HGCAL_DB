@@ -221,7 +221,10 @@ def get_number_bad_cells(scratchpad_ID, IV_or_CV):
                         print('\n HGSENSOR TEX FILE', hgsensor_tex_file_path)
                         logger.debug('\n HGSENSOR TEX FILE', hgsensor_tex_file_path)
                         f_tex=open(hgsensor_tex_file_path,'r')
-                        num_bad_pads = len(f_tex.readlines())
+                        if len(f_tex.readlines()):
+                            num_bad_pads = len(f_tex.readlines())
+                        else:
+                            num_bad_pads=0
                         print('NUMBER OF BAD PADS=',num_bad_pads)
 
                         f_tex.close()
@@ -236,7 +239,11 @@ def get_number_bad_cells(scratchpad_ID, IV_or_CV):
                         hgsensor_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
                         print('\n HGSENSOR TEX FILE', hgsensor_tex_file_path)
                         f_tex=open(hgsensor_tex_file_path,'r')
-                        num_bad_pads = len(f_tex.readlines())
+                        if len(f_tex.readlines()):
+                            num_bad_pads = len(f_tex.readlines())
+                        else:
+                            num_bad_pads=0
+                        print('NUMBER OF BAD PADS=',num_bad_pads)
                         f_tex.close()
     return num_bad_pads
 
@@ -472,7 +479,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
 
     xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_PRESERIES_TEST.xml'
 
-    NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, NUM_BAD_ADJ_CELLS_PASS, PASS = GET_GRADING_CRITERIA_IV(serial_number)
+    NUM_BAD_CELLS_PASS_IV, CURNT_600V_LESSTHAN_100uA_IV, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V_IV, NUM_BAD_ADJ_CELLS_PASS_IV, PASS_IV = GET_GRADING_CRITERIA_IV(serial_number)
     with open(xml_table_file, 'w+') as xmlf:
         xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
         xmlf.write('<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n')
@@ -506,12 +513,12 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
         TOT_CURRENT_600, TOT_CURRENT_800 = get_TOT_CURRENT_600_800V(IVDICT)
         xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_600V>'+str(TOT_CURRENT_600)+'</TOT_CURNT_NANOAMP_600V>\n')
         xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_800V>'+str(TOT_CURRENT_800)+'</TOT_CURNT_NANOAMP_800V>\n')
-        xmlf.write('\t\t\t\t<CURNT_600V_LESSTHAN_100uA>'+str(CURNT_600V_LESSTHAN_100uA)+'</CURNT_600V_LESSTHAN_100uA>\n')
-        xmlf.write('\t\t\t\t<CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>'+str(CURNT_800V_LESSTHAN_2POINT5_CURNT_600V)+'</CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>\n')
-        xmlf.write('\t\t\t\t<NUM_BAD_CELLS>'+ str(NUM_BAD_CELLS_ + '</NUM_BAD_CELLS>\n')
-        xmlf.write('\t\t\t\t<NUM_BAD_CELLS_PASS>'+str(NUM_BAD_CELLS_PASS)+'</NUM_BAD_CELLS_PASS>\n')
-        xmlf.write('\t\t\t\t<PASS>'+PASS+'</PASS>\n')
-        xmlf.write('\t\t\t\t<NUM_BAD_ADJ_CELLS_PASS>'+NUM_BAD_ADJ_CELLS_PASS+'</NUM_BAD_ADJ_CELLS_PASS>\n')
+        xmlf.write('\t\t\t\t<CURNT_600V_LESSTHAN_100uA>'+str(CURNT_600V_LESSTHAN_100uA_IV)+'</CURNT_600V_LESSTHAN_100uA>\n')
+        xmlf.write('\t\t\t\t<CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>'+str(CURNT_800V_LESSTHAN_2POINT5_CURNT_600V_IV)+'</CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>\n')
+        xmlf.write('\t\t\t\t<NUM_BAD_CELLS>'+ str(NUM_BAD_CELLS) + '</NUM_BAD_CELLS>\n')
+        xmlf.write('\t\t\t\t<NUM_BAD_CELLS_PASS>'+str(NUM_BAD_CELLS_PASS_IV)+'</NUM_BAD_CELLS_PASS>\n')
+        xmlf.write('\t\t\t\t<PASS>'+PASS_IV+'</PASS>\n')
+        xmlf.write('\t\t\t\t<NUM_BAD_ADJ_CELLS_PASS>'+NUM_BAD_ADJ_CELLS_PASS_IV+'</NUM_BAD_ADJ_CELLS_PASS>\n')
         xmlf.write('\t\t\t<DATA>\n')
         xmlf.write('\t\t</DATA_SET>\n')
         xmlf.write('</ROOT>\n')
