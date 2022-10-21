@@ -3,6 +3,7 @@ import argparse
 import get_iv_cv_dicts as dicts
 import os
 import pandas as pd
+import logging
 
 parser=argparse.ArgumentParser(description='Covert test results to xml schemas')
 parser.add_argument('--f', type=str, help='the .txt filname', required=False)
@@ -503,12 +504,12 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
 
         xmlf.write('\t\t\t<DATA>\n')
         TOT_CURRENT_600, TOT_CURRENT_800 = get_TOT_CURRENT_600_800V(IVDICT)
-        xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_600V>'+TOT_CURRENT_600+'</TOT_CURNT_NANOAMP_600V>\n')
-        xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_800V>'+TOT_CURRENT_800+'</TOT_CURNT_NANOAMP_800V>\n')
-        xmlf.write('\t\t\t\t<CURNT_600V_LESSTHAN_100uA>'+CURNT_600V_LESSTHAN_100uA+'</CURNT_600V_LESSTHAN_100uA>\n')
-        xmlf.write('\t\t\t\t<CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>'+CURNT_800V_LESSTHAN_2POINT5_CURNT_600V+'</CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>\n')
-        xmlf.write('\t\t\t\t<NUM_BAD_CELLS>'+ NUM_BAD_CELLS + '</NUM_BAD_CELLS>\n')
-        xmlf.write('\t\t\t\t<NUM_BAD_CELLS_PASS>'+NUM_BAD_CELLS_PASS+'</NUM_BAD_CELLS_PASS>\n')
+        xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_600V>'+str(TOT_CURRENT_600)+'</TOT_CURNT_NANOAMP_600V>\n')
+        xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_800V>'+str(TOT_CURRENT_800)+'</TOT_CURNT_NANOAMP_800V>\n')
+        xmlf.write('\t\t\t\t<CURNT_600V_LESSTHAN_100uA>'+str(CURNT_600V_LESSTHAN_100uA)+'</CURNT_600V_LESSTHAN_100uA>\n')
+        xmlf.write('\t\t\t\t<CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>'+str(CURNT_800V_LESSTHAN_2POINT5_CURNT_600V)+'</CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>\n')
+        xmlf.write('\t\t\t\t<NUM_BAD_CELLS>'+ str(NUM_BAD_CELLS_ + '</NUM_BAD_CELLS>\n')
+        xmlf.write('\t\t\t\t<NUM_BAD_CELLS_PASS>'+str(NUM_BAD_CELLS_PASS)+'</NUM_BAD_CELLS_PASS>\n')
         xmlf.write('\t\t\t\t<PASS>'+PASS+'</PASS>\n')
         xmlf.write('\t\t\t\t<NUM_BAD_ADJ_CELLS_PASS>'+NUM_BAD_ADJ_CELLS_PASS+'</NUM_BAD_ADJ_CELLS_PASS>\n')
         xmlf.write('\t\t\t<DATA>\n')
