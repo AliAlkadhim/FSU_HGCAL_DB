@@ -163,7 +163,11 @@ def main():
         print(full_path)
         IV_DICT = dicts.get_iv_dict(full_path)
         #print(IV_DICT)
+        #If you want to generate HGC_CERN_SENSOR_IV tables, uncomment the line below
         XML.make_xml_schema_HGC_CERN_SENSOR_IV(full_path)
+        # if you want to generate HGC_CERN_SENSOR_IV_SUMRY, uncomment below
+        XML.make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(full_path)
+
         #os.system('python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV' % full_path)
         
 
@@ -172,7 +176,12 @@ def main():
         full_path=str(os.path.abspath(os.path.join(INPUT_DIR, dir, preseries_CV_file)) )          
         print(full_path)
         CV_DICT = dicts.get_cv_dict(full_path)
+
+        #If you want to generate HGC_CERN_SENSOR_CV tables, uncomment the line below
         XML.make_xml_schema_HGC_CERN_SENSOR_CV(full_path)
+        # if you want to generate HGC_CERN_SENSOR_CV_SUMRY, uncomment below
+        XML.make_xml_schema_HGC_CERN_SENSOR_CV_SUMRY(full_path)
+        
 
 
 #with open(os.path.join(INPUT_DIR, 'HPK_8in_198ch_2019_100113_20220701','HPK_8in_198ch_2019_100113_20220701_IV.txt')) as f:
