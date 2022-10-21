@@ -3,11 +3,24 @@ import os
 import subprocess as sb
 import get_iv_cv_dicts as dicts
 import TXT_TO_XML as XML
+import logging
+
+
+####################### CONFIGURATIONS ####################
 
 INPUT_DIR=os.environ['INPUT_DIR']#this is just export INPUT_DIR="/home/input/"
 
 # FSUDB_OUTPUT_DIR='CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'#where the head of it is the git repo
 FSUDB_OUTPUT_DIR=os.environ['FSUDB_OUTPUT_DIR']
+
+
+################### SET UP LOGGING ###########
+logger=logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(message)s)')
+file_handler = logging.FileHandler('%sgenerate_summaries.log' % FSUDB_OUTPUT_DIR )
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
 
 
 # 100113 was the first one that was uploaded and checked

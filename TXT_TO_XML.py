@@ -51,6 +51,14 @@ except KeyError:
     print("you haven't set up any environemnt variables for your resutls! Set the environment variables in setup.sh and do source ./setup.sh") 
     pass
 
+################### SET UP LOGGING ###########
+logger=logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(message)s)')
+file_handler = logging.FileHandler('%sgenerate_summaries.log' % FSUDB_OUTPUT_DIR )
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
 
 #### GET FULL PATHS OF LCD SUMMARY DIRS
 if PRESERIES:
@@ -130,7 +138,7 @@ def get_kind_of_part(scratchpad_ID, IV_or_CV):
     elif thickness==300:
         HDorLD='LD'
     else:
-        print('couldnt find the thickness for sensor with %d scratchpad_ID (serial number)' % scratchpad_ID)
+        logger.debug('couldnt find the thickness for sensor with %d scratchpad_ID (serial number)' % scratchpad_ID)
     kind_of_part= str(thickness)+ 'um Si Sensor ' +  HDorLD + ' Full'
     print('kind of part = ', kind_of_part)
     return kind_of_part
@@ -143,50 +151,50 @@ def GET_GRADING_CRITERIA_IV(scratchpad_ID):
     for fullpath in IV_SUMMARY_FULL_DIRS:
         if scratchpad_ID in fullpath:
             scratchpad_ID_fullpath=fullpath
-            print('\n scratchpadID path=', scratchpad_ID_fullpath)
+            logger.debug('\n scratchpadID path=', scratchpad_ID_fullpath)
             for file in os.listdir(scratchpad_ID_fullpath):
                 if file.endswith('.tex') and "elog" not in file:
                     summary_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
-                    print('\n SUMMARY TEX FILE IV', summary_tex_file_path)
+                    logger.debug('\n SUMMARY TEX FILE IV', summary_tex_file_path)
                     f_tex=open(summary_tex_file_path,'r')
                     for line in f_tex:
                         if "item Number of bad pads 0 <= 8 for full-sized sensors:" in line:
-                            print(line.split())
+                            logger.debug(line.split())
                             if "Passed" in line:
                                 NUM_BAD_CELLS_PASS = "PASSED"
                             else:
                                 NUM_BAD_CELLS_PASS = "FAILED"
-                            print("NUM_BAD_CELLS_PASS=", NUM_BAD_CELLS_PASS)
+                            logger.debug("NUM_BAD_CELLS_PASS=", NUM_BAD_CELLS_PASS)
 
                         if "item Current at 600V I600 (normalised to 20 deg Celsius): <= 100 $\mu$A integrated over the sensor and guard rings" in line:
-                            print(line.split())
+                            logger.debug(line.split())
                             if "Passed" in line:
                                 CURNT_600V_LESSTHAN_100uA = "PASSED"
                             else:
                                 CURNT_600V_LESSTHAN_100uA = "FAILED"
-                            print('CURNT_600V_LESSTHAN_100uA=', CURNT_600V_LESSTHAN_100uA)
+                            logger.debug('CURNT_600V_LESSTHAN_100uA=', CURNT_600V_LESSTHAN_100uA)
 
                         if "item I800 < 2.5 x I600:" in line:
-                            print(line.split())
+                            logger.debug(line.split())
                             if "Passed" in line:
                                 CURNT_800V_LESSTHAN_2POINT5_CURNT_600V = "PASSED"
                             else:
                                 CURNT_800V_LESSTHAN_2POINT5_CURNT_600V="FAILED"
-                            print("CURNT_800V_LESSTHAN_2POINT5_CURNT_600V", CURNT_800V_LESSTHAN_2POINT5_CURNT_600V)
+                            logger.debug("CURNT_800V_LESSTHAN_2POINT5_CURNT_600V", CURNT_800V_LESSTHAN_2POINT5_CURNT_600V)
 
                         if "item Allowed number of adjacent bad pads <= 2:" in line:
-                            print(line.split())
+                            logger.debug(line.split())
                             if "Passed" in line:
                                 NUM_BAD_ADJ_CELLS_PASS = "PASSED"
                             else:
                                 NUM_BAD_ADJ_CELLS_PASS = "FAIL"
-                            print("NUM_BAD_ADJ_CELLS_PASS", NUM_BAD_ADJ_CELLS_PASS)
+                            logger.debug("NUM_BAD_ADJ_CELLS_PASS", NUM_BAD_ADJ_CELLS_PASS)
                         if "the requirements" in line:
                             if "PASSED" in line:
                                 PASS = 'Y'
                             else:
                                 PASS='N'
-                            print("PASS", PASS)
+                            logger.debug("PASS", PASS)
                     f_tex.close()
 
     return NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, NUM_BAD_ADJ_CELLS_PASS, PASS
@@ -210,6 +218,7 @@ def get_number_bad_cells(scratchpad_ID, IV_or_CV):
                     if file == 'bad_pads.txt':
                         hgsensor_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
                         print('\n HGSENSOR TEX FILE', hgsensor_tex_file_path)
+                        logger.debug('\n HGSENSOR TEX FILE', hgsensor_tex_file_path)
                         f_tex=open(hgsensor_tex_file_path,'r')
                         num_bad_pads = len(f_tex.readlines())
                         print('NUMBER OF BAD PADS=',num_bad_pads)
@@ -228,6 +237,7 @@ def get_number_bad_cells(scratchpad_ID, IV_or_CV):
                         f_tex=open(hgsensor_tex_file_path,'r')
                         num_bad_pads = len(f_tex.readlines())
                         f_tex.close()
+    return num_bad_pads
 
 
 ####################################################################################################
@@ -302,10 +312,12 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
         xmlf.write('\t\t\t<RUN_END_TIMESTAMP>'+convert_timestamp(IVDICT['Timestamp'].replace("\n", "").rstrip())+'</RUN_END_TIMESTAMP>\n')
         xmlf.write('\t\t\t<INITIATED_BY_USER>'+args.user.rstrip()+'</INITIATED_BY_USER>\n')
         xmlf.write('\t\t\t<LOCATION>'+location.rstrip()+'</LOCATION>\n')
-        if args.comment:
-            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+args.comment.replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
-        else:
-            xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(IVDICT['Comments']).replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
+        #FIGURE OUT WHY COMMENTS are reverting to booleans
+        # if args.comment:
+        #     xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+args.comment.replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
+        # else:
+        #     xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(IVDICT['Comments']).replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
+        xmlf.write('\t\t\t<COMMENT_DESCRIPTION>'+str(IVDICT['Comments']).replace("\n", "").rstrip()+ '</COMMENT_DESCRIPTION>\n')
         xmlf.write('\t\t</RUN>\n')
         xmlf.write(' </HEADER>\n')
 
