@@ -3,11 +3,24 @@ import os
 import subprocess as sb
 import get_iv_cv_dicts as dicts
 import TXT_TO_XML as XML
+import logging
+
+
+####################### CONFIGURATIONS ####################
 
 INPUT_DIR=os.environ['INPUT_DIR']#this is just export INPUT_DIR="/home/input/"
 
 # FSUDB_OUTPUT_DIR='CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'#where the head of it is the git repo
 FSUDB_OUTPUT_DIR=os.environ['FSUDB_OUTPUT_DIR']
+
+
+################### SET UP LOGGING ###########
+logger=logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(message)s)')
+file_handler = logging.FileHandler('%sgenerate_summaries.log' % FSUDB_OUTPUT_DIR )
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
 
 
 # 100113 was the first one that was uploaded and checked
@@ -163,7 +176,11 @@ def main():
         print(full_path)
         IV_DICT = dicts.get_iv_dict(full_path)
         #print(IV_DICT)
+        #If you want to generate HGC_CERN_SENSOR_IV tables, uncomment the line below
         XML.make_xml_schema_HGC_CERN_SENSOR_IV(full_path)
+        # if you want to generate HGC_CERN_SENSOR_IV_SUMRY, uncomment below
+        XML.make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(full_path)
+
         #os.system('python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV' % full_path)
         
 
@@ -172,7 +189,12 @@ def main():
         full_path=str(os.path.abspath(os.path.join(INPUT_DIR, dir, preseries_CV_file)) )          
         print(full_path)
         CV_DICT = dicts.get_cv_dict(full_path)
+
+        #If you want to generate HGC_CERN_SENSOR_CV tables, uncomment the line below
         XML.make_xml_schema_HGC_CERN_SENSOR_CV(full_path)
+        # if you want to generate HGC_CERN_SENSOR_CV_SUMRY, uncomment below
+        XML.make_xml_schema_HGC_CERN_SENSOR_CV_SUMRY(full_path)
+        
 
 
 #with open(os.path.join(INPUT_DIR, 'HPK_8in_198ch_2019_100113_20220701','HPK_8in_198ch_2019_100113_20220701_IV.txt')) as f:

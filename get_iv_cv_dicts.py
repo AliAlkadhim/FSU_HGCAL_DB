@@ -85,23 +85,23 @@ def get_iv_dict(file):
                 for row in rows:
                     # print(row)
                     fields = row.strip().split('\t')
-                    voltage = fields[0]
+                    voltage = fields[0].strip()
                     V_list.append(voltage)
-                    channel = fields[1]
+                    channel = fields[1].strip()
                     Cell_Number_list.append(channel)
-                    channel_current=fields[2]
+                    channel_current=fields[2].strip()
                     Channel_Current_list.append(channel_current)
-                    error=fields[3]
+                    error=fields[3].strip()
                     Error_Current_list.append(error)
-                    total_current=fields[4]
+                    total_current=fields[4].strip()
                     Tot_Current_list.append(total_current)
-                    Act_volt=fields[5]
+                    Act_volt=fields[5].strip()
                     Act_Volts_list.append(Act_volt)
-                    Time=fields[6]
+                    Time=fields[6].strip()
                     Time_list.append(Time)
-                    Temp=fields[7]
+                    Temp=fields[7].strip()
                     Temp_list.append(Temp)
-                    Humidity=fields[8]
+                    Humidity=fields[8].strip()
                     Humidity_list.append(Humidity)
 
 
@@ -187,34 +187,34 @@ def get_cv_dict(file):
                 for row in rows:
                     # print(row)
                     fields = row.strip().split('\t')
-                    voltage = fields[0]
+                    voltage = fields[0].strip()
                     V_list.append(voltage)
-                    channel = fields[1]
+                    channel = fields[1].strip()
                     Cell_Number_list.append(channel)
 
-                    Cs = fields[2]
+                    Cs = fields[2].strip()
                     Cs_list.append(Cs)
-                    Error_capacitance = fields[3]
+                    Error_capacitance = fields[3].strip()
                     Error_capacitance_list.append(Error_capacitance)
-                    Tot_current = fields[4]
+                    Tot_current = fields[4].strip()
                     Tot_Current_list.append(Tot_current)
-                    Act_Volts=fields[5]
+                    Act_Volts=fields[5].strip()
                     Act_Volts_list.append(Act_Volts)
-                    Time = fields[6]
+                    Time = fields[6].strip()
                     Time_list.append(Time)
-                    Temp = fields[7]
+                    Temp = fields[7].strip()
                     Temp_list.append(Temp)
-                    Humidity = fields[8]
+                    Humidity = fields[8].strip()
                     Humidity_list.append(Humidity)
-                    Cp =fields[9]
-                    Error_impedence=fields[10]
-                    Impedence=fields[11]
+                    Cp =fields[9].strip()
+                    Error_impedence=fields[10].strip()
+                    Impedence=fields[11].strip()
                     Impedence_list.append(Impedence)
-                    Error_phase = fields[12]
-                    Phase=fields[13]
+                    Error_phase = fields[12].strip()
+                    Phase=fields[13].strip()
                     Phase_list.append(Phase)
-                    Error_Cs_uncorr = fields[14]
-                    Cs_uncorr = fields[15]
+                    Error_Cs_uncorr = fields[14].strip()
+                    Cs_uncorr = fields[15].strip()
                     Cs_uncorr_list.append(Cs_uncorr)
 
 
