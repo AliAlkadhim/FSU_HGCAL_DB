@@ -45,11 +45,20 @@ try:
 
     PRESERIES_CV_HGSENSOR_DIR = os.environ['PRESERIES_CV_HGSENSOR_DIR']
     OLD_PRESERIES_CV_HGSENSOR_DIR = os.environ['OLD_PRESERIES_CV_HGSENSOR_DIR']
-    print('All environment variables properly set!')
+    if "SUMRY" in args.t:
+        FSUDB_OUTPUT_DIR=FSUDB_OUTPUT_DIR+'SUMMARY_TABLES/'
+        
+    print('All environment variables properly set!\n Files will be saved to %s' % FSUDB_OUTPUT_DIR)
 
 except KeyError:
     #raise KeyError(key) from None
     print("you haven't set up any environemnt variables for your resutls! Set the environment variables in setup.sh and do source ./setup.sh") 
+    pass
+
+
+try:
+    os.mkdir(FSUDB_OUTPUT_DIR)
+except Exception:
     pass
 
 ################### SET UP LOGGING ###########
@@ -186,18 +195,18 @@ def GET_GRADING_CRITERIA_IV(scratchpad_ID):
                         if "item Current at 600V I600 (normalised to 20 deg Celsius): <= 100 $\mu$A integrated over the sensor and guard rings" in line:
                             logger.debug(line.split())
                             if "Passed" in line:
-                                CURNT_600V_LESSTHAN_100uA = "PASSED"
+                                CURNT_600V_LT_100UA = "PASSED"
                             else:
-                                CURNT_600V_LESSTHAN_100uA = "FAILED"
-                            logger.debug('CURNT_600V_LESSTHAN_100uA=', CURNT_600V_LESSTHAN_100uA)
+                                CURNT_600V_LT_100UA = "FAILED"
+                            logger.debug('CURNT_600V_LT_100UA=', CURNT_600V_LT_100UA)
 
                         if "item I800 < 2.5 x I600:" in line:
                             logger.debug(line.split())
                             if "Passed" in line:
-                                CURNT_800V_LESSTHAN_2POINT5_CURNT_600V = "PASSED"
+                                CRNTRATIO_800_TO_600V = "PASSED"
                             else:
-                                CURNT_800V_LESSTHAN_2POINT5_CURNT_600V="FAILED"
-                            logger.debug("CURNT_800V_LESSTHAN_2POINT5_CURNT_600V", CURNT_800V_LESSTHAN_2POINT5_CURNT_600V)
+                                CRNTRATIO_800_TO_600V="FAILED"
+                            logger.debug("CRNTRATIO_800_TO_600V", CRNTRATIO_800_TO_600V)
 
                         if "item Allowed number of adjacent bad pads <= 2:" in line:
                             logger.debug(line.split())
@@ -214,7 +223,7 @@ def GET_GRADING_CRITERIA_IV(scratchpad_ID):
                             logger.debug("PASS", PASS)
                     f_tex.close()
 
-    return NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, NUM_BAD_ADJ_CELLS_PASS, PASS
+    return NUM_BAD_CELLS_PASS, CURNT_600V_LT_100UA, CRNTRATIO_800_TO_600V, NUM_BAD_ADJ_CELLS_PASS, PASS
 
 
 
@@ -469,8 +478,8 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
     <PASS>: Y or N
     <GRADE> (REMOVED)
     <NUM_BAD_ADJ_CELLS>: integer
-    <CURNT_600V_LESSTHAN_100uA>: PASS or FAIL
-    <CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>: PASS or FAIL
+    <CURNT_600V_LT_100UA>: PASS or FAIL
+    <CRNTRATIO_800_TO_600V>: PASS or FAIL
     <NUM_BAD_CELLS_PASS>: PASS or FAIL  from \item Number of bad pads 0 <= 8 for full-sized sensors: textcolor{green}{Passed})
     <NUM_BAD_ADJ_CELLS_PASS>: PASS or FAIL
     Args:s
@@ -496,7 +505,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
 
     xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_PRESERIES_TEST.xml'
 
-    NUM_BAD_CELLS_PASS_IV, CURNT_600V_LESSTHAN_100uA_IV, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V_IV, NUM_BAD_ADJ_CELLS_PASS_IV, PASS_IV = GET_GRADING_CRITERIA_IV(serial_number)
+    NUM_BAD_CELLS_PASS_IV, CURNT_600V_LT_100UA_IV, CRNTRATIO_800_TO_600V_IV, NUM_BAD_ADJ_CELLS_PASS_IV, PASS_IV = GET_GRADING_CRITERIA_IV(serial_number)
     with open(xml_table_file, 'w+') as xmlf:
         xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
         xmlf.write('<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n')
@@ -530,12 +539,12 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
         TOT_CURRENT_600, TOT_CURRENT_800 = get_TOT_CURRENT_600_800V(IVDICT)
         xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_600V>'+str(TOT_CURRENT_600)+'</TOT_CURNT_NANOAMP_600V>\n')
         xmlf.write('\t\t\t\t<TOT_CURNT_NANOAMP_800V>'+str(TOT_CURRENT_800)+'</TOT_CURNT_NANOAMP_800V>\n')
-        xmlf.write('\t\t\t\t<CURNT_600V_LESSTHAN_100uA>'+str(CURNT_600V_LESSTHAN_100uA_IV)+'</CURNT_600V_LESSTHAN_100uA>\n')
-        xmlf.write('\t\t\t\t<CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>'+str(CURNT_800V_LESSTHAN_2POINT5_CURNT_600V_IV)+'</CURNT_800V_LESSTHAN_2POINT5_CURNT_600V>\n')
+        xmlf.write('\t\t\t\t<CURNT_600V_LT_100UA>'+str(CURNT_600V_LT_100UA_IV)+'</CURNT_600V_LT_100UA>\n')
+        xmlf.write('\t\t\t\t<CRNTRATIO_800_TO_600V>'+str(CRNTRATIO_800_TO_600V_IV)+'</CRNTRATIO_800_TO_600V>\n')
         xmlf.write('\t\t\t\t<NUM_BAD_CELLS>'+ str(NUM_BAD_CELLS) + '</NUM_BAD_CELLS>\n')
         xmlf.write('\t\t\t\t<NUM_BAD_CELLS_PASS>'+str(NUM_BAD_CELLS_PASS_IV)+'</NUM_BAD_CELLS_PASS>\n')
         xmlf.write('\t\t\t\t<PASS>'+PASS_IV+'</PASS>\n')
-        NUM_BAD_ADJ_CELLS_IV=str(0)#temp
+        NUM_BAD_ADJ_CELLS_IV=str(-1)#temp
         xmlf.write('\t\t\t\t<NUM_BAD_ADJ_CELLS>'+NUM_BAD_ADJ_CELLS_IV+'</NUM_BAD_ADJ_CELLS>\n')
         xmlf.write('\t\t\t\t<NUM_BAD_ADJ_CELLS_PASS>'+NUM_BAD_ADJ_CELLS_PASS_IV+'</NUM_BAD_ADJ_CELLS_PASS>\n')
         xmlf.write('\t\t\t<DATA>\n')
@@ -611,7 +620,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV_SUMRY(filename):
 
     xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_PRESERIES_TEST.xml'
 
-    NUM_BAD_CELLS_PASS, CURNT_600V_LESSTHAN_100uA, CURNT_800V_LESSTHAN_2POINT5_CURNT_600V, NUM_BAD_ADJ_CELLS_PASS, PASS = GET_GRADING_CRITERIA_CV(serial_number)
+    NUM_BAD_CELLS_PASS, CURNT_600V_LT_100UA, CRNTRATIO_800_TO_600V, NUM_BAD_ADJ_CELLS_PASS, PASS = GET_GRADING_CRITERIA_CV(serial_number)
     with open(xml_table_file, 'w+') as xmlf:
         xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
         xmlf.write('<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n')
