@@ -188,7 +188,7 @@ def GET_GRADING_CRITERIA_IV(scratchpad_ID):
                     logger.debug('\n SUMMARY TEX FILE IV', summary_tex_file_path)
                     f_tex=open(summary_tex_file_path,'r')
                     for line in f_tex:
-                        if "item Number of bad pads 0 <= 8 for full-sized sensors:" in line:
+                        if "item Number of bad pads" in line:
                             logger.debug(line.split())
                             if "Passed" in line:
                                 NUM_BAD_CELLS_PASS = "PASSED"
@@ -251,12 +251,9 @@ def get_number_bad_cells(scratchpad_ID, IV_or_CV):
                         print('\n HGSENSOR TEX FILE', hgsensor_tex_file_path)
                         logger.debug('\n HGSENSOR TEX FILE', hgsensor_tex_file_path)
                         f_tex=open(hgsensor_tex_file_path,'r')
-                        if len(f_tex.readlines()):
-                            list_bad_cells=f_tex.readlines()
-                            num_bad_pads = len(list_bad_cells)
-                        else:
-                            num_bad_pads=0
-                            list_bad_cells='NULL'
+                        list_bad_cells=f_tex.readlines()
+                        num_bad_pads = len(list_bad_cells)
+
                         print('NUMBER OF BAD PADS=',num_bad_pads)
 
                         f_tex.close()
