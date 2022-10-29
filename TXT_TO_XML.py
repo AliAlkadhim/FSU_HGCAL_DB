@@ -251,7 +251,9 @@ def get_number_bad_cells(scratchpad_ID, IV_or_CV):
                         print('\n HGSENSOR TEX FILE', hgsensor_tex_file_path)
                         logger.debug('\n HGSENSOR TEX FILE', hgsensor_tex_file_path)
                         f_tex=open(hgsensor_tex_file_path,'r')
-                        list_bad_cells=f_tex.readlines()
+                        list_bad_cells==''
+                        for i in f_tex.readlines():
+                            list_bad_cells += float(i.split('\n')[0]) + ',' 
                         num_bad_pads = len(list_bad_cells)
 
                         print('NUMBER OF BAD PADS=',num_bad_pads)
@@ -268,12 +270,11 @@ def get_number_bad_cells(scratchpad_ID, IV_or_CV):
                         hgsensor_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
                         print('\n HGSENSOR TEX FILE', hgsensor_tex_file_path)
                         f_tex=open(hgsensor_tex_file_path,'r')
-                        if len(f_tex.readlines()):
-                            list_bad_cells=f_tex.readlines()
-                            num_bad_pads = len(list_bad_cells)
-                        else:
-                            num_bad_pads=0
-                            list_bad_cells='NULL'
+                        list_bad_cells==''
+                        for i in f_tex.readlines():
+                            list_bad_cells += float(i.split('\n')[0]) + ',' 
+                        num_bad_pads = len(list_bad_cells)
+                        
                         print('NUMBER OF BAD PADS=',num_bad_pads)
                         f_tex.close()
     return num_bad_pads, list_bad_cells

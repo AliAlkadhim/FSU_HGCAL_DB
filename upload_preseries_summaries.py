@@ -6,7 +6,8 @@ summary_files_paths_file = 'CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/preseries
 
 def save_upload_preseries_commands(file):
     #if local: FSUDB_OUTPUT_DIR= 'CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'
-    command_file = open('CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'+'save_summary_commands.txt','w')
+    command_file = open('CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'+'save_summary_commands.sh','w')
+    command_file.wrie('#!/bin/bash')
     fp = open(summary_files_paths_file,'r')
     for line in fp.readlines():
         if 'IV' in line:
