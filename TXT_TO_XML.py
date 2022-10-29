@@ -555,7 +555,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
         NUM_BAD_ADJ_CELLS_IV=str(-1)#temp
         xmlf.write('\t\t\t\t<NUM_BAD_ADJ_CELLS>'+NUM_BAD_ADJ_CELLS_IV+'</NUM_BAD_ADJ_CELLS>\n')
         xmlf.write('\t\t\t\t<NUM_BAD_ADJ_CELLS_PASS>'+NUM_BAD_ADJ_CELLS_PASS_IV+'</NUM_BAD_ADJ_CELLS_PASS>\n')
-        xmlf.write('\t\t\t<DATA>\n')
+        xmlf.write('\t\t\t</DATA>\n')
         xmlf.write('\t\t</DATA_SET>\n')
         xmlf.write('</ROOT>\n')
 
@@ -669,7 +669,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV_SUMRY(filename):
         xmlf.write('\t\t\t\t<C_INT_PASS>'+C_INT_PASS+'</C_INT_PASS>\n')
         xmlf.write('\t\t\t\t<SNSR_THKNES_UNIF_PASS>'+SNSR_THKNES_UNIF_PASS+'</SNSR_THKNES_UNIF_PASS>n')
         xmlf.write('\t\t\t\t<PASS>'+PASS+'</PASS>\n')
-        xmlf.write('\t\t\t<DATA>\n')
+        xmlf.write('\t\t\t</DATA>\n')
         xmlf.write('\t\t</DATA_SET>\n')
         xmlf.write('</ROOT>\n')
         ######################################################DATA######################################################
