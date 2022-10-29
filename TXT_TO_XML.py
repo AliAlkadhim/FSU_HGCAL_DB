@@ -48,8 +48,8 @@ try:
 
     PRESERIES_CV_HGSENSOR_DIR = os.environ['PRESERIES_CV_HGSENSOR_DIR']
     OLD_PRESERIES_CV_HGSENSOR_DIR = os.environ['OLD_PRESERIES_CV_HGSENSOR_DIR']
-    if "SUMRY" in args.t:
-        FSUDB_OUTPUT_DIR=FSUDB_OUTPUT_DIR+'SUMMARY_TABLES/'
+    # if "SUMRY" in args.t:
+        # FSUDB_OUTPUT_DIR=FSUDB_OUTPUT_DIR+'SUMMARY_TABLES/'
         
     print('All environment variables properly set!\n Files will be saved to %s' % FSUDB_OUTPUT_DIR)
 
