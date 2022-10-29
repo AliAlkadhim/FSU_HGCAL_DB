@@ -158,7 +158,7 @@ def main():
 
     print('dirs_l with no duplicates', dirs_l)
     print('IV_file_l with no duplicates', IV_file_l)
-    save_full_paths_no_duplicates(dirs_l, IV_file_l, filename='no_duplicate_dirs_IV.txt')
+    # save_full_paths_no_duplicates(dirs_l, IV_file_l, filename='no_duplicate_dirs_IV.txt')
 
     # CV_file_l.replace('HPK_8in_198ch_2019_200119_20220707_test1_CV.txt', )
     #for dir in dirs_in_input:
@@ -184,13 +184,13 @@ def main():
     for dir, preseries_IV_file in zip(dirs_l,IV_file_l):
         command='python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV --location FSU' % str('$INPUT_DIR'+'/'+dir+'/'+preseries_IV_file)	 
         full_path=str(os.path.abspath(os.path.join(INPUT_DIR, dir, preseries_IV_file)) )
-        print(full_path)
+        # print(full_path)
         # IV_DICT = dicts.get_iv_dict(full_path)
         #print(IV_DICT)
         #If you want to generate HGC_CERN_SENSOR_IV tables, uncomment the line below
         # XML.make_xml_schema_HGC_CERN_SENSOR_IV(full_path)
         # if you want to generate HGC_CERN_SENSOR_IV_SUMRY, uncomment below
-        # XML.make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(full_path)
+        XML.make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(full_path)
 
         #os.system('python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV' % full_path)
         

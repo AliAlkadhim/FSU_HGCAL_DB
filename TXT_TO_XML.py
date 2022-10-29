@@ -254,7 +254,7 @@ def get_number_bad_cells(scratchpad_ID, IV_or_CV):
                         list_bad_cells=''
                         for i in f_tex.readlines():
                             list_bad_cells += str(float(i.split('\n')[0])) + ',' 
-                        num_bad_pads = len(list(list_bad_cells.split(',')))
+                        num_bad_pads = len(list(list_bad_cells.split(','))) - 1
 
                         print('NUMBER OF BAD PADS=',num_bad_pads)
 
@@ -495,7 +495,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
     
     IVDICT = dicts.get_iv_dict(filename)
     XML_tablename = 'HGC_CERN_SENSOR_IV_SUMRY'
-
+    args.t=XML_tablename
     Name = 'HGC Sensor Manufacturer IV'
     Sensor_Type = IVDICT['Sensor_type']
     Run_Name = IVDICT['Identifier'].split('_')[0]
