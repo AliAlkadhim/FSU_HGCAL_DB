@@ -59,7 +59,7 @@ except KeyError:
     pass
 
 try:
-    os.mkdir(FSUDB_OUTPUT_DIR)
+    os.system('mkdir -p %s' % FSUDB_OUTPUT_DIR)
 except Exception:
     pass
     
