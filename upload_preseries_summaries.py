@@ -4,6 +4,18 @@ FSUDB_OUTPUT_DIR=os.environ['FSUDB_OUTPUT_DIR']
 
 summary_files_paths_file = 'CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/preseries_fullpaths_no_duplicates.txt'
 
+def save_upload_preseries_commands(file):
+    command_file = open(FSUDB_OUTPUT_DIR+'save_summary_commands.txt','w')
+    fp = open(summary_files_paths_file,'r')
+    for line in fp.readlines():
+        if 'IV' in line:
+            fullpathIV=str(line)
+            command_file.write('python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV_SUMRY' % fullpathIV)
+        if 'CV' in line:
+            fullpathCV=str(line)
+            command_file.write('python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_CV_SUMRY' % fullpathCV)
+    fp.close()
+    command_file.close()
 
 def upload_summary_files(IV_or_CV):
     if IV_or_CV=='IV':
@@ -12,7 +24,7 @@ def upload_summary_files(IV_or_CV):
         except Exception:
             pass
         summary_output = FSUDB_OUTPUT_DIR+'SUMMARIES_IV/'
-        f = open(summary_files_paths_file)
+        f = open(summary_files_paths_file,'r')
         for line in f.readlines():
             if IV_or_CV=='IV':
                 if 'IV' in line:
@@ -31,5 +43,6 @@ def upload_summary_files(IV_or_CV):
 
 
 if __name__ == '__main__':
-    upload_summary_files('IV')
+    # upload_summary_files('IV')
+    save_upload_preseries_commands(summary_files_paths_file)
     
