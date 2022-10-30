@@ -274,8 +274,8 @@ def GET_GRADING_CRITERIA_CV(scratchpad_ID):
                                 C_INT_PASS='PASSED'
                             elif "Failed" in line:
                                 C_INT_PASS='Failed'
-                            else:
-                                C_INT_PASS='NULL'
+                        else:
+                            C_INT_PASS='NULL'
                         if "Relative thickness variation" in line:
                             #this is the "Delta thickness"
                             SNSR_THKNES_UNIF = str(line.split('$\%$')[0].split('=')[1]).strip()
