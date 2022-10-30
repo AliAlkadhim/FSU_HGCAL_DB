@@ -791,7 +791,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV_SUMRY(filename):
         xmlf.write('\t\t\t\t<DEPL_VOLTS_PASS>'+DEPL_VOLTS_PASS+'</DEPL_VOLTS_PASS>\n')
         xmlf.write('\t\t\t\t<DEPL_VOLTS_UNIF_PASS>'+DEPL_VOLTS_UNIF_PASS+'</DEPL_VOLTS_UNIF_PASS>\n')
         xmlf.write('\t\t\t\t<C_INT_PASS>'+C_INT_PASS+'</C_INT_PASS>\n')
-        xmlf.write('\t\t\t\t<SNSR_THKNES_UNIF_PASS>'+SNSR_THKNES_UNIF_PASS+'</SNSR_THKNES_UNIF_PASS>n')
+        xmlf.write('\t\t\t\t<SNSR_THKNES_UNIF_PASS>'+SNSR_THKNES_UNIF_PASS+'</SNSR_THKNES_UNIF_PASS>n\n')
         xmlf.write('\t\t\t\t<PASS>'+PASS+'</PASS>\n')
         xmlf.write('\t\t\t</DATA>\n')
         xmlf.write('\t\t</DATA_SET>\n')
