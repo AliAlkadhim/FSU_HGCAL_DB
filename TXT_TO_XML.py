@@ -233,7 +233,7 @@ def GET_GRADING_CRITERIA_IV(scratchpad_ID):
 ################################################### GET CV SUMMARY RESULTS ###################################################
 def GET_GRADING_CRITERIA_CV(scratchpad_ID):
     scratchpad_ID=scratchpad_ID.split('_')[0]
-    CV_SUMMARY_FULL_DIRS, IV_SUMMARY_FULL_DIRS=GET_SUMMARY_FULL_DIRS()
+    IV_SUMMARY_FULL_DIRS, CV_SUMMARY_FULL_DIRS=GET_SUMMARY_FULL_DIRS()
     #search the summary directories for this scratcpadid then find the tex file
     #BAD BADS ARE STORED IN EG "/home/output/hgsensor_CV/grading/N3313_9_DF/bad_pads.txt"
     for fullpath in CV_SUMMARY_FULL_DIRS:
@@ -244,6 +244,7 @@ def GET_GRADING_CRITERIA_CV(scratchpad_ID):
                 if file.endswith('.tex') and "elog" not in file:
                     summary_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
                     logger.debug('\n SUMMARY TEX FILE CV', summary_tex_file_path)
+                    print('full path for summary file', summary_tex_file_path)
                     f_tex=open(summary_tex_file_path,'r')
                     for line in f_tex:
                         if "Full depletion voltage" in line:
@@ -731,7 +732,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV_SUMRY(filename):
         filename (.txt file): output file of HEXDAQ results
     """
     
-    CVDICT = dicts.get_CV_dict(filename)
+    CVDICT = dicts.get_cv_dict(filename)
     XML_tablename = 'HGC_CERN_SENSOR_CV_SUMRY'
     args.t = XML_tablename
 
