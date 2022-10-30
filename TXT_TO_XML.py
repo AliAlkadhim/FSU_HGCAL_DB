@@ -172,7 +172,7 @@ def get_kind_of_part(scratchpad_ID, IV_or_CV):
     print('kind of part = ', kind_of_part)
     return kind_of_part
 
-###################################################
+################################################### GET IV SUMMARY RESULTS ###################################################
 def GET_GRADING_CRITERIA_IV(scratchpad_ID):
     scratchpad_ID=scratchpad_ID.split('_')[0]
     IV_SUMMARY_FULL_DIRS, CV_SUMMARY_FULL_DIRS=GET_SUMMARY_FULL_DIRS()
@@ -230,7 +230,126 @@ def GET_GRADING_CRITERIA_IV(scratchpad_ID):
     return NUM_BAD_CELLS_PASS, CURNT_600V_LT_100UA, CRNTRATIO_800_TO_600V, NUM_BAD_ADJ_CELLS_PASS, PASS
 
 
+################################################### GET CV SUMMARY RESULTS ###################################################
+def GET_GRADING_CRITERIA_CV(scratchpad_ID):
+    scratchpad_ID=scratchpad_ID.split('_')[0]
+    CV_SUMMARY_FULL_DIRS, IV_SUMMARY_FULL_DIRS=GET_SUMMARY_FULL_DIRS()
+    #search the summary directories for this scratcpadid then find the tex file
+    #BAD BADS ARE STORED IN EG "/home/output/hgsensor_CV/grading/N3313_9_DF/bad_pads.txt"
+    for fullpath in CV_SUMMARY_FULL_DIRS:
+        if scratchpad_ID in fullpath:
+            scratchpad_ID_fullpath=fullpath
+            logger.debug('\n scratchpadID path=', scratchpad_ID_fullpath)
+            for file in os.listdir(scratchpad_ID_fullpath):
+                if file.endswith('.tex') and "elog" not in file:
+                    summary_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
+                    logger.debug('\n SUMMARY TEX FILE CV', summary_tex_file_path)
+                    f_tex=open(summary_tex_file_path,'r')
+                    for line in f_tex:
+                        if "Full depletion voltage" in line:
+                            logger.debug(line.split())
+                            DEPL_VOLTS = str(line.split('=')[1].split(' V ')[0].strip())
+                        if "assumed thickness" in line:
+                            MAX_DEPL_VOLTS = str(line.split('<')[1].split(' V ')[0].strip())
+                            if "Passed" in line:
+                                DEPL_VOLTS_PASS='PASSED'
+                            else:
+                                DEPL_VOLTS_PASS='FAILED'
 
+                        if "Variation across sensor" in line:
+                            # this is "Delta V"
+                            DEPL_UNIF_VOLTS=str(line.split('=')[1].split('\\')[0].strip())
+
+                        if "Maximum variation across sensor" in line:
+                            if "Passed" in line:
+                                DEPL_VOLTS_UNIF_PASS='PASS'
+                            else:
+                                DEPL_VOLTS_UNIF_PASS='FAILED'
+                        #C_BULK, C_MEASURED and C_INT are examples of gradigs that could potentially be stored
+                        #example of a grading that doesnt have C_INT:/home/output/summaryhgsensor_cv/Preseries/100143_test1/CV_100143_test1.tex
+                        #example of a grading that does have C_INT:/home/output/summaryhgsensor_cv/OLD_preseries/200117/CV_200117.tex 
+                        if "C_{int}" in line:
+                            if "Passed" in line:
+                                C_INT_PASS='PASSED'
+                            elif "Failed" in line:
+                                C_INT_PASS='Failed'
+                            else:
+                                C_INT_PASS='NULL'
+                        if "Relative thickness variation" in line:
+                            #this is the "Delta thickness"
+                            SNSR_THKNES_UNIF = str(line.split('$\%$')[0].split('=')[1]).strip()
+                            if "Passed" in line:
+                                SNSR_THKNES_UNIF_PASS = "PASSED"
+                            else:
+                                SNSR_THKNES_UNIF_PASS="FAILED"
+                            
+                        if "the requirements" in line:
+                            if "PASSED" in line:
+                                PASS = 'Y'
+                            else:
+                                PASS='N'
+
+                    f_tex.close()
+
+    return DEPL_VOLTS,MAX_DEPL_VOLTS, DEPL_VOLTS_PASS, DEPL_UNIF_VOLTS,DEPL_VOLTS_UNIF_PASS, C_INT_PASS, SNSR_THKNES_UNIF, SNSR_THKNES_UNIF_PASS, PASS
+
+
+################################################### GET IV SUMMARY RESULTS ###################################################
+def GET_GRADING_CRITERIA_IV(scratchpad_ID):
+    scratchpad_ID=scratchpad_ID.split('_')[0]
+    IV_SUMMARY_FULL_DIRS, CV_SUMMARY_FULL_DIRS=GET_SUMMARY_FULL_DIRS()
+    #search the summary directories for this scratcpadid then find the tex file
+    #BAD BADS ARE STORED IN EG "/home/output/hgsensor_iv/grading/N3313_9_DF/bad_pads.txt"
+    for fullpath in IV_SUMMARY_FULL_DIRS:
+        if scratchpad_ID in fullpath:
+            scratchpad_ID_fullpath=fullpath
+            logger.debug('\n scratchpadID path=', scratchpad_ID_fullpath)
+            for file in os.listdir(scratchpad_ID_fullpath):
+                if file.endswith('.tex') and "elog" not in file:
+                    summary_tex_file_path=os.path.join(scratchpad_ID_fullpath, file)
+                    logger.debug('\n SUMMARY TEX FILE IV', summary_tex_file_path)
+                    f_tex=open(summary_tex_file_path,'r')
+                    for line in f_tex:
+                        if "item Number of bad pads" in line:
+                            logger.debug(line.split())
+                            if "Passed" in line:
+                                NUM_BAD_CELLS_PASS = "PASSED"
+                            else:
+                                NUM_BAD_CELLS_PASS = "FAILED"
+                            logger.debug("NUM_BAD_CELLS_PASS=", NUM_BAD_CELLS_PASS)
+
+                        if "item Current at 600V I600 (normalised to 20 deg Celsius): <= 100 $\mu$A integrated over the sensor and guard rings" in line:
+                            logger.debug(line.split())
+                            if "Passed" in line:
+                                CURNT_600V_LT_100UA = "PASSED"
+                            else:
+                                CURNT_600V_LT_100UA = "FAILED"
+                            logger.debug('CURNT_600V_LT_100UA=', CURNT_600V_LT_100UA)
+
+                        if "item I800 < 2.5 x I600:" in line:
+                            logger.debug(line.split())
+                            if "Passed" in line:
+                                CRNTRATIO_800_TO_600V = "PASSED"
+                            else:
+                                CRNTRATIO_800_TO_600V="FAILED"
+                            logger.debug("CRNTRATIO_800_TO_600V", CRNTRATIO_800_TO_600V)
+
+                        if "item Allowed number of adjacent bad pads <= 2:" in line:
+                            logger.debug(line.split())
+                            if "Passed" in line:
+                                NUM_BAD_ADJ_CELLS_PASS = "PASSED"
+                            else:
+                                NUM_BAD_ADJ_CELLS_PASS = "FAIL"
+                            logger.debug("NUM_BAD_ADJ_CELLS_PASS", NUM_BAD_ADJ_CELLS_PASS)
+                        if "the requirements" in line:
+                            if "PASSED" in line:
+                                PASS = 'Y'
+                            else:
+                                PASS='N'
+                            logger.debug("PASS", PASS)
+                    f_tex.close()
+
+    return NUM_BAD_CELLS_PASS, CURNT_600V_LT_100UA, CRNTRATIO_800_TO_600V, NUM_BAD_ADJ_CELLS_PASS, PASS
 
 
 
@@ -323,6 +442,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV(filename):
     
     IVDICT = dicts.get_iv_dict(filename)
     XML_tablename = 'HGC_CERN_SENSOR_IV'
+    args.t = XML_tablename
 
     Name = 'HGC Sensor Manufacturer IV'
     Sensor_Type = IVDICT['Sensor_type']
@@ -400,6 +520,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV(filename):
 
     CVDICT = dicts.get_cv_dict(filename)
     XML_tablename = 'HGC_CERN_SENSOR_CV'
+    args.t = XML_tablename
 
     Name = 'HGC Sensor Manufacturer IV'
     Run_Name = CVDICT['Identifier'].split('_')[0]
@@ -496,6 +617,7 @@ def make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(filename):
     IVDICT = dicts.get_iv_dict(filename)
     XML_tablename = 'HGC_CERN_SENSOR_IV_SUMRY'
     args.t=XML_tablename
+
     Name = 'HGC Sensor Manufacturer IV'
     Sensor_Type = IVDICT['Sensor_type']
     Run_Name = IVDICT['Identifier'].split('_')[0]
@@ -611,6 +733,7 @@ def make_xml_schema_HGC_CERN_SENSOR_CV_SUMRY(filename):
     
     CVDICT = dicts.get_CV_dict(filename)
     XML_tablename = 'HGC_CERN_SENSOR_CV_SUMRY'
+    args.t = XML_tablename
 
     Name = 'HGC Sensor Manufacturer CV'
     Sensor_Type = CVDICT['Sensor_type']
@@ -623,12 +746,12 @@ def make_xml_schema_HGC_CERN_SENSOR_CV_SUMRY(filename):
         serial_number = serial_number +'_0'
 
     Kind_of_part = get_kind_of_part(serial_number, "CV")
-    NUM_BAD_CELLS = get_number_bad_cells(serial_number, "CV")
+    SNSR_THCKNESS = str(Kind_of_part.split('um')[0]).strip()
 
 
     xml_table_file = FSUDB_OUTPUT_DIR + Run_Name + '_'+ XML_tablename + '_PRESERIES_TEST.xml'
 
-    NUM_BAD_CELLS_PASS, CURNT_600V_LT_100UA, CRNTRATIO_800_TO_600V, NUM_BAD_ADJ_CELLS_PASS, PASS = GET_GRADING_CRITERIA_CV(serial_number)
+    DEPL_VOLTS,MAX_DEPL_VOLTS, DEPL_VOLTS_PASS, DEPL_UNIF_VOLTS,DEPL_VOLTS_UNIF_PASS, C_INT_PASS, SNSR_THKNES_UNIF, SNSR_THKNES_UNIF_PASS, PASS = GET_GRADING_CRITERIA_CV(serial_number)
     with open(xml_table_file, 'w+') as xmlf:
         xmlf.write('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n')
         xmlf.write('<ROOT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n')

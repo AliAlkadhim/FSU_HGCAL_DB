@@ -182,29 +182,31 @@ def main():
 
     #iterate over the directory and IV file of each preseries sensor (that was uploaded)
     for dir, preseries_IV_file in zip(dirs_l,IV_file_l):
-        command='python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV --location FSU' % str('$INPUT_DIR'+'/'+dir+'/'+preseries_IV_file)	 
-        full_path=str(os.path.abspath(os.path.join(INPUT_DIR, dir, preseries_IV_file)) )
+        #use this command if you wat to run python on each individual sensor
+        # command='python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV --location FSU' % str('$INPUT_DIR'+'/'+dir+'/'+preseries_IV_file)	 
+        # full_path=str(os.path.abspath(os.path.join(INPUT_DIR, dir, preseries_IV_file)) )
         # print(full_path)
         # IV_DICT = dicts.get_iv_dict(full_path)
         #print(IV_DICT)
         #If you want to generate HGC_CERN_SENSOR_IV tables, uncomment the line below
         # XML.make_xml_schema_HGC_CERN_SENSOR_IV(full_path)
         # if you want to generate HGC_CERN_SENSOR_IV_SUMRY, uncomment below
-        XML.make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(full_path)
+        # XML.make_xml_schema_HGC_CERN_SENSOR_IV_SUMRY(full_path)
 
         #os.system('python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV' % full_path)
         
 
     for dir, preseries_CV_file in zip(dirs_l,CV_file_l): 
-        command='python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV --location FSU' % str('$INPUT_DIR'+'/'+dir+'/'+preseries_IV_file) 
+        #use this command if you wat to run python on each individual sensor
+        # command='python TXT_TO_XML.py --f %s --t HGC_CERN_SENSOR_IV --location FSU' % str('$INPUT_DIR'+'/'+dir+'/'+preseries_IV_file) 
         full_path=str(os.path.abspath(os.path.join(INPUT_DIR, dir, preseries_CV_file)) )          
-        print(full_path)
+        # print(full_path)
         # CV_DICT = dicts.get_cv_dict(full_path)
 
         # #If you want to generate HGC_CERN_SENSOR_CV tables, uncomment the line below
         # XML.make_xml_schema_HGC_CERN_SENSOR_CV(full_path)
         # # if you want to generate HGC_CERN_SENSOR_CV_SUMRY, uncomment below
-        # XML.make_xml_schema_HGC_CERN_SENSOR_CV_SUMRY(full_path)
+        XML.make_xml_schema_HGC_CERN_SENSOR_CV_SUMRY(full_path)
         
 
 
