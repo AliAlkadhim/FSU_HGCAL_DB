@@ -4,6 +4,8 @@ We support the conversion of raw CMS HGCAL sensor test data to the XML schema fo
 
 **`[HGC_CERN_SENSOR_IV, HGC_CERN_SENSOR_CV, HGC_CERN_SENSOR_IV_SUMRY, HGC_CERN_SENSOR_CV_SUMRY]`**
 
+Which are all in the `CMS_HGC_HGCAL_COND` account of the central XML schema.
+
 To make tables to upload to the `int2r` CMS HGCAL DB, based on the XML table tempates in `CMS_HGCAL_DB/from_Umesh/CMS_HGCAL_DB/from_Umesh/XML Templates HGCAL Si Sensors.docx`, do
 
 **`python TXT_TO_XML.py --f <.TXT DATA FILE NAME> --t <TABLE NAME>`**
