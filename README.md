@@ -26,3 +26,6 @@ To produce an xml file for the `HGC_CERN_SENSOR_CV` table associated with the te
 **`python TXT_TO_XML.py --f HPK_8in_198ch_2019_200118_20220707_test1_CV.txt --t HGC_CERN_SENSOR_CV`**
 
 This produces `200118_20220707_test1_HGC_CERN_SENSOR_CV_TEST.xml` which is ready to be uploaded to the the DB. 
+
+
+There is much more functionality in this repository, and it becomes especially powerful when combined with [lcd_hgcal_analysisworkflows](https://gitlab.cern.ch/CLICdp/HGCAL/lcd_hgcal_analysisworkflows). 
