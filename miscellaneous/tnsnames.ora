@@ -1,0 +1,18 @@
+int2r_lb_local=(
+	DESCRIPTION=
+	(ADDRESS= (PROTOCOL=TCP) (HOST=localhost) (PORT=10131) )
+	(ADDRESS= (PROTOCOL=TCP) (HOST=localhost) (PORT=10132) )
+	(LOAD_BALANCE=yes)
+	(CONNECT_DATA=
+		(SERVER=DEDICATED)
+		(SERVICE_NAME=int2r_lb.cern.ch)
+		(FAILOVER_MODE=
+			(TYPE=SELECT)	
+			(METHOD=BASIC)
+			(RETRIES=180)
+			(DELAY=5)
+		)
+	)
+)
+
+
