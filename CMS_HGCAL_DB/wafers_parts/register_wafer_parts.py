@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import subprocess as sb
+from Register_wafer_xml import register_wafer_xml as wafer_xml
 # import TXT_TO_XML as XML
 # import logging
 
@@ -12,7 +13,6 @@ import subprocess as sb
 
 INPUT_DIR=os.environ['INPUT_DIR']
 
-# FSUDB_OUTPUT_DIR='CMS_HGCAL_DB/IV_CV_preseries_tested_at_FSU/'#where the head of it is the git repo
 FSUDB_OUTPUT_DIR=os.environ['FSUDB_OUTPUT_DIR']
 
 Wafers_Spreadsheet = pd.read_csv(
@@ -40,13 +40,17 @@ print(sensors_to_register_l)
 mask = (Wafers_Spreadsheet['Sensor ID'].isin(sensors_to_register_l))
 Wafers_to_register_DF=Wafers_Spreadsheet[mask]
 print(Wafers_to_register_DF)
-
+for ID in sensors_to_register_l:
+    wafer_xml(Wafers_to_register_DF=Wafers_to_register_DF, Sensor_ID=ID)
 
 
 
 # print(Wafers_Spreadsheet['Sensor ID'].dtype)
 
 
-if __name__=='__main__':
+# if __name__=='__main__':
     #  register_wafer_xml(Sensor_ID=100360)
-    print(Wafers_to_register_DF[Wafers_to_register_DF['Sensor ID'] == 100360] )
+    # sensor_row=Wafers_to_register_DF[Wafers_to_register_DF['Sensor ID'] == 100360] 
+    
+    # print(sensor_row['OBA Number'])
+    # wafer_xml(Wafers_to_register_DF=Wafers_to_register_DF, Sensor_ID=100360)
